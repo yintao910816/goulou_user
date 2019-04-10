@@ -309,7 +309,11 @@ extension WebViewController { // 支付
         if token.count > 0 && orderID.count > 0 {
             //        DispatchQueue.main.async {[weak self] in
             //        }
-            HttpRequestManager.shareIntance.getHisAppointInfo(orderID: orderID)
+            HttpRequestManager.shareIntance.getHisAppointInfo(orderID: orderID) { model in
+                if let retModel = model {
+                    HttpRequestManager.shareIntance.getPayPreOrder(model: retModel)
+                }
+            }
         }
     }
 }

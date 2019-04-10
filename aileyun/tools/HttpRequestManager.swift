@@ -1155,29 +1155,44 @@ class HttpRequestManager {
 //MARK: 支付相关
 extension HttpRequestManager {
     
-    func getHisAppointInfo(orderID: String) {
+    func getHisAppointInfo(orderID: String, callBack: @escaping ((AppointInfoModel?) ->())) {
         let dic = NSDictionary.init(dictionary: ["orderId" : orderID])
         HttpClient.shareIntance.GET(HC_getHisAppointInfo, parameters: dic) { (result, ccb) in
+            print(result)
             if ccb.success() {
-                let dic = result as! [String : Any]
-                print(result)
-                
-//                guard dic["data"] != nil else {
-////                    callback(true)
-//                    return
-//                }
-//                let dataDic = dic["data"] as! [String : Any]
-//                let isOn = dataDic["isOn"] as! NSNumber
-//                if isOn.intValue == 1{
-//                    callback(true)
-//                }else{
-//                    callback(false)
-//                }
+                guard let dic = result as? [String : Any], let data = dic["data"] as? [String: Any] else {
+                    callBack(nil)
+                    return
+                }
+                let model = AppointInfoModel.init(data)
+                callBack(model)
             }else{
-//                callback(false)
+                callBack(nil)
             }
         }
+    }
 
+    func getPayPreOrder(model: AppointInfoModel) {
+        let dic = NSDictionary.init(dictionary: ["register_sn": model.register_sn,
+                                                 "request_date": model.request_date,
+                                                 "his_order_id": model.his_order_id,
+                                                 "openId":"",
+                                                 "tradeType":"",
+                                                 "tpltId": "01",
+                                                 "wb": model.wb,
+                                                 "depart_code": model.depart_code,
+                                                 "depart_name": model.depart_name,
+                                                 "expertId":"",
+                                                 "expertName":"",
+                                                 "charge_price": model.charge_price,
+                                                 "diagnoseFee": model.diagnoseFee,
+                                                 "additionalFee": model.additionalFee,
+                                                 "patient_id": model.patient_id
+//                                                 "flow": model.clinic_flag
+            ])
+        HttpClient.shareIntance.POST(HC_preOrder, parameters: dic) { (result, cbb) in
+            print(result)
+        }
     }
 }
 
