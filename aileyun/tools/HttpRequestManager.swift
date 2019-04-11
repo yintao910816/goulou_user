@@ -1180,18 +1180,24 @@ extension HttpRequestManager {
                                                  "tradeType":"",
                                                  "tpltId": "01",
                                                  "wb": model.wb,
-                                                 "depart_code": model.depart_code,
-                                                 "depart_name": model.depart_name,
                                                  "expertId":"",
                                                  "expertName":"",
-                                                 "charge_price": model.charge_price,
+                                                 "totalFee": model.totalFee,
                                                  "diagnoseFee": model.diagnoseFee,
                                                  "additionalFee": model.additionalFee,
-                                                 "patient_id": model.patient_id
-//                                                 "flow": model.clinic_flag
+                                                 "registerFee": model.charge_price,
+                                                 "patient_id": model.patient_id,
+                                                 "flow": model.record_sn,
+                                                 "medicalCard": model.card_no,
+                                                 "clinicDate": model.request_date,
+                                                 "verifyCode": model.record_sn,
+                                                 "departmentId": model.depart_code,
+                                                 "departmentName": model.depart_name,
             ])
         HttpClient.shareIntance.POST(HC_preOrder, parameters: dic) { (result, cbb) in
             print(result)
+            let ret = result as? [String:Any]
+            print("错误提示：\(ret?["message"])")
         }
     }
 }
