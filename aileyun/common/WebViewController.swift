@@ -295,6 +295,8 @@ extension WebViewController { // 支付
     fileprivate func requestPayInfo(jsParams: [Any]?) {
         guard let params = jsParams else { return }
         
+        SVProgressHUD.show()
+        
         var token: String = ""
         var orderID: String = ""
 
@@ -307,11 +309,15 @@ extension WebViewController { // 支付
         }
         
         if token.count > 0 && orderID.count > 0 {
-            //        DispatchQueue.main.async {[weak self] in
-            //        }
-            HttpRequestManager.shareIntance.getHisAppointInfo(orderID: orderID) { model in
-                if let retModel = model {
-                    HttpRequestManager.shareIntance.getPayPreOrder(model: retModel)
+            HttpRequestManager.shareIntance.getHisAppointInfo(orderID: orderID) { [weak self] data in
+                if let retModel = data.0 {
+                    SVProgressHUD.dismiss()
+                    
+                    let payVC = PayOrderViewController.init(nibName: "PayOrderViewController", bundle: Bundle.main)
+                    payVC.payModelInfo = retModel
+                    self?.navigationController?.pushViewController(payVC, animated: true)
+                }else {
+                    SVProgressHUD.showError(withStatus: data.1)
                 }
             }
         }

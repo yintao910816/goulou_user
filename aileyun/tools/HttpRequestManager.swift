@@ -1153,51 +1153,80 @@ class HttpRequestManager {
 
 //MARK:
 //MARK: 支付相关
+import HandyJSON
 extension HttpRequestManager {
     
-    func getHisAppointInfo(orderID: String, callBack: @escaping ((AppointInfoModel?) ->())) {
+    func getHisAppointInfo(orderID: String, callBack: @escaping (((PreOrderInfoModel?, String?)) ->())) {
         let dic = NSDictionary.init(dictionary: ["orderId" : orderID])
         HttpClient.shareIntance.GET(HC_getHisAppointInfo, parameters: dic) { (result, ccb) in
             print(result)
             if ccb.success() {
                 guard let dic = result as? [String : Any], let data = dic["data"] as? [String: Any] else {
-                    callBack(nil)
+                    callBack((nil, ccb.msg))
                     return
                 }
-                let model = AppointInfoModel.init(data)
-                callBack(model)
+                HttpRequestManager.shareIntance.getPayPreOrder(model: AppointInfoModel.init(data), callBack: callBack)
             }else{
-                callBack(nil)
+                callBack((nil, ccb.msg))
             }
         }
     }
 
-    func getPayPreOrder(model: AppointInfoModel) {
-        let dic = NSDictionary.init(dictionary: ["register_sn": model.register_sn,
-                                                 "request_date": model.request_date,
-                                                 "his_order_id": model.his_order_id,
-                                                 "openId":"",
-                                                 "tradeType":"",
-                                                 "tpltId": "01",
-                                                 "wb": model.wb,
+    func getPayPreOrder(model: AppointInfoModel, callBack: @escaping (((PreOrderInfoModel?, String?)) ->())) {
+        let dic = NSDictionary.init(dictionary: ["departmentName": model.depart_name,
+                                                 "verifyCode": model.his_order_id,
                                                  "expertId":"",
                                                  "expertName":"",
-                                                 "totalFee": model.totalFee,
-                                                 "diagnoseFee": model.diagnoseFee,
-                                                 "additionalFee": model.additionalFee,
-                                                 "registerFee": model.charge_price,
-                                                 "patient_id": model.patient_id,
-                                                 "flow": model.record_sn,
-                                                 "medicalCard": model.card_no,
-                                                 "clinicDate": model.request_date,
-                                                 "verifyCode": model.record_sn,
+                                                 "openId":"",
+                                                 "tpltId": "01",
                                                  "departmentId": model.depart_code,
-                                                 "departmentName": model.depart_name,
-            ])
-        HttpClient.shareIntance.POST(HC_preOrder, parameters: dic) { (result, cbb) in
+                                                 "medicalCard": model.patient_id,
+                                                 "additionalFee": model.additionalFee,
+                                                 "totalFee": model.totalFee,
+                                                 "clinicDate": model.request_date,
+                                                 "registerFee": model.charge_price,
+                                                 "seeTime": model.wb,
+                                                 "flow": model.register_sn,
+                                                 "tradeType":"",
+                                                 "diagnoseFee": model.diagnoseFee])
+        HttpClient.shareIntance.POST(HC_preOrder, parameters: dic) { (result, ccb) in
             print(result)
-            let ret = result as? [String:Any]
-            print("错误提示：\(ret?["message"])")
+            if ccb.success() {
+                guard let dic = result as? [String : Any], let data = dic["data"] as? [String: Any] else {
+                    callBack((nil, ccb.msg))
+                    return
+                }
+                
+                guard let model = JSONDeserializer<PreOrderInfoModel>.deserializeFrom(dict: data) else {
+                    callBack((nil, "json解析失败"))
+                    return
+                }
+                callBack((model, nil))
+            }else{
+                callBack((nil, ccb.msg))
+            }
+        }
+    }
+    
+    func prePay(orderId: String, payCode: String, callBack: @escaping (((String?, String?)) ->())) {
+        let dic = NSDictionary.init(dictionary: ["tpltId": "01",
+                                                 "orderId": orderId,
+                                                 "payCode": payCode,
+                                                 "app": "app",
+                                                 "tradeType": "app应用",
+                                                 "password": ""])
+        HttpClient.shareIntance.POST(HC_prePay, parameters: dic) { (result, ccb) in
+            print(result)
+            if ccb.success() {
+                guard let dic = result as? [String : Any], let data = dic["data"] as? String else {
+                    callBack((nil, ccb.msg))
+                    return
+                }
+
+                callBack((data, nil))
+            }else{
+                callBack((nil, ccb.msg))
+            }
         }
     }
 }
