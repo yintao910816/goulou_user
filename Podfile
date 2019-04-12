@@ -18,6 +18,7 @@ pod 'MJRefresh'
 pod 'MJExtension'
 
 pod 'WechatOpenSDK'
+pod 'AlipaySDK-iOS'
 
 pod 'HandyJSON', '~> 4.2.0-beta1'
 

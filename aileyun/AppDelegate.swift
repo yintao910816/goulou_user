@@ -167,44 +167,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate{
 }
 
 extension AppDelegate {
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        
-        HCPrint(message: url.absoluteString)
-        
-        if url.host == "safepay"{
-            AlipaySDK.defaultService().processOrder(withPaymentResult: url, standbyCallback: { (resultDic) in
-                HCPrint(message: resultDic)
-                let status = resultDic?["resultStatus"] as! String
-                if status == "9000"{
-                    let s = resultDic?["result"] as! String
-                    do{
-                        let dic = try JSONSerialization.jsonObject(with: s.data(using: .utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String : Any]
-                        let tempDic = dic["alipay_trade_app_pay_response"] as! [String : Any]
-                        let tradeNo = tempDic["out_trade_no"] as! String
-                        //支付成功  发送通知
-                        
-                        let not = Notification.init(name: NSNotification.Name.init(ALIPAY_SUCCESS), object: nil, userInfo: ["tradeNo" : tradeNo])
-                        NotificationCenter.default.post(not)
-                    }
-                    catch{}
-                }else{
-                    //支付失败
-                    let not = Notification.init(name: NSNotification.Name.init(PAY_FAIL), object: nil, userInfo: nil)
-                    NotificationCenter.default.post(not)
-                }
-            })
-            return true
-        }else if url.absoluteString.contains("tencent" + tencentAppid){
-            TencentOAuth.handleOpen(url)
-            let vc = ShowShareViewController()
-            return QQApiInterface.handleOpen(url, delegate: vc)
-        }else if url.scheme == weixinAppid{
-            return WXApi.handleOpen(url, delegate: self)
-        }
-        
-//        return true
-        return IpsmapServices.sharedInstance().application(app, open: url)
-    }
     
     func onReq(_ req: BaseReq!) {
     }
@@ -347,3 +309,59 @@ extension AppDelegate : UNUserNotificationCenterDelegate{
     
 }
 
+ extension AppDelegate {
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        HCPrint(message: url.absoluteString)
+        
+        if url.host == "safepay"{
+            AlipaySDK.defaultService().processOrder(withPaymentResult: url, standbyCallback: { [unowned self] resultDic in
+                self.dealAlipay(resultDic: resultDic)
+            })
+            return true
+        }else if url.absoluteString.contains("tencent" + tencentAppid){
+            TencentOAuth.handleOpen(url)
+            let vc = ShowShareViewController()
+            return QQApiInterface.handleOpen(url, delegate: vc)
+        }else if url.scheme == weixinAppid{
+            return WXApi.handleOpen(url, delegate: self)
+        }
+        
+        //        return true
+        return IpsmapServices.sharedInstance().application(app, open: url)
+    }
+
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        if (url.host ?? "" ) == "safepay" {
+            //跳转支付宝钱包进行支付，处理支付结果
+            AlipaySDK.defaultService()?.processOrder(withPaymentResult: url) { [unowned self] resultDic in
+                self.dealAlipay(resultDic: resultDic)
+            }
+        }
+        
+        return true
+    }
+    
+    // 处理支付宝支付结果
+    private func dealAlipay(resultDic: [AnyHashable: Any]?) {
+        HCPrint(message: resultDic)
+        let status = resultDic?["resultStatus"] as! String
+        if status == "9000"{
+            let s = resultDic?["result"] as! String
+            do{
+                let dic = try JSONSerialization.jsonObject(with: s.data(using: .utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String : Any]
+                let tempDic = dic["alipay_trade_app_pay_response"] as! [String : Any]
+                let tradeNo = tempDic["out_trade_no"] as! String
+                //支付成功  发送通知
+                let not = Notification.init(name: NSNotification.Name.init(ALIPAY_SUCCESS), object: nil, userInfo: ["tradeNo" : tradeNo])
+                NotificationCenter.default.post(not)
+            }
+            catch{}
+        }else{
+            //支付失败
+            let not = Notification.init(name: NSNotification.Name.init(PAY_FAIL), object: nil, userInfo: nil)
+            NotificationCenter.default.post(not)
+        }
+    }
+
+ }
