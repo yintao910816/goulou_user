@@ -9,15 +9,17 @@ pod 'UMengAnalytics-NO-IDFA'
 pod 'AFNetworking'
 #pod ‘Reachability’
 
-pod ‘SDWebImage’
+pod 'SDWebImage'
 
 pod 'SVProgressHUD'
 pod 'SnapKit'
 pod 'MJRefresh'
 
-pod ‘MJExtension’
+pod 'MJExtension'
 
 pod 'WechatOpenSDK'
+
+pod 'HandyJSON', '~> 4.2.0-beta1'
 
 #pod 'IpsmapSDK'
 

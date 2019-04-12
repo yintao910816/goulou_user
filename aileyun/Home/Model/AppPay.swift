@@ -9,7 +9,7 @@
 import Foundation
 
 class AppointInfoModel: NSObject {
-        
+    
     var additionalFee: String = ""
     var card_no: String = ""
     var charge_price: String = ""
@@ -45,4 +45,33 @@ class AppointInfoModel: NSObject {
         setValuesForKeys(dict)
     }
     override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+}
+
+import HandyJSON
+class PreOrderInfoModel: HandyJSON {
+    var orderId: String = ""
+    var orderPayconfigs: [OrderPayconfigsModel] = []
+
+//    init(_ dict : [String : Any]) {
+//        super.init()
+//        setValuesForKeys(dict)
+//    }
+//
+//    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+
+    required init() { }
+}
+
+class OrderPayconfigsModel: HandyJSON {
+    var payCode: String = ""
+    var payDesc: String = ""
+    var payName: String = ""
+
+    required init() { }
+
+//    init(_ dict : [String : Any]) {
+//        super.init()
+//        setValuesForKeys(dict)
+//    }
+//    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 }

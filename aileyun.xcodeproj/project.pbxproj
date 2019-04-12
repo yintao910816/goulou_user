@@ -341,6 +341,9 @@
 		B8BE84A5225D1AE3004D2CAE /* GulouNaviViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE84A0225D1AE3004D2CAE /* GulouNaviViewController.swift */; };
 		B8BE84A6225D1AE3004D2CAE /* PlacePositionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE84A2225D1AE3004D2CAE /* PlacePositionModel.swift */; };
 		B8BE84A7225D1AE3004D2CAE /* GroupManagerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE84A4225D1AE3004D2CAE /* GroupManagerViewCell.swift */; };
+		C448416322602BB200F2DF0A /* PayOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448416122602BB200F2DF0A /* PayOrderViewController.swift */; };
+		C448416422602BB200F2DF0A /* PayOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C448416222602BB200F2DF0A /* PayOrderViewController.xib */; };
+		C448416622606E6500F2DF0A /* HandyJSON+MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448416522606E6500F2DF0A /* HandyJSON+MapModel.swift */; };
 		C4C8470B225DE1C100D3FEB5 /* AppPay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C8470A225DE1C100D3FEB5 /* AppPay.swift */; };
 		F666A4136C77989F16603994 /* Pods_aileyun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E253F5689AE7ECF7180033EA /* Pods_aileyun.framework */; };
 /* End PBXBuildFile section */
@@ -706,6 +709,9 @@
 		B8BE84A0225D1AE3004D2CAE /* GulouNaviViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GulouNaviViewController.swift; sourceTree = "<group>"; };
 		B8BE84A2225D1AE3004D2CAE /* PlacePositionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacePositionModel.swift; sourceTree = "<group>"; };
 		B8BE84A4225D1AE3004D2CAE /* GroupManagerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupManagerViewCell.swift; sourceTree = "<group>"; };
+		C448416122602BB200F2DF0A /* PayOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayOrderViewController.swift; sourceTree = "<group>"; };
+		C448416222602BB200F2DF0A /* PayOrderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayOrderViewController.xib; sourceTree = "<group>"; };
+		C448416522606E6500F2DF0A /* HandyJSON+MapModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HandyJSON+MapModel.swift"; sourceTree = "<group>"; };
 		C4C8470A225DE1C100D3FEB5 /* AppPay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPay.swift; sourceTree = "<group>"; };
 		E253F5689AE7ECF7180033EA /* Pods_aileyun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_aileyun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1086,6 +1092,7 @@
 		3C3D785A1EF3C35E00DE6F46 /* tools */ = {
 			isa = PBXGroup;
 			children = (
+				C448416522606E6500F2DF0A /* HandyJSON+MapModel.swift */,
 				3CFC3B3E1FF5D31200B15585 /* IpsmapSDK */,
 				3CF9D51B1F6FC138002E89A9 /* DataProvide */,
 				3C8B0BC01F3C52F800611AF2 /* UMessage_Sdk_1.5.0a */,
@@ -1116,6 +1123,8 @@
 				3C821EBF1F25DD9A005C976D /* WebViewController.swift */,
 				3C8B0BBC1F3C342400611AF2 /* WebMenuViewController.swift */,
 				3C4F1B341F974E46009A93E3 /* LEDWordsView.swift */,
+				C448416122602BB200F2DF0A /* PayOrderViewController.swift */,
+				C448416222602BB200F2DF0A /* PayOrderViewController.xib */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -1728,6 +1737,7 @@
 				3C490A881F27397100130B91 /* 书籍.png in Resources */,
 				3CFC3B431FF5D31200B15585 /* IpsmapSDK.xcassets in Resources */,
 				3C69B3621EF8BF940068355D /* 标题@2x.png in Resources */,
+				C448416422602BB200F2DF0A /* PayOrderViewController.xib in Resources */,
 				3CAEFA3D1F9ED5CA00DB20E1 /* goodnewsBaby.png in Resources */,
 				3C5D66891F32B3F1002CE23D /* User_HL@3x.png in Resources */,
 				3C3EAD111F2866E1008430D5 /* 搜索-黑@2x.png in Resources */,
@@ -1833,6 +1843,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-aileyun/Pods-aileyun-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -1844,6 +1855,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -1919,6 +1931,7 @@
 				3C69B38F1EF926F50068355D /* selbutton.swift in Sources */,
 				3C2E70871EFA285B006F1C1D /* chooseButton.swift in Sources */,
 				3C3D78601EF3C45D00DE6F46 /* MainTabBarController.swift in Sources */,
+				C448416322602BB200F2DF0A /* PayOrderViewController.swift in Sources */,
 				3CFAAF001F50170800096D98 /* HC_consultViewmodel.swift in Sources */,
 				3C30E8921F3416E700E35AC9 /* UserTableViewCell.swift in Sources */,
 				3CAEFA3B1F9ED2FB00DB20E1 /* GoodNewsView.swift in Sources */,
@@ -1956,6 +1969,7 @@
 				3CFAAEFC1F5005DB00096D98 /* HC_consultListModel.swift in Sources */,
 				3CD7D8F51F4C32E100420F4B /* MessageDetailModel.swift in Sources */,
 				3CF12B8D1F55731000745F17 /* SearchDocViewController.swift in Sources */,
+				C448416622606E6500F2DF0A /* HandyJSON+MapModel.swift in Sources */,
 				3C60B6801F18CE77004B4AFA /* BaseChatTableViewCell.swift in Sources */,
 				3C64D4531F1C47700068255C /* ChatPicTableViewCell.swift in Sources */,
 				3C9008D61EFBADB100CED474 /* UserQQModel.swift in Sources */,
