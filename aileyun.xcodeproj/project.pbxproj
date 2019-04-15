@@ -341,6 +341,9 @@
 		B8BE84A5225D1AE3004D2CAE /* GulouNaviViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE84A0225D1AE3004D2CAE /* GulouNaviViewController.swift */; };
 		B8BE84A6225D1AE3004D2CAE /* PlacePositionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE84A2225D1AE3004D2CAE /* PlacePositionModel.swift */; };
 		B8BE84A7225D1AE3004D2CAE /* GroupManagerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE84A4225D1AE3004D2CAE /* GroupManagerViewCell.swift */; };
+		C4094E75226423D300992B08 /* QueryPayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4094E73226423D300992B08 /* QueryPayViewController.swift */; };
+		C4094E76226423D300992B08 /* QueryPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4094E74226423D300992B08 /* QueryPayViewController.xib */; };
+		C4094E7822642B0600992B08 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4094E7722642B0600992B08 /* Timer.swift */; };
 		C448416322602BB200F2DF0A /* PayOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448416122602BB200F2DF0A /* PayOrderViewController.swift */; };
 		C448416422602BB200F2DF0A /* PayOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C448416222602BB200F2DF0A /* PayOrderViewController.xib */; };
 		C448416622606E6500F2DF0A /* HandyJSON+MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448416522606E6500F2DF0A /* HandyJSON+MapModel.swift */; };
@@ -709,6 +712,9 @@
 		B8BE84A0225D1AE3004D2CAE /* GulouNaviViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GulouNaviViewController.swift; sourceTree = "<group>"; };
 		B8BE84A2225D1AE3004D2CAE /* PlacePositionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacePositionModel.swift; sourceTree = "<group>"; };
 		B8BE84A4225D1AE3004D2CAE /* GroupManagerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupManagerViewCell.swift; sourceTree = "<group>"; };
+		C4094E73226423D300992B08 /* QueryPayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryPayViewController.swift; sourceTree = "<group>"; };
+		C4094E74226423D300992B08 /* QueryPayViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QueryPayViewController.xib; sourceTree = "<group>"; };
+		C4094E7722642B0600992B08 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		C448416122602BB200F2DF0A /* PayOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayOrderViewController.swift; sourceTree = "<group>"; };
 		C448416222602BB200F2DF0A /* PayOrderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayOrderViewController.xib; sourceTree = "<group>"; };
 		C448416522606E6500F2DF0A /* HandyJSON+MapModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HandyJSON+MapModel.swift"; sourceTree = "<group>"; };
@@ -1092,6 +1098,7 @@
 		3C3D785A1EF3C35E00DE6F46 /* tools */ = {
 			isa = PBXGroup;
 			children = (
+				C4094E7722642B0600992B08 /* Timer.swift */,
 				C448416522606E6500F2DF0A /* HandyJSON+MapModel.swift */,
 				3CFC3B3E1FF5D31200B15585 /* IpsmapSDK */,
 				3CF9D51B1F6FC138002E89A9 /* DataProvide */,
@@ -1125,6 +1132,8 @@
 				3C4F1B341F974E46009A93E3 /* LEDWordsView.swift */,
 				C448416122602BB200F2DF0A /* PayOrderViewController.swift */,
 				C448416222602BB200F2DF0A /* PayOrderViewController.xib */,
+				C4094E73226423D300992B08 /* QueryPayViewController.swift */,
+				C4094E74226423D300992B08 /* QueryPayViewController.xib */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -1765,6 +1774,7 @@
 				3C3D788A1EF3D17900DE6F46 /* Group@2x.png in Resources */,
 				3C30E8771F34053200E35AC9 /* 可使用@2x.png in Resources */,
 				3C69B3661EF8BF940068355D /* 消息@2x.png in Resources */,
+				C4094E76226423D300992B08 /* QueryPayViewController.xib in Resources */,
 				3C51A96E1F0B63D6004ED84B /* 多边形2@2x.png in Resources */,
 				3C3D788D1EF3D17900DE6F46 /* Group_HL@3x.png in Resources */,
 				3C30E88B1F34053200E35AC9 /* 预约@2x.png in Resources */,
@@ -1965,6 +1975,7 @@
 				3C60B6781F18AB46004B4AFA /* dialogModel.swift in Sources */,
 				3CAB713C1F725729002A61D7 /* EqualSpaceFlowLayout.swift in Sources */,
 				C4C8470B225DE1C100D3FEB5 /* AppPay.swift in Sources */,
+				C4094E75226423D300992B08 /* QueryPayViewController.swift in Sources */,
 				3C5E35A51EF7796200F08575 /* UserModel.swift in Sources */,
 				3C5E359A1EF7786A00F08575 /* HttpClient.swift in Sources */,
 				3C69B38D1EF9202B0068355D /* selectView.swift in Sources */,
@@ -2023,6 +2034,7 @@
 				3CD7D8F31F4C2FBF00420F4B /* MessageDetailViewController.swift in Sources */,
 				3CE3074F1F1F02E800B06923 /* PhotoPickerView.swift in Sources */,
 				3C60B66B1F1892DB004B4AFA /* VoiceConverter.mm in Sources */,
+				C4094E7822642B0600992B08 /* Timer.swift in Sources */,
 				3C49828A1F0F83F6003ECA46 /* CoverPresentationController.swift in Sources */,
 				3C1196221F469A40006DB0B8 /* FunctionCollectionViewCell.swift in Sources */,
 				3C47DAD11F42CFE000996FA2 /* KnowledgeListModel.swift in Sources */,

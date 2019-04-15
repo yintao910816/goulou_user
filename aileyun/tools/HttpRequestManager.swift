@@ -1197,11 +1197,13 @@ extension HttpRequestManager {
                     return
                 }
                 
-                guard let model = JSONDeserializer<PreOrderInfoModel>.deserializeFrom(dict: data) else {
+                guard let retModel = JSONDeserializer<PreOrderInfoModel>.deserializeFrom(dict: data) else {
                     callBack((nil, "json解析失败"))
                     return
                 }
-                callBack((model, nil))
+                retModel.price = model.totalFee
+                retModel.info  = model.name
+                callBack((retModel, nil))
             }else{
                 callBack((nil, ccb.msg))
             }
@@ -1226,6 +1228,21 @@ extension HttpRequestManager {
                 callBack((data, nil))
             }else{
                 callBack((nil, ccb.msg))
+            }
+        }
+    }
+    
+    // HC_queryPay
+    func queryPay(orderId: String, appointId: String, callBack: @escaping (((Bool, String?)) ->())) {
+        let dic = NSDictionary.init(dictionary: ["tpltId": "01",
+                                                 "orderId": orderId,
+                                                 "appointId": appointId])
+        HttpClient.shareIntance.POST(HC_queryPay, parameters: dic) { (result, ccb) in
+            print(result)
+            if ccb.success() {
+                callBack((true, nil))
+            }else{
+                callBack((false, ccb.msg))
             }
         }
     }

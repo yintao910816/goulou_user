@@ -51,13 +51,9 @@ import HandyJSON
 class PreOrderInfoModel: HandyJSON {
     var orderId: String = ""
     var orderPayconfigs: [OrderPayconfigsModel] = []
-
-//    init(_ dict : [String : Any]) {
-//        super.init()
-//        setValuesForKeys(dict)
-//    }
-//
-//    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+    
+    var price: String = "0"
+    var info: String  = ""
 
     required init() { }
 }
@@ -68,10 +64,4 @@ class OrderPayconfigsModel: HandyJSON {
     var payName: String = ""
 
     required init() { }
-
-//    init(_ dict : [String : Any]) {
-//        super.init()
-//        setValuesForKeys(dict)
-//    }
-//    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 }

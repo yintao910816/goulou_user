@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QueryPayViewController" customModule="aileyun" customModuleProvider="target">
+            <connections>
+                <outlet property="priceOutlet" destination="Fjr-9b-mpO" id="qqe-WS-p2e"/>
+                <outlet property="timeCutDownOutlet" destination="Yac-xO-m6F" id="vIk-b4-rD8"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fjr-9b-mpO">
+                    <rect key="frame" x="197.5" y="268" width="10" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.96470588235294119" green="0.79607843137254897" blue="0.50980392156862742" alpha="1" colorSpace="deviceRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CSz-ir-zez">
+                    <rect key="frame" x="20" y="316" width="335" height="35"/>
+                    <color key="backgroundColor" red="0.84705882352941175" green="0.36862745098039218" blue="0.41568627450980389" alpha="1" colorSpace="deviceRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="dH2-qM-rua"/>
+                    </constraints>
+                    <state key="normal" title="返回">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="backAction:" destination="-1" eventType="touchUpInside" id="91H-Cw-7Zd"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付金额: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PAq-kP-U3A">
+                    <rect key="frame" x="122.5" y="268" width="70" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3秒..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yac-xO-m6F">
+                    <rect key="frame" x="163.5" y="223" width="48" height="22"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="CSz-ir-zez" secondAttribute="trailing" constant="20" id="4Yo-T8-uDj"/>
+                <constraint firstItem="Fjr-9b-mpO" firstAttribute="centerY" secondItem="PAq-kP-U3A" secondAttribute="centerY" id="6ZQ-37-JAq"/>
+                <constraint firstItem="CSz-ir-zez" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Bd9-TS-ne7"/>
+                <constraint firstItem="Fjr-9b-mpO" firstAttribute="leading" secondItem="PAq-kP-U3A" secondAttribute="trailing" constant="5" id="UFi-rN-8cq"/>
+                <constraint firstItem="PAq-kP-U3A" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="-30" id="XOz-ba-M3a"/>
+                <constraint firstItem="CSz-ir-zez" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="XYg-5W-bWw"/>
+                <constraint firstItem="Yac-xO-m6F" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="YEw-y2-fAz"/>
+                <constraint firstItem="PAq-kP-U3A" firstAttribute="top" secondItem="Yac-xO-m6F" secondAttribute="bottom" constant="23" id="fZ3-N8-a2n"/>
+                <constraint firstItem="CSz-ir-zez" firstAttribute="top" secondItem="PAq-kP-U3A" secondAttribute="bottom" constant="30" id="sUw-VO-BGu"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
