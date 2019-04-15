@@ -36,7 +36,7 @@ class QueryPayViewController: BaseViewController {
             if value == 0 {
                 strongSelf.timeCutDownOutlet.text = "请您耐心等待..."
                 SVProgressHUD.show()
-                HttpRequestManager.shareIntance.queryPay(orderId: strongSelf.payModelInfo.orderId, appointId: strongSelf.payModelInfo.orderId, callBack: { [weak self] data in
+                HttpRequestManager.shareIntance.queryPay(orderId: strongSelf.payModelInfo.orderId, appointId: strongSelf.payModelInfo.appointId, callBack: { [weak self] data in
                     if data.0 == true {
                         SVProgressHUD.dismiss()
                         self?.push()
@@ -53,10 +53,9 @@ class QueryPayViewController: BaseViewController {
     }
     
     private func push() {
-        let token = UserManager.shareIntance.HCUser?.token ?? "noToken"
         let webVC = WebViewController()
         webVC.isPopRoot = true
-        webVC.url = "https://wx.ivfcn.com/imagingRecord?token=\(token)"
+        webVC.url = "https://wx.ivfcn.com/imagingRecord"
         navigationController?.pushViewController(webVC, animated: true)
     }
 

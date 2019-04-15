@@ -54,6 +54,9 @@ class PreOrderInfoModel: HandyJSON {
     
     var price: String = "0"
     var info: String  = ""
+    
+    // 点h5上支付按钮，h5传过来的orderId
+    var appointId: String = ""
 
     required init() { }
 }

@@ -313,6 +313,7 @@ extension WebViewController { // 支付
         if token.count > 0 && orderID.count > 0 {
             HttpRequestManager.shareIntance.getHisAppointInfo(orderID: orderID) { [weak self] data in
                 if let retModel = data.0 {
+                    retModel.appointId = orderID
                     SVProgressHUD.dismiss()
                     
                     let payVC = PayOrderViewController.init(nibName: "PayOrderViewController", bundle: Bundle.main)
