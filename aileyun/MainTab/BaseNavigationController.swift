@@ -10,6 +10,7 @@ import UIKit
 
 class BaseNavigationController: UINavigationController {
     
+    fileprivate var isPopRoot: Bool = false
     
     override var childViewControllerForStatusBarStyle: UIViewController?{
         get {
@@ -37,6 +38,10 @@ class BaseNavigationController: UINavigationController {
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         
         if childViewControllers.count > 0 {
+            if let web = viewController as? WebViewController {
+                isPopRoot = web.isPopRoot
+            }
+            
             viewController.hidesBottomBarWhenPushed = true
             viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "返回灰"), style: .plain, target: self, action: #selector(popToParent))
             let target = self.interactivePopGestureRecognizer!.delegate
@@ -52,7 +57,13 @@ class BaseNavigationController: UINavigationController {
 extension BaseNavigationController {
     @objc fileprivate func popToParent() {
         HttpClient.shareIntance.cancelAllRequest()
-        popViewController(animated: true)
+        if isPopRoot {
+            popToRootViewController(animated: true)
+        }else {
+            popViewController(animated: true)
+        }
+        
+        isPopRoot = false
     }
 }
 

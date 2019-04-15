@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="detailOutlet" destination="3j6-TB-lF3" id="mtI-Bk-y4N"/>
                 <outlet property="priceOutlet" destination="X4O-5s-tZu" id="Qc3-4p-hMQ"/>
+                <outlet property="topCns" destination="Ym0-g8-QlZ" id="BOS-AW-oWr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

@@ -13,6 +13,7 @@ class PayOrderViewController: BaseViewController {
 
     @IBOutlet weak var priceOutlet: UILabel!
     @IBOutlet weak var detailOutlet: UILabel!
+    @IBOutlet weak var topCns: NSLayoutConstraint!
     
     var payModelInfo: PreOrderInfoModel!
     
@@ -22,6 +23,8 @@ class PayOrderViewController: BaseViewController {
         navigationItem.title = "支付状态"
         priceOutlet.text = payModelInfo.price
         detailOutlet.text = payModelInfo.info
+        
+        topCns.constant += LayoutSize.fitTopArea
     }
 
     @IBAction func actions(_ sender: UIButton) {

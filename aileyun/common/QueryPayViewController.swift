@@ -55,6 +55,7 @@ class QueryPayViewController: BaseViewController {
     private func push() {
         let token = UserManager.shareIntance.HCUser?.token ?? "noToken"
         let webVC = WebViewController()
+        webVC.isPopRoot = true
         webVC.url = "https://wx.ivfcn.com/imagingRecord?token=\(token)"
         navigationController?.pushViewController(webVC, animated: true)
     }

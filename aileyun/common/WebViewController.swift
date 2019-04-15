@@ -11,6 +11,8 @@ import JavaScriptCore
 import SVProgressHUD
 
 class WebViewController: BaseViewController {
+    var isPopRoot: Bool = false
+
     var url : String?{
         didSet{
             HCPrint(message: url)
