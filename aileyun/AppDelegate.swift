@@ -347,20 +347,20 @@ extension AppDelegate : UNUserNotificationCenterDelegate{
         HCPrint(message: resultDic)
         let status = resultDic?["resultStatus"] as! String
         if status == "9000"{
-            let s = resultDic?["result"] as! String
-            do{
-                let dic = try JSONSerialization.jsonObject(with: s.data(using: .utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String : Any]
-                let tempDic = dic["alipay_trade_app_pay_response"] as! [String : Any]
-                let tradeNo = tempDic["out_trade_no"] as! String
-                //支付成功  发送通知
-                let not = Notification.init(name: NSNotification.Name.init(ALIPAY_SUCCESS), object: nil, userInfo: ["tradeNo" : tradeNo])
-                NotificationCenter.default.post(not)
-            }
-            catch{}
+//            let s = resultDic?["result"] as! String
+//            do{
+//                let dic = try JSONSerialization.jsonObject(with: s.data(using: .utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String : Any]
+//                let tempDic = dic["alipay_trade_app_pay_response"] as! [String : Any]
+//                let tradeNo = tempDic["out_trade_no"] as! String
+//                //支付成功  发送通知
+////                let not = Notification.init(name: NSNotification.Name.init(ALIPAY_SUCCESS), object: nil, userInfo: ["tradeNo" : tradeNo])
+////                NotificationCenter.default.post(not)
+//            }
+//            catch{}
         }else{
-            //支付失败
-            let not = Notification.init(name: NSNotification.Name.init(PAY_FAIL), object: nil, userInfo: nil)
-            NotificationCenter.default.post(not)
+//            //支付失败
+//            let not = Notification.init(name: NSNotification.Name.init(PAY_FAIL), object: nil, userInfo: nil)
+//            NotificationCenter.default.post(not)
         }
     }
 

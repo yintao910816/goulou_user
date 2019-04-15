@@ -1202,7 +1202,7 @@ extension HttpRequestManager {
                     return
                 }
                 retModel.price = model.totalFee
-                retModel.info  = model.name
+                retModel.info  = "支付挂号费"
                 callBack((retModel, nil))
             }else{
                 callBack((nil, ccb.msg))
