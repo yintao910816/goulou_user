@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3DBE4E9208EA37E919B946531ABAC570"
-               BlueprintName = "SVProgressHUD"
+               BlueprintIdentifier = "1DAACFD3C7DBAFD79F0BC194768C9424"
+               BlueprintName = "AlipaySDK-iOS"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "SVProgressHUD.framework">
+               BuildableName = "AlipaySDK-iOS">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
