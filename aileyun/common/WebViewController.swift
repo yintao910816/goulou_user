@@ -323,6 +323,6 @@ extension WebViewController { // 支付
                     SVProgressHUD.showError(withStatus: data.1)
                 }
             }
-        }
+        }        
     }
 }

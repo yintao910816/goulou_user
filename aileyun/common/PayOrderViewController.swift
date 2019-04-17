@@ -21,29 +21,38 @@ class PayOrderViewController: BaseViewController {
         super.viewDidLoad()
 
         navigationItem.title = "支付状态"
-        priceOutlet.text = payModelInfo.price
+        priceOutlet.text = "\(payModelInfo.price)元"
         detailOutlet.text = payModelInfo.info
         
         topCns.constant += LayoutSize.fitTopArea
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(alipaySuccess),
+                                               name: NSNotification.Name.init(ALIPAY_SUCCESS),
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(alipayFailure),
+                                               name: NSNotification.Name.init(PAY_FAIL),
+                                               object: nil)
     }
-
+    
     @IBAction func actions(_ sender: UIButton) {
         SVProgressHUD.show()
+
         let model = payModelInfo.orderPayconfigs.first(where: { $0.payName == "支付宝" })
         HttpRequestManager.shareIntance.prePay(orderId: payModelInfo.orderId, payCode: model?.payCode ?? "") { [weak self] data in
             if let preOrderString = data.0 {
                 AlipaySDK.defaultService()?.payOrder(preOrderString, fromScheme: kScheme, callback: { [weak self] resultDic in
                     HCPrint(message: resultDic)
-                    let resultS = resultDic?["resultStatus"] as! String
-                    
-                    switch resultS {
-                    case "4000":
-                        HCShowError(info: "订单支付失败")
-                    case "6001":
-                        HCShowError(info: "用户中途取消")
-                    case "6002":
-                        HCShowError(info: "网络连接出错")
-                    case "9000":
+//                    let resultS = resultDic?["resultStatus"] as! String
+//
+//                    switch resultS {
+//                    case "4000":
+//                        HCShowError(info: "订单支付失败")
+//                    case "6001":
+//                        HCShowError(info: "用户中途取消")
+//                    case "6002":
+//                        HCShowError(info: "网络连接出错")
+//                    case "9000":
 //                        let s = resultDic?["result"] as! String
 //                        do{
 //                            let dic = try JSONSerialization.jsonObject(with: s.data(using: .utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String : Any]
@@ -55,18 +64,31 @@ class PayOrderViewController: BaseViewController {
 //                            self?.checkAlipayResult(note: not)
 //                        }
 //                        catch{}
-                        guard let strongSelf = self else { return }
-                        let queryVC = QueryPayViewController.init(nibName: "QueryPayViewController", bundle: Bundle.main)
-                        queryVC.payModelInfo = strongSelf.payModelInfo
-                        strongSelf.navigationController?.pushViewController(queryVC, animated: true)
-                    default:
-                        HCShowError(info: "nothing")
-                    }
+//                        SVProgressHUD.dismiss()
+//                        guard let strongSelf = self else { return }
+//                        let queryVC = QueryPayViewController.init(nibName: "QueryPayViewController", bundle: Bundle.main)
+//                        queryVC.payModelInfo = strongSelf.payModelInfo
+//                        strongSelf.navigationController?.pushViewController(queryVC, animated: true)
+//                    default:
+//                        HCShowError(info: "nothing")
+//                    }
                 })
             }else {
                 SVProgressHUD.showError(withStatus: data.1)
             }
         }
+    }
+    
+    @objc private func alipaySuccess() {
+        SVProgressHUD.dismiss()
+        
+        let queryVC = QueryPayViewController.init(nibName: "QueryPayViewController", bundle: Bundle.main)
+        queryVC.payModelInfo = payModelInfo
+        navigationController?.pushViewController(queryVC, animated: true)
+    }
+    
+    @objc private func alipayFailure() {
+        SVProgressHUD.showError(withStatus: "支付失败")
     }
     
     func checkAlipayResult(note : Notification){
