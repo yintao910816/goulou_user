@@ -10,8 +10,6 @@ import UIKit
 
 class BaseNavigationController: UINavigationController {
     
-    var willDismissViewController: UIViewController?
-    
     override var childViewControllerForStatusBarStyle: UIViewController?{
         get {
             return self.topViewController
@@ -37,8 +35,6 @@ class BaseNavigationController: UINavigationController {
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        willDismissViewController = viewController
-        
         if childViewControllers.count > 0 {
             viewController.hidesBottomBarWhenPushed = true
             viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "返回灰"), style: .plain, target: self, action: #selector(popToParent))
@@ -49,7 +45,6 @@ class BaseNavigationController: UINavigationController {
         }
         super.pushViewController(viewController, animated: true)
     }
-
 }
 
 extension BaseNavigationController {
@@ -60,25 +55,21 @@ extension BaseNavigationController {
 }
 
 //extension BaseNavigationController: UINavigationBarDelegate {
-//    
+//
 //    func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
-//        var shouldPop = true
 //        let viewControllersCount = self.viewControllers.count
 //
-//        if viewControllersCount > 0 {
-//            if let vc = willDismissViewController {
-//                shouldPop = vc.shouldPopOnBackButtonPress()
-//            }
-//            if(shouldPop == false){
-////                popToRootViewController(animated: true)
+//        if viewControllersCount > 0, let vc = topViewController as? WebViewController {
+//            if vc.isPopRoot == true {
+//                vc.navigationController?.popToRootViewController(animated: true)
 //                return false
 //            }
 //        }
-//     
+//
 //        return true
 //    }
 //}
-//
+
 //@objc protocol NavigationCustomBack {
 //    
 //    @objc optional func shouldPopOnBackButtonPress() -> Bool

@@ -20,6 +20,9 @@ class PayOrderViewController: BaseViewController {
     
     var payModelInfo: PreOrderInfoModel!
     
+    private var payStatue: Bool = true
+    private var needChangeVC: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,6 +41,19 @@ class PayOrderViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(alipayFailure(no:)),
                                                name: NSNotification.Name.init(PAY_FAIL),
                                                object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if needChangeVC == true {
+            if payStatue == true
+            {
+                push()
+            }else {
+                navigationController?.popViewController(animated: true)
+            }
+        }
     }
     
     @IBAction func actions(_ sender: UIButton) {
@@ -85,11 +101,8 @@ class PayOrderViewController: BaseViewController {
                         strongSelf.navigationController?.pushViewController(queryVC, animated: true)
                         
                         queryVC.payCallBack = { statu in
-                            if statu == true {
-                                strongSelf.push()
-                            }else {
-                                strongSelf.navigationController?.popViewController(animated: true)
-                            }
+                            strongSelf.needChangeVC = true
+                            strongSelf.payStatue = statu
                         }
                     default:
                         HCShowError(info: "nothing")
@@ -104,8 +117,11 @@ class PayOrderViewController: BaseViewController {
     private func push() {
         let webVC = WebViewController()
         webVC.isPopRoot = true
+        webVC.isIgoreWebBack = true
         webVC.url = "https://wx.ivfcn.com/imagingRecord"
         navigationController?.pushViewController(webVC, animated: true)
+        
+        needChangeVC = false
     }
     
     @objc private func alipaySuccess() {

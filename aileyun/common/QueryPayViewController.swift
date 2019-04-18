@@ -20,7 +20,6 @@ class QueryPayViewController: BaseViewController {
     
     private var timer: CountdownTimer!
 
-    private var payStatus: Bool = true
     // 支付完成回调
     var payCallBack: ((Bool)->())?
     
@@ -28,13 +27,14 @@ class QueryPayViewController: BaseViewController {
     
     @IBAction func backAction(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
-        payCallBack?(payStatus)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.title = "支付状态"
+        priceOutlet.text = "\(payModelInfo.price)元"
+        payStatusView.isHidden = false
         
         timer = CountdownTimer.init(totleCount: 3)
         
@@ -47,12 +47,12 @@ class QueryPayViewController: BaseViewController {
                 HttpRequestManager.shareIntance.queryPay(orderId: strongSelf.payModelInfo.orderId, appointId: strongSelf.payModelInfo.appointId, callBack: { [weak self] data in
                     SVProgressHUD.dismiss()
                     if data.0 == true {
-                        self?.payStatus = true
+                        self?.payCallBack?(true)
                     }else {
                         self?.payRemindOutlet.text = "支付失败"
                         self?.payStatusIconOutlet.image = UIImage.init(named: "pay_failure")
                         
-                        self?.payStatus = false
+                        self?.payCallBack?(false)
                     }
                     self?.payStatusView.isHidden = false
                 })

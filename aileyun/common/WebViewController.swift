@@ -12,6 +12,7 @@ import SVProgressHUD
 
 class WebViewController: BaseViewController {
     var isPopRoot: Bool = false
+    var isIgoreWebBack: Bool = false
 
     var url : String?{
         didSet{
@@ -109,14 +110,23 @@ class WebViewController: BaseViewController {
     }
 
     func popViewController(){
-        if webView.canGoBack{
-            webView.goBack()
-        }else{
+        if isIgoreWebBack == true {
             SVProgressHUD.dismiss()
             if isPopRoot == true {
                 navigationController?.popToRootViewController(animated: true)
             }else {
                 navigationController?.popViewController(animated: true)
+            }
+        }else {
+            if webView.canGoBack{
+                webView.goBack()
+            }else{
+                SVProgressHUD.dismiss()
+                if isPopRoot == true {
+                    navigationController?.popToRootViewController(animated: true)
+                }else {
+                    navigationController?.popViewController(animated: true)
+                }
             }
         }
     }
