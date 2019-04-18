@@ -76,6 +76,10 @@ let logoName = "GL-logo"
 let shareURL = "http://t.cn/RNhs1l9"
 let kDefaultThemeColor = UIColor.init(red: 233/255.0, green: 84/255.0, blue: 103/255.0, alpha: 1)
 
+/**
+ 微信开放平台账号：app@huchuang.com sz2017@83754648
+ */
+
 //第三方登录 鼓楼相关APPID
 let weixinAppid = "wx6bffd984efe7e7f9"
 let weixinSecret = "f8b1f4a4d3631d924127e4b507d126a8"

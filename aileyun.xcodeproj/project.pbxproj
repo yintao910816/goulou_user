@@ -338,6 +338,7 @@
 		3CFC3B4C1FF5D46000B15585 /* gulouQRCode.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CFC3B481FF5D46000B15585 /* gulouQRCode.png */; };
 		3CFC3B4D1FF5D46000B15585 /* medicalRecord.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3CFC3B491FF5D46000B15585 /* medicalRecord.jpg */; };
 		3CFC3B4E1FF5D4F500B15585 /* BindHospitalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0085431F31AFE1009BCCC6 /* BindHospitalViewController.swift */; };
+		B827A36122683F100088A2B8 /* UINavigationCtroller+Pop.swift in Sources */ = {isa = PBXBuildFile; fileRef = B827A36022683F100088A2B8 /* UINavigationCtroller+Pop.swift */; };
 		B831ADE9226440F6008347A5 /* Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831ADE8226440F6008347A5 /* Frame.swift */; };
 		B831ADEB2264413F008347A5 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831ADEA2264413F008347A5 /* UIDevice+Extension.swift */; };
 		B8BE84A5225D1AE3004D2CAE /* GulouNaviViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE84A0225D1AE3004D2CAE /* GulouNaviViewController.swift */; };
@@ -711,6 +712,7 @@
 		3CFC3B481FF5D46000B15585 /* gulouQRCode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gulouQRCode.png; sourceTree = "<group>"; };
 		3CFC3B491FF5D46000B15585 /* medicalRecord.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = medicalRecord.jpg; sourceTree = "<group>"; };
 		6D2808A40648D35BFB8F8A19 /* Pods-aileyun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-aileyun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-aileyun/Pods-aileyun.debug.xcconfig"; sourceTree = "<group>"; };
+		B827A36022683F100088A2B8 /* UINavigationCtroller+Pop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationCtroller+Pop.swift"; sourceTree = "<group>"; };
 		B831ADE8226440F6008347A5 /* Frame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Frame.swift; sourceTree = "<group>"; };
 		B831ADEA2264413F008347A5 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		B8BE84A0225D1AE3004D2CAE /* GulouNaviViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GulouNaviViewController.swift; sourceTree = "<group>"; };
@@ -1123,6 +1125,7 @@
 				3C60B6461F189233004B4AFA /* SharePlayer.swift */,
 				3C0085411F31A99D009BCCC6 /* HCLocationManager.swift */,
 				3C6A9EB01F6A86000010146A /* HCFindImageTool.swift */,
+				B827A36022683F100088A2B8 /* UINavigationCtroller+Pop.swift */,
 			);
 			path = tools;
 			sourceTree = "<group>";
@@ -2034,6 +2037,7 @@
 				3CF0D7E11F70FD6E0019B108 /* TagCollectionViewCell.swift in Sources */,
 				B8BE84A5225D1AE3004D2CAE /* GulouNaviViewController.swift in Sources */,
 				3CF9D5201F6FC1F9002E89A9 /* HCCircleModel.swift in Sources */,
+				B827A36122683F100088A2B8 /* UINavigationCtroller+Pop.swift in Sources */,
 				3C6A9EB11F6A86000010146A /* HCFindImageTool.swift in Sources */,
 				3C3D78341EF3C07600DE6F46 /* AppDelegate.swift in Sources */,
 				3CFC3B4E1FF5D4F500B15585 /* BindHospitalViewController.swift in Sources */,

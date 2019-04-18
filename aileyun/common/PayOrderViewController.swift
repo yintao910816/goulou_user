@@ -55,36 +55,41 @@ class PayOrderViewController: BaseViewController {
         HttpRequestManager.shareIntance.prePay(orderId: payModelInfo.orderId, payCode: model?.payCode ?? "") { [weak self] data in
             if let preOrderString = data.0 {
                 AlipaySDK.defaultService()?.payOrder(preOrderString, fromScheme: kScheme, callback: { [weak self] resultDic in
-                    HCPrint(message: resultDic)
+                    SVProgressHUD.dismiss()
                     let resultS = resultDic?["resultStatus"] as! String
                     switch resultS {
                     case "4000":
-                        SVProgressHUD.dismiss()
                         self?.failureView.isHidden = false
                     case "6001":
-                        HCShowError(info: "您取消了支付")
+//                        HCShowError(info: "您取消了支付")
+                        self?.failureView.isHidden = false
                     case "6002":
-                        HCShowError(info: "网络连接出错")
+//                        HCShowError(info: "网络连接出错")
+                        self?.failureView.isHidden = false
                     case "9000":
-                        let s = resultDic?["result"] as! String
-                        do{
-                            let dic = try JSONSerialization.jsonObject(with: s.data(using: .utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String : Any]
-                            let tempDic = dic["alipay_trade_app_pay_response"] as! [String : Any]
-                            let tradeNo = tempDic["out_trade_no"] as! String
-                            //支付成功  发送通知
+//                        let s = resultDic?["result"] as! String
+//                        do{
+//                            let dic = try JSONSerialization.jsonObject(with: s.data(using: .utf8)!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String : Any]
+//                            let tempDic = dic["alipay_trade_app_pay_response"] as! [String : Any]
+//                            let tradeNo = tempDic["out_trade_no"] as! String
+//                            //支付成功  发送通知
+//
+//                            let not = Notification.init(name: NSNotification.Name.init(ALIPAY_SUCCESS), object: nil, userInfo: ["tradeNo" : tradeNo])
+//                            self?.checkAlipayResult(note: not)
+//                        }
+//                        catch{}
 
-                            let not = Notification.init(name: NSNotification.Name.init(ALIPAY_SUCCESS), object: nil, userInfo: ["tradeNo" : tradeNo])
-                            self?.checkAlipayResult(note: not)
-                        }
-                        catch{}
-                        SVProgressHUD.dismiss()
                         guard let strongSelf = self else { return }
                         let queryVC = QueryPayViewController.init(nibName: "QueryPayViewController", bundle: Bundle.main)
                         queryVC.payModelInfo = strongSelf.payModelInfo
                         strongSelf.navigationController?.pushViewController(queryVC, animated: true)
                         
                         queryVC.payCallBack = { statu in
-                            if statu == true { strongSelf.push() }
+                            if statu == true {
+                                strongSelf.push()
+                            }else {
+                                strongSelf.navigationController?.popViewController(animated: true)
+                            }
                         }
                     default:
                         HCShowError(info: "nothing")
@@ -116,16 +121,20 @@ class PayOrderViewController: BaseViewController {
             SVProgressHUD.showError(withStatus: "支付失败")
             return
         }
+        
+        SVProgressHUD.dismiss()
         switch status {
         case "4000":
-            SVProgressHUD.dismiss()
             failureView.isHidden = false
         case "6001":
-            HCShowError(info: "您取消了支付")
+//            HCShowError(info: "您取消了支付")
+            failureView.isHidden = false
         case "6002":
-            HCShowError(info: "网络连接出错")
+            failureView.isHidden = false
+//            HCShowError(info: "网络连接出错")
         default:
-            HCShowError(info: "未知状态")
+            failureView.isHidden = false
+//            HCShowError(info: "未知状态")
         }
     }
     
@@ -141,5 +150,5 @@ class PayOrderViewController: BaseViewController {
                 HCShowError(info: msg)
             }
         }
-    }
+    }    
 }

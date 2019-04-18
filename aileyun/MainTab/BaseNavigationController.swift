@@ -10,6 +10,8 @@ import UIKit
 
 class BaseNavigationController: UINavigationController {
     
+    var willDismissViewController: UIViewController?
+    
     override var childViewControllerForStatusBarStyle: UIViewController?{
         get {
             return self.topViewController
@@ -27,6 +29,7 @@ class BaseNavigationController: UINavigationController {
 
         //禁用系统原先的侧滑返回功能
         self.interactivePopGestureRecognizer!.isEnabled = false
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,6 +37,7 @@ class BaseNavigationController: UINavigationController {
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        willDismissViewController = viewController
         
         if childViewControllers.count > 0 {
             viewController.hidesBottomBarWhenPushed = true
@@ -54,5 +58,35 @@ extension BaseNavigationController {
         popViewController(animated: true)
     }
 }
+
+//extension BaseNavigationController: UINavigationBarDelegate {
+//    
+//    func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
+//        var shouldPop = true
+//        let viewControllersCount = self.viewControllers.count
+//
+//        if viewControllersCount > 0 {
+//            if let vc = willDismissViewController {
+//                shouldPop = vc.shouldPopOnBackButtonPress()
+//            }
+//            if(shouldPop == false){
+////                popToRootViewController(animated: true)
+//                return false
+//            }
+//        }
+//     
+//        return true
+//    }
+//}
+//
+//@objc protocol NavigationCustomBack {
+//    
+//    @objc optional func shouldPopOnBackButtonPress() -> Bool
+//}
+//
+//extension UIViewController: NavigationCustomBack {
+//    
+//    func shouldPopOnBackButtonPress() -> Bool { return true }
+//}
 
 

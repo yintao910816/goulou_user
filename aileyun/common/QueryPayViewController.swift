@@ -62,5 +62,5 @@ class QueryPayViewController: BaseViewController {
         }
         
         timer.timerStar()
-    }
+    }    
 }
