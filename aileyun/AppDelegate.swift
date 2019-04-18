@@ -362,7 +362,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate{
 //            catch{}
         }else{
             //支付失败
-            let not = Notification.init(name: NSNotification.Name.init(PAY_FAIL), object: nil, userInfo: nil)
+            let not = Notification.init(name: NSNotification.Name.init(PAY_FAIL), object: status, userInfo: nil)
             NotificationCenter.default.post(not)
         }
     }

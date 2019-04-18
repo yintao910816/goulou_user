@@ -14,13 +14,21 @@ class QueryPayViewController: BaseViewController {
     @IBOutlet weak var timeCutDownOutlet: UILabel!
     @IBOutlet weak var priceOutlet: UILabel!
     
+    @IBOutlet weak var payStatusView: UIView!
+    @IBOutlet weak var payRemindOutlet: UILabel!
+    @IBOutlet weak var payStatusIconOutlet: UIImageView!
+    
     private var timer: CountdownTimer!
 
+    private var payStatus: Bool = true
+    // 支付完成回调
+    var payCallBack: ((Bool)->())?
     
     var payModelInfo: PreOrderInfoModel!
     
     @IBAction func backAction(_ sender: UIButton) {
-        navigationController?.popToRootViewController(animated: true)
+        navigationController?.popViewController(animated: true)
+        payCallBack?(payStatus)
     }
     
     override func viewDidLoad() {
@@ -37,12 +45,16 @@ class QueryPayViewController: BaseViewController {
                 strongSelf.timeCutDownOutlet.text = "请您耐心等待..."
                 SVProgressHUD.show()
                 HttpRequestManager.shareIntance.queryPay(orderId: strongSelf.payModelInfo.orderId, appointId: strongSelf.payModelInfo.appointId, callBack: { [weak self] data in
+                    SVProgressHUD.dismiss()
                     if data.0 == true {
-                        SVProgressHUD.dismiss()
-                        self?.push()
+                        self?.payStatus = true
                     }else {
-                        SVProgressHUD.showError(withStatus: data.1)
+                        self?.payRemindOutlet.text = "支付失败"
+                        self?.payStatusIconOutlet.image = UIImage.init(named: "pay_failure")
+                        
+                        self?.payStatus = false
                     }
+                    self?.payStatusView.isHidden = false
                 })
             }else {
                 strongSelf.timeCutDownOutlet.text = "\(value)秒..."
@@ -51,12 +63,4 @@ class QueryPayViewController: BaseViewController {
         
         timer.timerStar()
     }
-    
-    private func push() {
-        let webVC = WebViewController()
-        webVC.isPopRoot = true
-        webVC.url = "https://wx.ivfcn.com/imagingRecord"
-        navigationController?.pushViewController(webVC, animated: true)
-    }
-
 }

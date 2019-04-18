@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QueryPayViewController" customModule="aileyun" customModuleProvider="target">
             <connections>
+                <outlet property="payRemindOutlet" destination="i29-sr-R1t" id="Kcj-9T-doD"/>
+                <outlet property="payStatusIconOutlet" destination="dAf-hN-LiK" id="fcb-dY-cgy"/>
+                <outlet property="payStatusView" destination="M8m-ZW-FYC" id="GKh-Is-Nqu"/>
                 <outlet property="priceOutlet" destination="Fjr-9b-mpO" id="qqe-WS-p2e"/>
                 <outlet property="timeCutDownOutlet" destination="Yac-xO-m6F" id="vIk-b4-rD8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -52,19 +55,52 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M8m-ZW-FYC">
+                    <rect key="frame" x="30" y="210" width="315" height="35"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i29-sr-R1t">
+                            <rect key="frame" x="135.5" y="6" width="78" height="23"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pay_success" translatesAutoresizingMaskIntoConstraints="NO" id="dAf-hN-LiK">
+                            <rect key="frame" x="100.5" y="2.5" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="dAf-hN-LiK" secondAttribute="height" multiplier="1:1" id="3h6-vK-xZK"/>
+                                <constraint firstAttribute="width" constant="30" id="Ufb-yx-swS"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="i29-sr-R1t" firstAttribute="centerY" secondItem="M8m-ZW-FYC" secondAttribute="centerY" id="3iT-RV-OtD"/>
+                        <constraint firstItem="i29-sr-R1t" firstAttribute="leading" secondItem="dAf-hN-LiK" secondAttribute="trailing" constant="5" id="CZz-t6-OGk"/>
+                        <constraint firstItem="i29-sr-R1t" firstAttribute="centerX" secondItem="M8m-ZW-FYC" secondAttribute="centerX" constant="17" id="UQv-PP-uM9"/>
+                        <constraint firstItem="dAf-hN-LiK" firstAttribute="centerY" secondItem="i29-sr-R1t" secondAttribute="centerY" id="oeU-PQ-be8"/>
+                        <constraint firstAttribute="height" constant="35" id="xsX-aM-HDi"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="CSz-ir-zez" secondAttribute="trailing" constant="20" id="4Yo-T8-uDj"/>
+                <constraint firstAttribute="trailing" secondItem="M8m-ZW-FYC" secondAttribute="trailing" constant="30" id="5v3-8G-LEv"/>
                 <constraint firstItem="Fjr-9b-mpO" firstAttribute="centerY" secondItem="PAq-kP-U3A" secondAttribute="centerY" id="6ZQ-37-JAq"/>
                 <constraint firstItem="CSz-ir-zez" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Bd9-TS-ne7"/>
                 <constraint firstItem="Fjr-9b-mpO" firstAttribute="leading" secondItem="PAq-kP-U3A" secondAttribute="trailing" constant="5" id="UFi-rN-8cq"/>
                 <constraint firstItem="PAq-kP-U3A" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="-30" id="XOz-ba-M3a"/>
                 <constraint firstItem="CSz-ir-zez" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="XYg-5W-bWw"/>
                 <constraint firstItem="Yac-xO-m6F" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="YEw-y2-fAz"/>
+                <constraint firstItem="M8m-ZW-FYC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="cGQ-gd-l5s"/>
                 <constraint firstItem="PAq-kP-U3A" firstAttribute="top" secondItem="Yac-xO-m6F" secondAttribute="bottom" constant="23" id="fZ3-N8-a2n"/>
                 <constraint firstItem="CSz-ir-zez" firstAttribute="top" secondItem="PAq-kP-U3A" secondAttribute="bottom" constant="30" id="sUw-VO-BGu"/>
+                <constraint firstItem="M8m-ZW-FYC" firstAttribute="bottom" secondItem="Yac-xO-m6F" secondAttribute="bottom" id="uio-ZQ-4oo"/>
             </constraints>
+            <point key="canvasLocation" x="138.40000000000001" y="152.47376311844079"/>
         </view>
     </objects>
+    <resources>
+        <image name="pay_success" width="128" height="128"/>
+    </resources>
 </document>

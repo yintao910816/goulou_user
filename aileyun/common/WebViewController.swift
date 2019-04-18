@@ -113,7 +113,11 @@ class WebViewController: BaseViewController {
             webView.goBack()
         }else{
             SVProgressHUD.dismiss()
-            self.navigationController?.popViewController(animated: true)
+            if isPopRoot == true {
+                navigationController?.popToRootViewController(animated: true)
+            }else {
+                navigationController?.popViewController(animated: true)
+            }
         }
     }
     
