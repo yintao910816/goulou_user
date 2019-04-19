@@ -130,6 +130,11 @@ class PayOrderViewController: BaseViewController {
         let queryVC = QueryPayViewController.init(nibName: "QueryPayViewController", bundle: Bundle.main)
         queryVC.payModelInfo = payModelInfo
         navigationController?.pushViewController(queryVC, animated: true)
+        
+        queryVC.payCallBack = { [weak self] statu in
+            self?.needChangeVC = true
+            self?.payStatue = statu
+        }
     }
     
     @objc private func alipayFailure(no: Notification) {

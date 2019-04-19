@@ -34,7 +34,6 @@ class QueryPayViewController: BaseViewController {
 
         navigationItem.title = "支付状态"
         priceOutlet.text = "\(payModelInfo.price)元"
-        payStatusView.isHidden = false
         
         timer = CountdownTimer.init(totleCount: 3)
         
