@@ -101,6 +101,7 @@ class BindHospitalViewController: UIViewController {
         let space = AppDelegate.shareIntance.space
         
         let scrollV = UIScrollView.init(frame: CGRect.init(x: 0, y: space.topSpace + 44, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - space.topSpace - space.bottomSpace - 44))
+        scrollV.keyboardDismissMode = .onDrag
         scrollV.backgroundColor = klightGrayColor
         
 //        scrollV.contentSize = CGSize.init(width: 0, height: SCREEN_HEIGHT * 1.2)
@@ -290,8 +291,14 @@ class BindHospitalViewController: UIViewController {
         bindBtn.backgroundColor = kDefaultThemeColor
         bindBtn.setTitle("绑定", for: UIControlState.normal)
         bindBtn.addTarget(self, action: #selector(BindHospitalViewController.bindHospital), for: UIControlEvents.touchUpInside)
+        
+        let tapGes = UITapGestureRecognizer.init(target: self, action: #selector(dismissKeyBoard))
+        scrollV.addGestureRecognizer(tapGes)
     }
     
+    @objc private func dismissKeyBoard() {
+        view.endEditing(true)
+    }
     
     func protocolWebview(){
         let webV = WebViewController()
