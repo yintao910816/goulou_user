@@ -105,12 +105,12 @@ class GroupViewController: BaseViewController {
         }
     }
     
-    func refreshData(){
+    @objc func refreshData(){
         recommendWV.reload()
         groupWV.reload()
     }
     
-    func groupNotification(){
+    @objc func groupNotification(){
         currentIndex = 1
     }
 
@@ -137,13 +137,13 @@ class GroupViewController: BaseViewController {
         segmentedV.tintColor = kDefaultThemeColor
         segmentedV.selectedSegmentIndex = 0
         
-        segmentedV.addTarget(self, action: #selector(GroupViewController.segmentedAction), for: UIControlEvents.valueChanged)
+        segmentedV.addTarget(self, action: #selector(GroupViewController.segmentedAction), for: UIControl.Event.valueChanged)
         
         self.navigationItem.titleView = segmentedV
         
     }
     
-    func segmentedAction(sender : UISegmentedControl){
+    @objc func segmentedAction(sender : UISegmentedControl){
         if currentIndex != CGFloat(sender.selectedSegmentIndex) {
             currentIndex = CGFloat(sender.selectedSegmentIndex)
         }
@@ -258,7 +258,7 @@ extension GroupViewController : UIWebViewDelegate {
 
     }
     
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
         HCPrint(message: "shouldStartLoadWith")
         return true
     }

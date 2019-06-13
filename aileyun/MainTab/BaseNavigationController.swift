@@ -10,7 +10,7 @@ import UIKit
 
 class BaseNavigationController: UINavigationController {
     
-    override var childViewControllerForStatusBarStyle: UIViewController?{
+    override var childForStatusBarStyle: UIViewController?{
         get {
             return self.topViewController
         }
@@ -23,7 +23,7 @@ class BaseNavigationController: UINavigationController {
         self.navigationBar.shadowImage = UIImage()
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
 
         //禁用系统原先的侧滑返回功能
         self.interactivePopGestureRecognizer!.isEnabled = false
@@ -35,7 +35,7 @@ class BaseNavigationController: UINavigationController {
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        if childViewControllers.count > 0 {
+        if children.count > 0 {
             viewController.hidesBottomBarWhenPushed = true
             viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "返回灰"), style: .plain, target: self, action: #selector(popToParent))
             let target = self.interactivePopGestureRecognizer!.delegate

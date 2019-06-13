@@ -10,7 +10,7 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
     
-    override var childViewControllerForStatusBarStyle: UIViewController?{
+    override var childForStatusBarStyle: UIViewController?{
         get {
             return self.selectedViewController
         }
@@ -75,7 +75,7 @@ class MainTabBarController: UITabBarController {
         
         // 包装导航控制器
         let nav = BaseNavigationController(rootViewController: childController)
-        self.addChildViewController(nav)
+        self.addChild(nav)
     }
     
     override func didReceiveMemoryWarning() {

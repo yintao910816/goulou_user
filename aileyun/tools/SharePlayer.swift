@@ -20,7 +20,7 @@ class SharePlayer: NSObject {
         var p = HCAudioPlayer.init()
         let audioSession = AVAudioSession.sharedInstance()
         do {
-            try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+            try audioSession.setCategory(AVAudioSession.Category.playback)
             let pathS = Bundle.main.path(forResource: "defaultVoice.wav", ofType: nil)
             let url = URL.init(string: pathS!)
             try p = HCAudioPlayer.init(contentsOf: url!)

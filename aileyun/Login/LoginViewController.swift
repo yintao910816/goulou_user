@@ -39,7 +39,7 @@ class LoginViewController: UIViewController {
         
         self.automaticallyAdjustsScrollViewInsets = false
     
-        let rightItem = UIBarButtonItem(title: "免费注册", style: UIBarButtonItemStyle.plain, target: self, action: #selector(LoginViewController.register))
+        let rightItem = UIBarButtonItem(title: "免费注册", style: UIBarButtonItem.Style.plain, target: self, action: #selector(register))
         self.navigationItem.rightBarButtonItem = rightItem
         
         observeKeyboard()
@@ -73,7 +73,7 @@ class LoginViewController: UIViewController {
             make.left.right.top.equalTo(containerV)
             make.height.equalTo(80)
         }
-        aileyunImgV.contentMode = UIViewContentMode.scaleAspectFit
+        aileyunImgV.contentMode = UIView.ContentMode.scaleAspectFit
         
         let headL = UILabel()
         containerV.addSubview(headL)
@@ -156,11 +156,11 @@ class LoginViewController: UIViewController {
             make.width.equalTo(80)
             make.height.equalTo(30)
         }
-        findBtn.setTitle("忘记密码？", for: UIControlState.normal)
-        findBtn.setTitleColor(kTextColor, for: UIControlState.normal)
+        findBtn.setTitle("忘记密码？", for: UIControl.State.normal)
+        findBtn.setTitleColor(kTextColor, for: UIControl.State.normal)
         findBtn.titleLabel?.font = UIFont.init(name: kReguleFont, size: 14)
         
-        findBtn.addTarget(self, action: #selector(LoginViewController.findPassword), for: UIControlEvents.touchUpInside)
+        findBtn.addTarget(self, action: #selector(LoginViewController.findPassword), for: UIControl.Event.touchUpInside)
         
         let loginBtn = UIButton()
         containerV.addSubview(loginBtn)
@@ -170,15 +170,15 @@ class LoginViewController: UIViewController {
             make.right.equalTo(containerV).offset(-40)
             make.height.equalTo(40)
         }
-        loginBtn.setTitle("登 录", for: UIControlState.normal)
+        loginBtn.setTitle("登 录", for: UIControl.State.normal)
         loginBtn.layer.cornerRadius = 10
         loginBtn.backgroundColor = kDefaultThemeColor
         
-        loginBtn.addTarget(self, action: #selector(LoginViewController.login), for: UIControlEvents.touchUpInside)
+        loginBtn.addTarget(self, action: #selector(LoginViewController.login), for: UIControl.Event.touchUpInside)
 
         #if DEBUG
-//        cellphoneTF.text = "13995631675"
-        cellphoneTF.text = "13871080176"
+        cellphoneTF.text = "13995631675"
+//        cellphoneTF.text = "13871080176"
         passwordTF.text  = "123456"
         #endif
     }
@@ -205,7 +205,7 @@ class LoginViewController: UIViewController {
         QQBtn.imgv.image = UIImage.init(named: "QQ02")
         QQBtn.titleL.text = "QQ登录"
         
-        QQBtn.addTarget(self, action: #selector(LoginViewController.QQLogin), for: UIControlEvents.touchUpInside)
+        QQBtn.addTarget(self, action: #selector(LoginViewController.QQLogin), for: UIControl.Event.touchUpInside)
         
         //微信
         containerV.addSubview(weixinBtn)
@@ -216,7 +216,7 @@ class LoginViewController: UIViewController {
         weixinBtn.imgv.image = UIImage.init(named: "微信02")
         weixinBtn.titleL.text = "微信登录"
         
-        weixinBtn.addTarget(self, action: #selector(LoginViewController.sendAuthRequest), for: UIControlEvents.touchUpInside)
+        weixinBtn.addTarget(self, action: #selector(LoginViewController.sendAuthRequest), for: UIControl.Event.touchUpInside)
         
         let infoL = UILabel()
         containerV.addSubview(infoL)
@@ -262,7 +262,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func login(){
+    @objc func login(){
         
         guard cellphoneTF.text != "" && cellphoneTF.text != nil else {
             HCShowError(info: "请输入手机号码！")
@@ -293,12 +293,12 @@ class LoginViewController: UIViewController {
 
     }
 
-    func register(){
+    @objc func register(){
         
         self.navigationController?.pushViewController(RegisterViewController(), animated: true)
     }
     
-    func findPassword(){
+    @objc func findPassword(){
         self.navigationController?.pushViewController(findViewController(), animated: true)
     }
     
@@ -308,7 +308,7 @@ class LoginViewController: UIViewController {
     }
     
     //微信
-    func sendAuthRequest(){
+    @objc func sendAuthRequest(){
         let req = SendAuthReq.init()
         //应用授权作用域，如获取用户个人信息则填写snsapi_userinfo
         req.scope = "snsapi_userinfo"
@@ -321,7 +321,7 @@ class LoginViewController: UIViewController {
         }
     }
 
-    func QQLogin(){
+    @objc func QQLogin(){
         let permissions = ["add_share", "get_user_info", "get_simple_userinfo"]
         //登录时，调用TencetnOAuth对象的authorize方法
         tencentOAuth?.authorize(permissions)
@@ -389,11 +389,11 @@ extension LoginViewController : TencentSessionDelegate {
 extension LoginViewController {
     func observeKeyboard() -> () {
         //注册键盘出现的通知
-        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
     }
     
-    func keyboardShow() -> () {
+    @objc func keyboardShow() -> () {
         let rect = CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 400)
         UIView.animate(withDuration: 0.25) {[weak self]()in
             self?.containerV.frame = rect

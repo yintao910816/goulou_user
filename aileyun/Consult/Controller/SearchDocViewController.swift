@@ -149,7 +149,7 @@ extension SearchDocViewController : UISearchBarDelegate {
         searchTheName()
     }
     
-    func searchTheName(){
+    @objc func searchTheName(){
         guard hasNext == true else{
             HCShowError(info: "已加载全部信息")
             return

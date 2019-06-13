@@ -186,13 +186,13 @@ let kReceiveRemoteNote = "kReceiveRemoteNote"
 
 func HCTextSize(_ label : UILabel) -> CGSize {
     let maxSize = CGSize.init(width: label.frame.size.width, height: 9999)
-    let textSize = (label.text! as NSString).boundingRect(with: maxSize, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: label.font], context: nil).size
+    let textSize = (label.text! as NSString).boundingRect(with: maxSize, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: label.font], context: nil).size
     return textSize
 }
 
 func HCGetSize(content : NSString, maxWidth : CGFloat, font : UIFont) -> CGSize {
     let maxSize = CGSize.init(width: maxWidth, height: 9999)
-    let textSize = content.boundingRect(with: maxSize, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil).size
+    let textSize = content.boundingRect(with: maxSize, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil).size
     return textSize
 }
 
@@ -318,7 +318,7 @@ func authorizationForPhotoLibrary(confirmBlock : @escaping blankBlock){
 // 相机权限
 func checkCameraPermissions() -> Bool {
     
-    let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+    let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
     
     if authStatus == AVAuthorizationStatus.denied || authStatus == AVAuthorizationStatus.restricted || authStatus == AVAuthorizationStatus.notDetermined {
         return false
@@ -329,7 +329,7 @@ func checkCameraPermissions() -> Bool {
 
 func authorizationForCamera(confirmBlock : @escaping blankBlock){
     
-    AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { (granted) in
+    AVCaptureDevice.requestAccess(for: .video) { (granted) in
         if granted == true {
             confirmBlock()
         }else{
@@ -342,7 +342,7 @@ func authorizationForCamera(confirmBlock : @escaping blankBlock){
 // 麦克风权限
 func checkMicrophonePermissions() -> Bool {
     
-    let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeAudio)
+    let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .audio)
     
     if authStatus == AVAuthorizationStatus.denied || authStatus == AVAuthorizationStatus.restricted || authStatus == AVAuthorizationStatus.notDetermined {
         return false

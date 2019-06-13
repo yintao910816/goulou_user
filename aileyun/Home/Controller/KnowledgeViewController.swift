@@ -92,7 +92,7 @@ class KnowledgeViewController: UIViewController {
     func initUI(){
         
         knowledgeIV.image = UIImage.init(named: "标题")
-        knowledgeIV.contentMode = UIViewContentMode.scaleAspectFit
+        knowledgeIV.contentMode = UIView.ContentMode.scaleAspectFit
         self.view.addSubview(knowledgeIV)
         knowledgeIV.snp.updateConstraints { (make) in
             make.left.equalTo(self.view).offset(20)
@@ -113,7 +113,7 @@ class KnowledgeViewController: UIViewController {
         
         sexBtn.setTitle(modelArr?[3].name, for: .normal)
         sexBtn.tag = 3
-        sexBtn.addTarget(self, action: #selector(KnowledgeViewController.chooseCategory), for: UIControlEvents.touchUpInside)
+        sexBtn.addTarget(self, action: #selector(KnowledgeViewController.chooseCategory), for: UIControl.Event.touchUpInside)
         self.view.addSubview(sexBtn)
         sexBtn.snp.updateConstraints { (make) in
             make.width.equalTo(buttonWidth)
@@ -124,7 +124,7 @@ class KnowledgeViewController: UIViewController {
         
         nutritionBtn.setTitle(modelArr?[2].name, for: .normal)
         nutritionBtn.tag = 2
-        nutritionBtn.addTarget(self, action: #selector(KnowledgeViewController.chooseCategory), for: UIControlEvents.touchUpInside)
+        nutritionBtn.addTarget(self, action: #selector(KnowledgeViewController.chooseCategory), for: UIControl.Event.touchUpInside)
         self.view.addSubview(nutritionBtn)
         nutritionBtn.snp.updateConstraints { (make) in
             make.width.equalTo(buttonWidth)
@@ -135,7 +135,7 @@ class KnowledgeViewController: UIViewController {
         
         lifeBtn.setTitle(modelArr?[1].name, for: .normal)
         lifeBtn.tag = 1
-        lifeBtn.addTarget(self, action: #selector(KnowledgeViewController.chooseCategory), for: UIControlEvents.touchUpInside)
+        lifeBtn.addTarget(self, action: #selector(KnowledgeViewController.chooseCategory), for: UIControl.Event.touchUpInside)
         self.view.addSubview(lifeBtn)
         lifeBtn.snp.updateConstraints { (make) in
             make.width.equalTo(buttonWidth)
@@ -147,7 +147,7 @@ class KnowledgeViewController: UIViewController {
         recommendBtn.setTitle(modelArr?[0].name, for: .normal)
         recommendBtn.tag = 0
         recommendBtn.isSelected = true
-        recommendBtn.addTarget(self, action: #selector(KnowledgeViewController.chooseCategory), for: UIControlEvents.touchUpInside)
+        recommendBtn.addTarget(self, action: #selector(KnowledgeViewController.chooseCategory), for: UIControl.Event.touchUpInside)
         self.view.addSubview(recommendBtn)
         recommendBtn.snp.updateConstraints { (make) in
             make.width.equalTo(buttonWidth)
@@ -198,7 +198,7 @@ class KnowledgeViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func chooseCategory(btn : chooseButton, fromIndex : Bool = false){
+    @objc func chooseCategory(btn : chooseButton, fromIndex : Bool = false){
         selectBtn.isSelected = false
         
         let i = btn.tag - selectBtn.tag

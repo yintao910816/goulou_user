@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate{
     }
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         IpsmapServices.setAppKey(NaviAppkey)
         
@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate{
     }
 
     
-    func ipsReceiveShareInfo(noti : Notification){
+    @objc func ipsReceiveShareInfo(noti : Notification){
         guard noti.object != nil else {
             return
         }
@@ -78,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate{
     
     
     
-    func UMeng(launchOptions: [UIApplicationLaunchOptionsKey: Any]?){
+    func UMeng(launchOptions: [UIApplication.LaunchOptionsKey: Any]?){
         let obj = UMAnalyticsConfig.init()
         obj.appKey = KUMengKey
         MobClick.start(withConfigure: obj)
@@ -311,7 +311,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate{
 
  extension AppDelegate {
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         HCPrint(message: url.absoluteString)
         
         if url.host == "safepay"{

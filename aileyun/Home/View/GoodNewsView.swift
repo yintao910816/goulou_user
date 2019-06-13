@@ -72,7 +72,7 @@ class GoodNewsView: UIView {
                 self?.tableV.scrollToRow(at: indexP, at: .top, animated: true)
                 self?.row = (self?.row)! + 1
             })
-            RunLoop.main.add(timer!, forMode: RunLoopMode.commonModes)
+            RunLoop.main.add(timer!, forMode: RunLoop.Mode.common)
         } else {
         }
     }
@@ -80,7 +80,7 @@ class GoodNewsView: UIView {
     func initUI(){
         let imgV = UIImageView.init(frame: CGRect.init(x: 20, y: 10, width: 20, height: 20))
         imgV.image = UIImage.init(named: "标题")
-        imgV.contentMode = UIViewContentMode.scaleAspectFit
+        imgV.contentMode = UIView.ContentMode.scaleAspectFit
         self.addSubview(imgV)
         
         let titleL = UILabel()
@@ -95,7 +95,7 @@ class GoodNewsView: UIView {
         
         let babyV = UIImageView.init(frame: CGRect.init(x: SCREEN_WIDTH - 110, y: 10, width: 100, height: 80))
         babyV.image = UIImage.init(named: "goodnewsBaby")
-        babyV.contentMode = UIViewContentMode.scaleAspectFit
+        babyV.contentMode = UIView.ContentMode.scaleAspectFit
         self.addSubview(babyV)
         
         let contV = UIView.init(frame: CGRect.init(x: 20, y: 40, width: SCREEN_WIDTH - 140, height: 50))

@@ -40,7 +40,7 @@ class MyDoctorViewController: BaseViewController {
         requestData()
     }
 
-    func requestData(){
+    @objc func requestData(){
         
         guard hasNext == true else{
             self.tableV.mj_footer.endRefreshing()

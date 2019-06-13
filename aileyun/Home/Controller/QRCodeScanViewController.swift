@@ -29,8 +29,8 @@ class QRCodeScanViewController: BaseViewController {
     }()
     
     lazy var input : AVCaptureDeviceInput? = {
-        let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
-        let i = try? AVCaptureDeviceInput.init(device: device)
+        let devices = AVCaptureDevice.default(for: .video)
+        let i = try? AVCaptureDeviceInput.init(device: devices!)
         return i
     }()
     
@@ -102,11 +102,11 @@ class QRCodeScanViewController: BaseViewController {
     }
     
     func startScan(){
-        guard session.canAddInput(input) else {
+        guard session.canAddInput(input!) else {
             HCShowError(info: "未能获取摄像头")
             return
         }
-        session.addInput(input)
+        session.addInput(input!)
         
         guard session.canAddOutput(output) else {
             return
@@ -117,8 +117,8 @@ class QRCodeScanViewController: BaseViewController {
         output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         
         let previewLayer = AVCaptureVideoPreviewLayer.init(session: session)
-        previewLayer?.frame = self.view.frame
-        self.view.layer.insertSublayer(previewLayer!, at: 0)
+        previewLayer.frame = self.view.frame
+        self.view.layer.insertSublayer(previewLayer, at: 0)
         
         session.startRunning()
     }

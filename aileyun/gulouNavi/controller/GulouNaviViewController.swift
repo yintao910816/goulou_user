@@ -51,7 +51,7 @@ class GulouNaviViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.navigationController?.navigationBar.isHidden = false
     }
     
@@ -64,7 +64,7 @@ class GulouNaviViewController: UIViewController {
         
         let mapImgV = UIImageView.init(frame: CGRect.init(x: 0, y: 64, width: SCREEN_WIDTH, height: 200))
         mapImgV.image = UIImage.init(named: "gulouNavi")
-        mapImgV.contentMode = UIViewContentMode.scaleAspectFit
+        mapImgV.contentMode = .scaleAspectFit
         mapImgV.isUserInteractionEnabled = true
         self.view.addSubview(mapImgV)
         
@@ -133,7 +133,7 @@ class GulouNaviViewController: UIViewController {
         }
     }
 
-    func showMap(){
+    @objc func showMap(){
         let mapVC = IpsMapViewController.init(mapId: NaviMapId)
         mapVC.locationShareDelegate = self
         self.navigationController?.pushViewController(mapVC, animated: true)
@@ -243,7 +243,7 @@ extension GulouNaviViewController : IpsLocationShareProtocol {
     func shareToQQ(title : String, desc : String, url : String, thumbImage : UIImage){
         
         let url = URL.init(string: url)!
-        let imgData = UIImagePNGRepresentation(thumbImage)!
+        let imgData = thumbImage.pngData()!
         let newsObj = QQApiNewsObject.init(url: url, title: title, description: desc, previewImageData: imgData, targetContentType: QQApiURLTargetTypeNews)!
         let req = SendMessageToQQReq.init(content: newsObj)
     

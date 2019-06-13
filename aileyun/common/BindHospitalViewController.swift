@@ -14,11 +14,11 @@ class BindHospitalViewController: UIViewController {
     
     lazy var noticeBtn : UIButton = {
             let b = UIButton()
-            b.setTitle("服务条款", for: UIControlState.normal)
+        b.setTitle("服务条款", for: UIControl.State.normal)
             b.titleLabel?.font = UIFont.init(name: kReguleFont, size: 14)
-            b.setTitleColor(kTextColor, for: UIControlState.normal)
-            b.setImage(UIImage.init(named: "未选中"), for: UIControlState.normal)
-            b.setImage(UIImage.init(named: "选中"), for: UIControlState.selected)
+        b.setTitleColor(kTextColor, for: UIControl.State.normal)
+        b.setImage(UIImage.init(named: "未选中"), for: UIControl.State.normal)
+        b.setImage(UIImage.init(named: "选中"), for: UIControl.State.selected)
             b.titleEdgeInsets = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: 0)
             b.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -10, bottom: 0, right: 0)
             b.isSelected = true
@@ -73,7 +73,7 @@ class BindHospitalViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
@@ -261,13 +261,13 @@ class BindHospitalViewController: UIViewController {
             make.left.top.height.equalTo(contV)
             make.width.equalTo(100)
         }
-        noticeBtn.addTarget(self, action: #selector(BindHospitalViewController.notice), for: UIControlEvents.touchUpInside)
+        noticeBtn.addTarget(self, action: #selector(BindHospitalViewController.notice), for: .touchUpInside)
         
         
         let protocolBtn = UIButton()
-        protocolBtn.setTitle("《app使用协议和隐私条款》", for: UIControlState.normal)
+        protocolBtn.setTitle("《app使用协议和隐私条款》", for: .normal)
         protocolBtn.titleLabel?.font = UIFont.init(name: kReguleFont, size: 14)
-        protocolBtn.setTitleColor(kDefaultThemeColor, for: UIControlState.normal)
+        protocolBtn.setTitleColor(kDefaultThemeColor, for: .normal)
         
         contV.addSubview(protocolBtn)
         protocolBtn.snp.updateConstraints { (make) in
@@ -289,8 +289,8 @@ class BindHospitalViewController: UIViewController {
         }
         bindBtn.layer.cornerRadius = 5
         bindBtn.backgroundColor = kDefaultThemeColor
-        bindBtn.setTitle("绑定", for: UIControlState.normal)
-        bindBtn.addTarget(self, action: #selector(BindHospitalViewController.bindHospital), for: UIControlEvents.touchUpInside)
+        bindBtn.setTitle("绑定", for: .normal)
+        bindBtn.addTarget(self, action: #selector(BindHospitalViewController.bindHospital), for: .touchUpInside)
         
         let tapGes = UITapGestureRecognizer.init(target: self, action: #selector(dismissKeyBoard))
         scrollV.addGestureRecognizer(tapGes)
@@ -300,7 +300,7 @@ class BindHospitalViewController: UIViewController {
         view.endEditing(true)
     }
     
-    func protocolWebview(){
+    @objc func protocolWebview(){
         let webV = WebViewController()
         //        webV.url = "http://www.ivfcn.com/static/html/aileyunInfo.html"
         webV.url = "http://www.ivfcn.com/static/html/gulouInfo.html"
@@ -308,12 +308,12 @@ class BindHospitalViewController: UIViewController {
         self.navigationController?.pushViewController(webV, animated: true)
     }
     
-    func notice(btn : UIButton){
+    @objc func notice(btn : UIButton){
         noticeBtn.isSelected = !btn.isSelected
     }
     
     
-    func hospitalList(){
+    @objc func hospitalList(){
         //中一不需要跳转列表
         self.view.endEditing(true)
         
@@ -371,7 +371,7 @@ class BindHospitalViewController: UIViewController {
         }
     }
     
-    func bindHospital(){
+    @objc func bindHospital(){
         guard hospitalModel != nil else {
             HCShowError(info: "请选择生殖中心！")
             return

@@ -10,11 +10,11 @@ import UIKit
 import MJRefresh
 import SVProgressHUD
 
-protocol GetPhotoCenterDelegate : NSObjectProtocol {
+@objc protocol GetPhotoCenterDelegate : NSObjectProtocol {
     //设置协议方法
-    func getPhotoCenter()->CGPoint
+    @objc func getPhotoCenter()->CGPoint
     
-    func getImage()->UIImage
+    @objc func getImage()->UIImage
 }
 
 class RecordTableViewController: UITableViewController {
@@ -71,7 +71,7 @@ class RecordTableViewController: UITableViewController {
     lazy var nodataIV : UIImageView = {
         let IV = UIImageView.init(frame: CGRect.init(x: 40, y: 100, width: SCREEN_WIDTH - 80, height: SCREEN_WIDTH - 80))
         IV.image = UIImage.init(named: "noData")
-        IV.contentMode = UIViewContentMode.scaleAspectFit
+        IV.contentMode = UIView.ContentMode.scaleAspectFit
         
         self.view.addSubview(IV)
         return IV
@@ -168,7 +168,7 @@ extension RecordTableViewController {
         }
     }
     
-    func moreData(){
+    @objc func moreData(){
         SVProgressHUD.show()
         requestDate(status: status!) { [weak self](success, s) in
             if success == true {
@@ -475,7 +475,7 @@ extension RecordTableViewController {
 
 extension RecordTableViewController : UINavigationControllerDelegate {
     
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         let pushTransition = PushAnimation()
         
@@ -486,7 +486,7 @@ extension RecordTableViewController : UINavigationControllerDelegate {
             HCPrint(message: scP)
         }
         
-        if operation == UINavigationControllerOperation.push{
+        if operation == UINavigationController.Operation.push{
             pushTransition.aniType = .kAnimatorTransitionTypePush
             pushTransition.itemCenter = scP
         }else{

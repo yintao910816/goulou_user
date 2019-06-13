@@ -20,7 +20,7 @@ pod 'MJExtension'
 pod 'WechatOpenSDK'
 pod 'AlipaySDK-iOS'
 
-pod 'HandyJSON', '~> 4.2.0-beta1'
+pod 'HandyJSON', '~> 5.0.0'
 
 #pod 'IpsmapSDK'
 

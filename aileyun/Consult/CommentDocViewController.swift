@@ -73,7 +73,7 @@ class CommentDocViewController: BaseViewController {
     
     lazy var commitCommentBtn : UIButton = {
         let b = UIButton()
-        b.setTitle("提交评论", for: UIControlState.normal)
+        b.setTitle("提交评论", for: .normal)
         b.backgroundColor = kDefaultThemeColor
         b.layer.cornerRadius = 5
         return b
@@ -143,14 +143,14 @@ class CommentDocViewController: BaseViewController {
             make.height.equalTo(35)
         }
         
-        commitCommentBtn.addTarget(self, action: #selector(CommentDocViewController.commitComment), for: UIControlEvents.touchUpInside)
+        commitCommentBtn.addTarget(self, action: #selector(CommentDocViewController.commitComment), for: .touchUpInside)
     }
     
-    func editEnd(){
+    @objc func editEnd() {
         self.view.endEditing(true)
     }
     
-    func commitComment(){
+    @objc func commitComment(){
         
         SVProgressHUD.show()
         

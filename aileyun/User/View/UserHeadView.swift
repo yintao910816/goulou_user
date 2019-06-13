@@ -61,7 +61,7 @@ class UserHeadView: UIView {
         }
         headImgV.layer.cornerRadius = 30
         headImgV.clipsToBounds = true
-        headImgV.contentMode = UIViewContentMode.scaleAspectFill
+        headImgV.contentMode = .scaleAspectFill
         
         containerV.addSubview(phoneL)
         phoneL.snp.updateConstraints { (make) in
@@ -101,7 +101,7 @@ class UserHeadView: UIView {
             make.centerY.equalTo(headImgV)
             make.width.height.equalTo(40)
         }
-        rightImgV.contentMode = UIViewContentMode.right
+        rightImgV.contentMode = .right
         rightImgV.image = UIImage.init(named: "userRight")
         
         
@@ -115,10 +115,10 @@ class UserHeadView: UIView {
             make.left.top.bottom.equalTo(containerV2)
             make.width.equalTo(width)
         }
-        appointmentBtn.setTitle("我的预约", for: UIControlState.normal)
-        appointmentBtn.setImage(UIImage.init(named: "预约"), for: UIControlState.normal)
+        appointmentBtn.setTitle("我的预约", for: .normal)
+        appointmentBtn.setImage(UIImage.init(named: "预约"), for: .normal)
         
-        appointmentBtn.addTarget(self, action: #selector(UserHeadView.register), for: UIControlEvents.touchUpInside)
+        appointmentBtn.addTarget(self, action: #selector(UserHeadView.register), for: .touchUpInside)
         
         containerV2.addSubview(consultBtn)
         consultBtn.snp.updateConstraints { (make) in
@@ -126,8 +126,8 @@ class UserHeadView: UIView {
             make.top.bottom.equalTo(containerV2)
             make.width.equalTo(width)
         }
-        consultBtn.setTitle("问诊记录", for: UIControlState.normal)
-        consultBtn.setImage(UIImage.init(named: "问诊"), for: UIControlState.normal)
+        consultBtn.setTitle("问诊记录", for: .normal)
+        consultBtn.setImage(UIImage.init(named: "问诊"), for: .normal)
         
         consultBtn.addTarget(self, action: #selector(UserHeadView.consult), for: .touchUpInside)
         
@@ -137,15 +137,14 @@ class UserHeadView: UIView {
             make.top.bottom.equalTo(containerV2)
             make.width.equalTo(width)
         }
-        collectBtn.setTitle("我的收藏", for: UIControlState.normal)
-        collectBtn.setImage(UIImage.init(named: "收藏"), for: UIControlState.normal)
+        collectBtn.setTitle("我的收藏", for: .normal)
+        collectBtn.setImage(UIImage.init(named: "收藏"), for: .normal)
         
-        collectBtn.addTarget(self, action: #selector(UserHeadView.myCollect), for: UIControlEvents.touchUpInside)
+        collectBtn.addTarget(self, action: #selector(UserHeadView.myCollect), for: .touchUpInside)
         
     }
-
     
-    func userInfo(){
+    @objc func userInfo(){
         let infoVC = UserInfoViewController()
         naviVC?.pushViewController(infoVC, animated: true)
     }
@@ -177,7 +176,7 @@ class UserHeadView: UIView {
     }
     
     //预约
-    func register(){
+    @objc func register(){
         SVProgressHUD.show()
         HttpRequestManager.shareIntance.HC_getH5URL(keyCode: kRegisterURL) { [weak self](success, info) in
             if success == true {
@@ -188,12 +187,12 @@ class UserHeadView: UIView {
         }
     }
     
-    func consult(){
+    @objc func consult(){
         naviVC?.pushViewController(ConsultRecordViewController(), animated: true)
     }
     
     
-    func myCollect(){
+    @objc func myCollect(){
         
         let bbsToken = UserManager.shareIntance.HCUserInfo?.BBSToken
         guard bbsToken != nil else{

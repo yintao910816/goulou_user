@@ -36,7 +36,7 @@ class PhotoPickerView: UIView {
         layout.minimumLineSpacing = CGFloat(itemSpace)
         layout.minimumInteritemSpacing = CGFloat(itemSpace)
         layout.itemSize = CGSize.init(width: itemWidth, height: itemHeight)
-        layout.scrollDirection = UICollectionViewScrollDirection.horizontal
+        layout.scrollDirection = .horizontal
         
         collectionV = UICollectionView.init(frame: CGRect.init(x: 0, y: margin_top, width: frame.size.width , height: frame.size.height - margin_top * 2), collectionViewLayout: layout)
         
@@ -107,14 +107,14 @@ extension PhotoPickerView {
     func takePhoto(){
         if checkCameraPermissions() {
             let photoVC = UIImagePickerController()
-            photoVC.sourceType = UIImagePickerControllerSourceType.camera
+            photoVC.sourceType = .camera
             photoVC.delegate = self
             photoVC.allowsEditing = true
             UIApplication.shared.keyWindow?.rootViewController?.present(photoVC, animated: true, completion: nil)
         }else{
             authorizationForCamera(confirmBlock: { [weak self]()in
                 let photoVC = UIImagePickerController()
-                photoVC.sourceType = UIImagePickerControllerSourceType.camera
+                photoVC.sourceType = .camera
                 photoVC.delegate = self
                 photoVC.allowsEditing = true
                 UIApplication.shared.keyWindow?.rootViewController?.present(photoVC, animated: true, completion: nil)
@@ -125,7 +125,7 @@ extension PhotoPickerView {
     
     func systemPic(){
         let systemPicVC = UIImagePickerController()
-        systemPicVC.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        systemPicVC.sourceType = .photoLibrary
         systemPicVC.delegate = self
         systemPicVC.allowsEditing = true
         UIApplication.shared.keyWindow?.rootViewController?.present(systemPicVC, animated: true, completion: nil)

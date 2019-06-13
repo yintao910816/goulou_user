@@ -39,7 +39,7 @@ class CountdownTimer {
             timer.fireDate = Date.distantFuture
         }
         
-        RunLoop.main.add(timer, forMode: RunLoop.Mode.defaultRunLoopMode)
+        RunLoop.main.add(timer, forMode: RunLoop.Mode.default)
         
     }
     

@@ -76,7 +76,7 @@ class HCFindImageTool: NSObject {
     }
     
     private func storeImage(url : String, key : String, img : UIImage){
-        if let data = UIImagePNGRepresentation(img) as NSData?{
+        if let data = img.pngData() as NSData?{
             let path = getFilePathStr(url: url)
             DispatchQueue.global().async {
                 let isSuc = data.write(toFile: path, atomically: true)

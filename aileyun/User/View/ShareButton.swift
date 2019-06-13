@@ -17,7 +17,7 @@ class ShareButton: UIButton {
         super.init(frame: frame)
         
         self.addSubview(imgV)
-        imgV.contentMode = UIViewContentMode.scaleAspectFit
+        imgV.contentMode = UIView.ContentMode.scaleAspectFit
         
         self.addSubview(titleL)
         titleL.font = UIFont.systemFont(ofSize: 10)

@@ -10,7 +10,7 @@ import UIKit
 
 class HCDataProvideTool: NSObject {
     
-    dynamic var circleData : [HCCircleModel]?
+    @objc dynamic var circleData : [HCCircleModel]?
     
     // 设计成单例
     static let shareIntance : HCDataProvideTool = {

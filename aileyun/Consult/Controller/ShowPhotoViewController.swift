@@ -24,7 +24,7 @@ class ShowPhotoViewController: UIViewController {
                 let imagV = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT))
                 imagV.isUserInteractionEnabled = true
                 imagV.isMultipleTouchEnabled = true
-                imagV.contentMode = UIViewContentMode.scaleAspectFit
+                imagV.contentMode = UIView.ContentMode.scaleAspectFit
                 imagV.HC_setImageFromURL(urlS: i, placeHolder: "HC-placeHolder")
                 tempArr.append(imagV)
                 
@@ -82,7 +82,7 @@ class ShowPhotoViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func dismissAction(){
+    @objc func dismissAction(){
         self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true) { 
             //

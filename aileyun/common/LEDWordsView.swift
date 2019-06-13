@@ -97,7 +97,7 @@ class LEDWordsView: UIView {
             timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { [weak self](t) in
                 self?.findLabelTodisplay()
             })
-            RunLoop.main.add(timer!, forMode: RunLoopMode.commonModes)
+            RunLoop.main.add(timer!, forMode: RunLoop.Mode.common)
         } else {
         }
     }
@@ -153,7 +153,7 @@ class LEDWordsView: UIView {
         
         let time = (contWidth + l.frame.size.width) / speed
         
-        UIView.animate(withDuration: Double(time), delay: 0, options: UIViewAnimationOptions.curveLinear, animations: {[weak self]()in
+        UIView.animate(withDuration: Double(time), delay: 0, options: UIView.AnimationOptions.curveLinear, animations: {[weak self]()in
             l.frame = CGRect.init(x: -l.frame.size.width, y: 0, width: l.frame.size.width + 30, height: (self?.frame.size.height)!)
         }) { [weak self](b) in
             l.removeFromSuperview()
@@ -167,12 +167,12 @@ class LEDWordsView: UIView {
         super.init(coder: aDecoder)
     }
     
-    func removeAction(){
+    @objc func removeAction(){
         timer?.invalidate()
         self.removeFromSuperview()
     }
     
-    func noticeClick(tap : UITapGestureRecognizer){
+    @objc func noticeClick(tap : UITapGestureRecognizer){
         let point = tap.location(in: self)
         for l in showingLabel {
             let tempFrame = l.layer.presentation()?.frame

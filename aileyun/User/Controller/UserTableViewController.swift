@@ -70,7 +70,7 @@ class UserTableViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func setUserInfo(){
+    @objc func setUserInfo(){
         tableHeadV.userInfoM = UserManager.shareIntance.HCUserInfo
     }
     
@@ -81,11 +81,11 @@ class UserTableViewController: UIViewController {
         
         let logoutBtn = UIButton.init(frame: CGRect.init(x: 0, y: 10, width: SCREEN_WIDTH, height: 44))
         logoutBtn.backgroundColor = UIColor.white
-        logoutBtn.setTitle("退出登录", for: UIControlState.normal)
+        logoutBtn.setTitle("退出登录", for: .normal)
         logoutBtn.setTitleColor(kDefaultThemeColor, for: .normal)
         logoutBtn.titleLabel?.font = UIFont.init(name: kReguleFont, size: kTextSize)
         
-        logoutBtn.addTarget(self, action: #selector(UserTableViewController.logout), for: UIControlEvents.touchUpInside)
+        logoutBtn.addTarget(self, action: #selector(UserTableViewController.logout), for: .touchUpInside)
         footContainerV.addSubview(logoutBtn)
         
         let infoDic = Bundle.main.infoDictionary
@@ -103,7 +103,7 @@ class UserTableViewController: UIViewController {
         }
     }
     
-    func logout(){
+    @objc func logout(){
         let alertController = UIAlertController(title: "提醒",
                                                 message: "退出登录会清空个人信息", preferredStyle: .alert)
         let cancelAction = UIAlertAction.init(title: "确定退出", style: .cancel) { (action) in

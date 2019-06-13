@@ -80,7 +80,7 @@ class NoticeView: UIView {
                 self?.tableV.scrollToRow(at: indexP, at: .top, animated: true)
                 self?.row = (self?.row)! + 1
             })
-            RunLoop.main.add(timer!, forMode: RunLoopMode.commonModes)
+            RunLoop.main.add(timer!, forMode: RunLoop.Mode.common)
         } else {
         }
     }
@@ -88,7 +88,7 @@ class NoticeView: UIView {
     func initUI(){
         let imgV = UIImageView.init(frame: CGRect.init(x: 20, y: 10, width: 20, height: 20))
         imgV.image = UIImage.init(named: "noticeNew")
-        imgV.contentMode = UIViewContentMode.scaleAspectFit
+        imgV.contentMode = .scaleAspectFit
         self.addSubview(imgV)
         
         let titleL = UILabel()
@@ -113,7 +113,7 @@ class NoticeView: UIView {
         
         let rightV = UIImageView()
         rightV.image = UIImage.init(named: "箭头")
-        rightV.contentMode = UIViewContentMode.right
+        rightV.contentMode = .right
         self.addSubview(rightV)
         rightV.snp.updateConstraints { (make) in
             make.right.equalTo(self).offset(-20)
