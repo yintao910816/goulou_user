@@ -8,23 +8,11 @@
 
 import UIKit
 
-class HCUserModel: NSObject {
+class HCUserModel: HJModel {
 
     var phone : String?
     var nickname : String?
     var hospitalId : NSNumber?
     var id : NSNumber?
     var token : String?
-    
-    
-    convenience init(_ dic : [String : Any]) {
-        self.init()
-        setValuesForKeys(dic)
-    }
-    
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {
-        //
-    }
-    
-    
 }

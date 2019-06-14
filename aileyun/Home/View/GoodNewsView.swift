@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import HandyJSON
 
 class GoodNewsView: UIView {
     
@@ -58,8 +59,10 @@ class GoodNewsView: UIView {
         let dateS = Date.init().converteYYYYMMdd()
         for var d in dicArr {
             d["deliver"] = dateS
-            let m = GoodNewsModel.init(d)
-            modelA.append(m)
+            if let model = JSONDeserializer<GoodNewsModel>.deserializeFrom(dict: d)
+            {
+                modelA.append(model)
+            }
         }
         modelArr = modelA
     }

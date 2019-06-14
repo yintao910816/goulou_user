@@ -29,5 +29,4 @@
 
 #import <CommonCrypto/CommonDigest.h>
 
-
 #endif /* Bridge_h */

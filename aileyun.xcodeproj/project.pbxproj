@@ -321,7 +321,6 @@
 		3CF6E19A1F4AD4F900E81896 /* ConsultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF6E1991F4AD4F900E81896 /* ConsultViewController.swift */; };
 		3CF6E19C1F4AD70F00E81896 /* ConsultViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF6E19B1F4AD70F00E81896 /* ConsultViewCell.swift */; };
 		3CF73E4F1F3D907E006AA487 /* BindedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF73E4E1F3D907D006AA487 /* BindedModel.swift */; };
-		3CF9D51D1F6FC18A002E89A9 /* HCDataProvideTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9D51C1F6FC18A002E89A9 /* HCDataProvideTool.swift */; };
 		3CF9D5201F6FC1F9002E89A9 /* HCCircleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9D51F1F6FC1F9002E89A9 /* HCCircleModel.swift */; };
 		3CFAAEF71F4FFCEB00096D98 /* 咨询-问@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CFAAEF51F4FFCEB00096D98 /* 咨询-问@2x.png */; };
 		3CFAAEF81F4FFCEB00096D98 /* 咨询-问@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CFAAEF61F4FFCEB00096D98 /* 咨询-问@3x.png */; };
@@ -350,6 +349,7 @@
 		C448416322602BB200F2DF0A /* PayOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448416122602BB200F2DF0A /* PayOrderViewController.swift */; };
 		C448416422602BB200F2DF0A /* PayOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C448416222602BB200F2DF0A /* PayOrderViewController.xib */; };
 		C448416622606E6500F2DF0A /* HandyJSON+MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448416522606E6500F2DF0A /* HandyJSON+MapModel.swift */; };
+		C4731D4C22B33C8F0046BE52 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4731D4B22B33C8F0046BE52 /* BaseModel.swift */; };
 		C4C8470B225DE1C100D3FEB5 /* AppPay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C8470A225DE1C100D3FEB5 /* AppPay.swift */; };
 		F666A4136C77989F16603994 /* Pods_aileyun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E253F5689AE7ECF7180033EA /* Pods_aileyun.framework */; };
 /* End PBXBuildFile section */
@@ -696,7 +696,6 @@
 		3CF6E1991F4AD4F900E81896 /* ConsultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsultViewController.swift; sourceTree = "<group>"; };
 		3CF6E19B1F4AD70F00E81896 /* ConsultViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsultViewCell.swift; sourceTree = "<group>"; };
 		3CF73E4E1F3D907D006AA487 /* BindedModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindedModel.swift; sourceTree = "<group>"; };
-		3CF9D51C1F6FC18A002E89A9 /* HCDataProvideTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCDataProvideTool.swift; sourceTree = "<group>"; };
 		3CF9D51F1F6FC1F9002E89A9 /* HCCircleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCCircleModel.swift; sourceTree = "<group>"; };
 		3CFAAEF51F4FFCEB00096D98 /* 咨询-问@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "咨询-问@2x.png"; sourceTree = "<group>"; };
 		3CFAAEF61F4FFCEB00096D98 /* 咨询-问@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "咨询-问@3x.png"; sourceTree = "<group>"; };
@@ -724,6 +723,7 @@
 		C448416122602BB200F2DF0A /* PayOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayOrderViewController.swift; sourceTree = "<group>"; };
 		C448416222602BB200F2DF0A /* PayOrderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayOrderViewController.xib; sourceTree = "<group>"; };
 		C448416522606E6500F2DF0A /* HandyJSON+MapModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HandyJSON+MapModel.swift"; sourceTree = "<group>"; };
+		C4731D4B22B33C8F0046BE52 /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		C4C8470A225DE1C100D3FEB5 /* AppPay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPay.swift; sourceTree = "<group>"; };
 		E253F5689AE7ECF7180033EA /* Pods_aileyun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_aileyun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1312,6 +1312,7 @@
 				3C64D45E1F1CC3230068255C /* LocalUserModel.swift */,
 				3C13021F1F297AF50066F23F /* HCUserModel.swift */,
 				3C916BA71F2AE0CD007543D2 /* HCUserInfoModel.swift */,
+				C4731D4B22B33C8F0046BE52 /* BaseModel.swift */,
 			);
 			path = userModel;
 			sourceTree = "<group>";
@@ -1474,7 +1475,6 @@
 		3CF9D51B1F6FC138002E89A9 /* DataProvide */ = {
 			isa = PBXGroup;
 			children = (
-				3CF9D51C1F6FC18A002E89A9 /* HCDataProvideTool.swift */,
 				3CF9D51E1F6FC1AF002E89A9 /* model */,
 			);
 			path = DataProvide;
@@ -1616,8 +1616,8 @@
 				TargetAttributes = {
 					3C3D782F1EF3C07600DE6F46 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = ECNTW6TQFM;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = KZ83WEMA2D;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1963,6 +1963,7 @@
 				3C5D66921F32C771002CE23D /* HospitalListTableViewCell.swift in Sources */,
 				3CC266F91F9D908C0068E320 /* NetworkStatusTool.swift in Sources */,
 				3C40EF061F1603F60051FACA /* ConfirmOrderViewController.swift in Sources */,
+				C4731D4C22B33C8F0046BE52 /* BaseModel.swift in Sources */,
 				3C2290921F1DEEC200FBDEEE /* DoctorCommentModel.swift in Sources */,
 				3C69B38F1EF926F50068355D /* selbutton.swift in Sources */,
 				3C2E70871EFA285B006F1C1D /* chooseButton.swift in Sources */,
@@ -2002,7 +2003,6 @@
 				3CD7D8EF1F4C1E6300420F4B /* messageGroupModel.swift in Sources */,
 				3CAEFA3F1F9ED86A00DB20E1 /* GoodNewsTableViewCell.swift in Sources */,
 				3CF25A211F0E0FF600874413 /* BaseNavigationController.swift in Sources */,
-				3CF9D51D1F6FC18A002E89A9 /* HCDataProvideTool.swift in Sources */,
 				3CFAAEFC1F5005DB00096D98 /* HC_consultListModel.swift in Sources */,
 				3CD7D8F51F4C32E100420F4B /* MessageDetailModel.swift in Sources */,
 				3CF12B8D1F55731000745F17 /* SearchDocViewController.swift in Sources */,
@@ -2169,8 +2169,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = aileyun/aileyun.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ECNTW6TQFM;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = KZ83WEMA2D;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2223,9 +2223,9 @@
 					"-all_load",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jclick.gulou;
+				PRODUCT_BUNDLE_IDENTIFIER = potatochat.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = potatochat_beta_dev;
 				SWIFT_OBJC_BRIDGING_HEADER = aileyun/Bridge.h;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2240,8 +2240,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = aileyun/aileyun.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ECNTW6TQFM;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2294,7 +2294,7 @@
 					"-all_load",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jclick.gulou;
+				PRODUCT_BUNDLE_IDENTIFIER = potatochat.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = aileyun/Bridge.h;

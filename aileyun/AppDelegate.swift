@@ -8,6 +8,7 @@
 
 import UIKit
 import SVProgressHUD
+ import HandyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate{
@@ -30,8 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate{
     var defaultViewController : UIViewController {
         
         let dic = UserDefaults.standard.value(forKey: kUserDic)
-        if let dic = dic{
-            UserManager.shareIntance.HCUser = HCUserModel.init(dic as! [String : Any])
+        if let jsonDic = dic as? [String : Any],
+            let model = JSONDeserializer<HCUserModel>.deserializeFrom(dict: jsonDic)
+        {
+            UserManager.shareIntance.HCUser = model
             Login = true
         }else{
             Login = false

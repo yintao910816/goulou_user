@@ -8,27 +8,11 @@
 
 import UIKit
 
-class TreasuryTypeModel: NSObject {
+class TreasuryTypeModel: HJModel {
 
     var name : String?
     var value : String?
     var id : String?
     var order : NSNumber?
-    
-    // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
-    
-    
-    //  + "\()"
-    override var description: String {
-        get{
-            return "name\(name)" + " value\(value)" + " id\(id)" + " order\(order)"
-        }
-    }
 
 }

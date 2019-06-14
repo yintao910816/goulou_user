@@ -56,7 +56,7 @@ extension HttpClient {
         HCmanager.get(URLString, parameters: parameters, progress: { (progress) in
             //
         }, success: { ( task : URLSessionDataTask, responseObject : Any?) in
-            
+                        
             let ccb = CommonCallBack.init()
             let resDic = responseObject as! NSDictionary
             
@@ -87,7 +87,6 @@ extension HttpClient {
             callBack(responseObject, ccb)
             
         }) { ( task : URLSessionDataTask?, error : Error) in
-            
             let ccb = CommonCallBack.init()
             ccb.code = 404
             

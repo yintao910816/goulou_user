@@ -8,17 +8,11 @@
 
 import UIKit
 
-class TreasuryListModel: NSObject {
+class TreasuryListModel: HJModel {
     
-    var list : NSArray?
+    var list : [KnowledgeModel] = []
     var pageidx : NSNumber?
     var total : NSNumber?
     var pagecount : NSNumber?
-    
-    
-    override static func mj_objectClassInArray() -> [AnyHashable : Any]! {
-        return ["list" : KnowledgeModel.classForCoder()]
-    }
-
 
 }

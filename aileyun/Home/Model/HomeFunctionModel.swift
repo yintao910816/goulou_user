@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeFunctionModel: NSObject {
+class HomeFunctionModel: HJModel {
     
     
     var name : String?
@@ -24,12 +24,4 @@ class HomeFunctionModel: NSObject {
     
     var isBind : NSNumber?
     
-    // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
-
 }

@@ -179,12 +179,10 @@ class HttpRequestManager {
     func weixinPay(objectId : String, account : String, callback : @escaping (Bool, weixinPrepayModel?)->()){
         let dic = NSDictionary.init(dictionary: ["objectId" : objectId, "account" : account])
         HttpClient.shareIntance.POST(REQEST_GET_PREPAY_ID, parameters: dic) { (result, ccb) in
-            if ccb.success(){
-                guard let dic = ccb.data as? [String : Any] else{
-                    callback(false, nil)
-                    return
-                }
-                let model = weixinPrepayModel.init(dic)
+            if ccb.success(),
+                let dic = ccb.data as? [String : Any],
+                let model = JSONDeserializer<weixinPrepayModel>.deserializeFrom(dict: dic)
+                {
                 callback(true, model)
             }else{
                 callback(false, nil)
@@ -252,11 +250,10 @@ class HttpRequestManager {
         HttpClient.shareIntance.GET(HC_LOGIN, parameters: dic) { (result, ccb) in
             if ccb.success(){
                 let dic = ccb.data as? [String : Any]
-                if let dic = dic {
-                    
+                if let dic = dic,
+                    let model = JSONDeserializer<HCUserModel>.deserializeFrom(dict: dic)
+                {
                     UserDefaults.standard.set(dic, forKey: kUserDic)
-                    
-                    let model = HCUserModel.init(dic)
                     UserManager.shareIntance.HCUser = model
                 }
                 callback(true, ccb.msg)
@@ -273,7 +270,9 @@ class HttpRequestManager {
         HttpClient.shareIntance.GET(HC_REGISTER, parameters: dic) { (result, ccb) in
             if ccb.success(){
                 let dic = ccb.data as? [String : Any]
-                if let dic = dic {
+                if let dic = dic,
+                    let model = JSONDeserializer<HCUserModel>.deserializeFrom(dict: dic)
+                {
                     //保存phoneNumber
                     let phone = dic["phone"] as? String
                     if let phone = phone {
@@ -281,7 +280,6 @@ class HttpRequestManager {
                         UserDefaults.standard.set(phone, forKey: kUserPhone)
                     }
                     
-                    let model = HCUserModel.init(dic)
                     UserManager.shareIntance.HCUser = model
                 }
 
@@ -369,13 +367,11 @@ class HttpRequestManager {
         HttpClient.shareIntance.GET(HC_BANNER, parameters: nil) { (result, ccb) in
             if ccb.success(){
                 let dicArr = ccb.data as? [[String : Any]]
-                if let dicArr = dicArr {
-                    var arr = [HomeBannerModel]()
-                    for dic in dicArr {
-                        let m = HomeBannerModel.init(dic)
-                        arr.append(m)
-                    }
-                    callback(true, arr, ccb.msg)
+                if let dicArr = dicArr,
+                    let dataModel = JSONDeserializer<HomeBannerModel>.deserializeModelArrayFromArray(array: dicArr),
+                    let retData = dataModel as? [HomeBannerModel]
+                    {
+                    callback(true, retData, ccb.msg)
                 }else{
                     callback(false, nil, ccb.msg)
                 }
@@ -391,13 +387,16 @@ class HttpRequestManager {
         HttpClient.shareIntance.GET(HC_FUNCTIONLIST, parameters: nil) { (result, ccb) in
             if ccb.success(){
                 let dicArr = ccb.data as? [[String : Any]]
-                if let dicArr = dicArr {
-                    var arr = [HomeFunctionModel]()
-                    for dic in dicArr {
-                        let m = HomeFunctionModel.init(dic)
-                        arr.append(m)
-                    }
-                    callback(true, arr, ccb.msg)
+                if let dicArr = dicArr,
+                    let dataModel = JSONDeserializer<HomeFunctionModel>.deserializeModelArrayFromArray(array: dicArr),
+                    let retData = dataModel as? [HomeFunctionModel]
+                {
+//                    var arr = [HomeFunctionModel]()
+//                    for dic in dicArr {
+//                        let m = HomeFunctionModel.init(dic)
+//                        arr.append(m)
+//                    }
+                    callback(true, retData, ccb.msg)
                 }else{
                     callback(false, nil, ccb.msg)
                 }
@@ -416,7 +415,9 @@ class HttpRequestManager {
             
             if ccb.success(){
                 let dic = ccb.data as? [String : Any]
-                if let dic = dic {
+                if let dic = dic,
+                    let model = JSONDeserializer<HCUserModel>.deserializeFrom(dict: dic)
+                {
                     //保存phoneNumber
                     let phone = dic["phone"] as? String
                     if let phone = phone {
@@ -424,7 +425,6 @@ class HttpRequestManager {
                         UserDefaults.standard.set(phone, forKey: kUserPhone)
                     }
                     
-                    let model = HCUserModel.init(dic)
                     UserManager.shareIntance.HCUser = model
                     UserDefaults.standard.set(dic, forKey: kUserDic)
                 }
@@ -442,13 +442,14 @@ class HttpRequestManager {
             HCPrint(message: ccb.data)
             if ccb.success(){
                 let dic = ccb.data as? [String : Any]
-                if let dic = dic {
+                if let dic = dic,
+                    let model = JSONDeserializer<HCUserModel>.deserializeFrom(dict: dic)
+                {
                     //保存phoneNumber
                     let phone = dic["phone"] as? String
                     if let phone = phone {
                         UserDefaults.standard.set(phone, forKey: kUserPhone)
                     }
-                    let model = HCUserModel.init(dic)
                     UserManager.shareIntance.HCUser = model
                 }
                 callback(true, "绑定成功")
@@ -671,14 +672,12 @@ class HttpRequestManager {
     func HC_knowledgeList(hospitalId : NSInteger, callback : @escaping (Bool, [KnowledgeListModel]?)->()){
         let dic = NSDictionary.init(dictionary: ["hospitalId" : hospitalId])
         HttpClient.shareIntance.GET(HC_KNOWLEDGE_LIST, parameters: dic) { (result, ccb) in
-            if ccb.success() {
-                let tempArr = ccb.data as! NSArray
-                var arr = [KnowledgeListModel]()
-                for i in tempArr {
-                    let m = KnowledgeListModel.mj_object(withKeyValues: i)
-                    arr.append(m!)
-                }
-                callback(true, arr)
+            if ccb.success(),
+                let tempArr = ccb.data as? [[String: Any]],
+                let dataModel = JSONDeserializer<KnowledgeListModel>.deserializeModelArrayFromArray(array: tempArr),
+                let retData = dataModel as? [KnowledgeListModel]
+            {
+                callback(true, retData)
             }else{
                 callback(false, nil)
             }
@@ -692,15 +691,19 @@ class HttpRequestManager {
         let dic = NSDictionary.init(dictionary: ["hospitalId" : hospitalId])
         HttpClient.shareIntance.GET(HC_TREASURY_TYPE, parameters: dic) { (result, ccb) in
             
-            if ccb.success() {
-                let tempArr = ccb.data as! NSArray
-                var arr = [TreasuryTypeModel]()
-                for i in tempArr {
-                    let j = i as! [String : Any]
-                    let m = TreasuryTypeModel.init(j)
-                    arr.append(m)
-                }
-                callback(true, arr)
+            if ccb.success(),
+                let tempArr = ccb.data as? [[String: Any]],
+                let dataModel = JSONDeserializer<TreasuryTypeModel>.deserializeModelArrayFromArray(array: tempArr),
+                let retData = dataModel as? [TreasuryTypeModel]
+                {
+//                let tempArr = ccb.data as! NSArray
+//                var arr = [TreasuryTypeModel]()
+//                for i in tempArr {
+//                    let j = i as! [String : Any]
+//                    let m = TreasuryTypeModel.init(j)
+//                    arr.append(m)
+//                }
+                callback(true, retData)
             }else{
                 callback(false, nil)
             }
@@ -714,10 +717,11 @@ class HttpRequestManager {
         let dic = NSDictionary.init(dictionary: ["hospitalId" : hospitalId, "pageNum" : pageNum, "pageSize" : pageSize])
         HttpClient.shareIntance.GET(HC_TREASURY_LIST, parameters: dic) { (result, ccb) in
             
-            if ccb.success() {
-                let dic = ccb.data as! [String : Any]
-                let m = TreasuryListModel.mj_object(withKeyValues: dic)
-                callback(true, m)
+            if ccb.success(),
+                let dic = ccb.data as? [String : Any],
+                let model = JSONDeserializer<TreasuryListModel>.deserializeFrom(dict: dic)
+                {
+                callback(true, model)
             }else{
                 callback(false, nil)
             }
@@ -1007,14 +1011,12 @@ class HttpRequestManager {
             //鼓楼
             let dic = NSDictionary.init(dictionary: ["hospitalId" : 19])
             HttpClient.shareIntance.GET(findLastestTopics, parameters: dic, callBack: { (result, ccb) in
-                if ccb.success() {
-                    let dicArr = ccb.data as! [[String : Any]]
-                    var modelArr = [HCCircleModel]()
-                    for dic in dicArr {
-                        let model = HCCircleModel.init(dic)
-                        modelArr.append(model)
-                    }
-                    callback(true, modelArr, ccb.msg)
+                if ccb.success(),
+                    let dicArr = ccb.data as? [[String : Any]],
+                    let dataModel = JSONDeserializer<HCCircleModel>.deserializeModelArrayFromArray(array: dicArr),
+                    let retData = dataModel as? [HCCircleModel]
+                    {
+                    callback(true, retData, ccb.msg)
                 }else{
                     callback(false, nil, ccb.msg)
                 }
@@ -1083,17 +1085,15 @@ class HttpRequestManager {
     func HC_notice(callback : @escaping ([NoticeHomeVModel]?, String)->()){  //pageNum=1&pageSize=10
         let dic = NSDictionary.init(dictionary: ["pageNum" : 1, "pageSize" : 10])
         HttpClient.shareIntance.GET(HC_NOTICE, parameters: dic) { (result, ccb) in
-            if ccb.success(){
-                let dic = ccb.data as! [String : Any]
-                let arr = dic["list"] as! NSArray
+            if ccb.success(),
+                let dic = ccb.data as? [String : Any],
+                let arr = dic["list"] as? [[String: Any]],
+                let dataModel = JSONDeserializer<NoticeHomeVModel>.deserializeModelArrayFromArray(array: arr),
+                let retData = dataModel as? [NoticeHomeVModel]
+            {
+                
                 if arr.count > 0{
-                    var strArr = [NoticeHomeVModel]()
-                    for i in arr{
-                        let j = i as! [String : Any]
-                        let m = NoticeHomeVModel.init(j)
-                        strArr.append(m)
-                    }
-                    callback(strArr, "获取成功")
+                    callback(retData, "获取成功")
                 }else{
                     callback(nil, "没有数据")
                 }
@@ -1107,15 +1107,12 @@ class HttpRequestManager {
         HttpClient.shareIntance.GET(HC_GOODNEWS, parameters: nil) { (result, ccb) in
             if ccb.success(){
                 let dic = ccb.data as! [String : Any]
-                let arr = dic["prosperityList"] as? NSArray
-                if let arr = arr{
-                    var modelArr = [GoodNewsModel]()
-                    for i in arr {
-                        let j = i as! [String : Any]
-                        let m = GoodNewsModel.init(j)
-                        modelArr.append(m)
-                    }
-                    callback(modelArr, "请求成功")
+                let arr = dic["prosperityList"] as? [[String: Any]]
+                if let arr = arr,
+                    let dataModel = JSONDeserializer<GoodNewsModel>.deserializeModelArrayFromArray(array: arr),
+                    let retData = dataModel as? [GoodNewsModel]
+                    {
+                    callback(retData, "请求成功")
                 }else{
                     callback(nil, "没有数据")
                 }
@@ -1127,10 +1124,10 @@ class HttpRequestManager {
     
     func HC_unreadNum(callback : @escaping(UnreadModel?, String)->()){
         HttpClient.shareIntance.GET(HC_NOTREAD_NUM, parameters: nil) { (result, ccb) in
-            if ccb.success(){
-                let dic = ccb.data as! [String : Any]
-                let m = UnreadModel.init(dic)
-                callback(m, "请求成功")
+            if ccb.success(),
+                let dic = ccb.data as? [String : Any]
+                {
+                callback(JSONDeserializer<UnreadModel>.deserializeFrom(dict: dic), "请求成功")
             }else{
                 callback(nil, "请求失败")
             }
@@ -1160,12 +1157,12 @@ extension HttpRequestManager {
         let dic = NSDictionary.init(dictionary: ["orderId" : orderID])
         HttpClient.shareIntance.GET(HC_getHisAppointInfo, parameters: dic) { (result, ccb) in
             print(result)
-            if ccb.success() {
-                guard let dic = result as? [String : Any], let data = dic["data"] as? [String: Any] else {
-                    callBack((nil, ccb.msg))
-                    return
-                }
-                HttpRequestManager.shareIntance.getPayPreOrder(model: AppointInfoModel.init(data), callBack: callBack)
+            if ccb.success(),
+                let dic = result as? [String : Any],
+                let data = dic["data"] as? [String: Any],
+                let model = JSONDeserializer<AppointInfoModel>.deserializeFrom(dict: data)
+            {
+                HttpRequestManager.shareIntance.getPayPreOrder(model: model, callBack: callBack)
             }else{
                 callBack((nil, ccb.msg))
             }

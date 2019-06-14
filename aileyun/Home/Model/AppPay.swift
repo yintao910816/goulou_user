@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AppointInfoModel: NSObject {
+class AppointInfoModel: HJModel {
     
     var additionalFee: String = ""
     var card_no: String = ""
@@ -39,12 +39,6 @@ class AppointInfoModel: NSObject {
     var visit_flag: String = ""
     var wb: String = ""
     
-    // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 }
 
 import HandyJSON

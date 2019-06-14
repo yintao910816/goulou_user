@@ -91,7 +91,6 @@ class HomeTableViewController: BaseViewController {
     }()
     
     
-    var mycontext = 0
     var circleArr : [HCCircleModel]?{
         didSet{
             tableV.reloadData()
@@ -107,12 +106,9 @@ class HomeTableViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         markUnreadNum()
         
         initUI()
-        
-        HCDataProvideTool.shareIntance.addObserver(self, forKeyPath: "circleData", options: NSKeyValueObservingOptions.new, context: &mycontext)
         
         //设置数据
         SVProgressHUD.show()
@@ -147,7 +143,6 @@ class HomeTableViewController: BaseViewController {
     }
     
     deinit {
-        HCDataProvideTool.shareIntance.removeObserver(self, forKeyPath: "circleData", context: &mycontext)
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -274,7 +269,6 @@ class HomeTableViewController: BaseViewController {
         
         SVProgressHUD.show()
         
-        HCDataProvideTool.shareIntance.requestCircleData()
         markUnreadNum()
         
         let group = DispatchGroup.init()
@@ -359,10 +353,20 @@ class HomeTableViewController: BaseViewController {
             group.leave()
         }
         
+        group.enter()
+        HttpRequestManager.shareIntance.HC_findLastestTopics(callback: { [weak self](success, arr, msg) in
+            if success == true {
+                self?.circleArr = arr
+            }else{
+                HCPrint(message: msg)
+            }
+            group.leave()
+        })
         
         group.notify(queue: DispatchQueue.main) {
             SVProgressHUD.dismiss()
         }
+        
     }
     
 }
@@ -383,14 +387,6 @@ extension HomeTableViewController : UIScrollViewDelegate {
 }
 
 extension HomeTableViewController {
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if context == &mycontext {
-            if let newValue = change?[NSKeyValueChangeKey.newKey] {
-                let arr = newValue as! [HCCircleModel]
-                circleArr = arr
-            }
-        }
-    }
     
     //专家指导
     @objc func treatFlow(){

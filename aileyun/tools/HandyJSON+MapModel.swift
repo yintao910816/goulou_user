@@ -11,7 +11,7 @@ import HandyJSON
 
 extension JSONDeserializer {
 
-    public static func deserializeModelArrayFromArray(array: Array<NSDictionary>?) -> Array<T?>? {
+    public static func deserializeModelArrayFromArray(array: Array<[String: Any]>?) -> Array<T?>? {
         guard let _array = array else {
             return nil
         }

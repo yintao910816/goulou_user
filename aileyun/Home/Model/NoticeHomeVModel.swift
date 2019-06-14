@@ -8,20 +8,12 @@
 
 import UIKit
 
-class NoticeHomeVModel: NSObject {
+class NoticeHomeVModel: HJModel {
 
     var content : String = "GoodNews is coming"
     var title : String?
     var id : NSNumber?
     var createTime : String?
     var type : NSNumber?
-    var updateTime : String?
-    
-    // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+    var updateTime : String?    
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GoodNewsModel: NSObject {
+class GoodNewsModel: HJModel {
     
     var name : String = "匿名"
     var pid : String?
@@ -19,12 +19,4 @@ class GoodNewsModel: NSObject {
     var mCardNo : String?
     var type : String = "pregnant"   //childbirth
     
-    // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
-
 }

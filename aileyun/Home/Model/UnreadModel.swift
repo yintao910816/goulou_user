@@ -8,15 +8,8 @@
 
 import UIKit
 
-class UnreadModel: NSObject {
+class UnreadModel: HJModel {
     
     var unread : NSNumber?
     var patientId : NSNumber?
-
-    // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 }

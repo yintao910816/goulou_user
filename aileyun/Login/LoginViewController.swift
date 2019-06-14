@@ -275,6 +275,7 @@ class LoginViewController: UIViewController {
 
         SVProgressHUD.show()
         UserManager.shareIntance.HC_login(uname: cellphoneTF.text!, pwd: passwordTF.text!) { [weak self](success, msg) in
+            print("登录信息：\(msg)")
             if success == true{
                 UserDefaults.standard.set(self?.cellphoneTF.text!, forKey: kUserPhone)
                 

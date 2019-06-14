@@ -232,9 +232,9 @@ extension KnowledgeViewController : UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! knowledgeTableViewCell
         
         if tableView == currentTV {
-            cell.model = modelArr?[currentIndex].detailList?[indexPath.row] as! KnowledgeModel
+            cell.model = modelArr?[currentIndex].detailList[indexPath.row]
         }else{
-            cell.model = modelArr?[nextIndex].detailList?[indexPath.row] as! KnowledgeModel
+            cell.model = modelArr?[nextIndex].detailList[indexPath.row]
         }
         return cell
     }
@@ -243,9 +243,9 @@ extension KnowledgeViewController : UITableViewDataSource, UITableViewDelegate {
         let webVC = WebViewController()
         var url : String?
         if tableView == currentTV {
-            url = (modelArr?[currentIndex].detailList?[indexPath.row] as! KnowledgeModel).PAGE_URL
+            url = (modelArr?[currentIndex].detailList[indexPath.row])?.PAGE_URL
         }else{
-            url = (modelArr?[nextIndex].detailList?[indexPath.row] as! KnowledgeModel).PAGE_URL
+            url = (modelArr?[nextIndex].detailList[indexPath.row])?.PAGE_URL
         }
         webVC.url = url
         naviVC?.pushViewController(webVC, animated: true)

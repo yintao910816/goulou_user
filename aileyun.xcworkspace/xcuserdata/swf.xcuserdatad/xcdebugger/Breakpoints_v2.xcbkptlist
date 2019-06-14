@@ -10,12 +10,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "aileyun/tools/HttpRequestManager.swift"
-            timestampString = "577162050.029802"
+            timestampString = "582176310.429927"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1242"
-            endingLineNumber = "1242"
+            startingLineNumber = "1239"
+            endingLineNumber = "1239"
             landmarkName = "queryPay(orderId:appointId:callBack:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "aileyun/tools/HttpRequestManager.swift"
+            timestampString = "582176310.430288"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "695"
+            endingLineNumber = "695"
+            landmarkName = "HC_treasuryType(hospitalId:callback:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

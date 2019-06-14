@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import HandyJSON
 
 class NoticeView: UIView {
 
@@ -65,8 +66,10 @@ class NoticeView: UIView {
     func defaultData(){
         var modelA = [NoticeHomeVModel]()
         for d in dicArr {
-            let m = NoticeHomeVModel.init(d)
-            modelA.append(m)
+            if let m = JSONDeserializer<NoticeHomeVModel>.deserializeFrom(dict: d)
+            {
+                modelA.append(m)
+            }
         }
         modelArr = modelA
     }

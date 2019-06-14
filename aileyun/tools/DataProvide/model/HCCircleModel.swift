@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HCCircleModel: NSObject {
+class HCCircleModel: HJModel {
     
     var labelNames : NSArray?
     var brief : String?
@@ -22,11 +22,4 @@ class HCCircleModel: NSObject {
     var createTime : String?
     var replayCount : String?
 
-    // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 }

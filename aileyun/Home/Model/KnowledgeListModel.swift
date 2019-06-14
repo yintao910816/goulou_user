@@ -8,17 +8,12 @@
 
 import UIKit
 
-class KnowledgeListModel: NSObject {
+class KnowledgeListModel: HJModel {
     
     var name : String?
     var value : String?
-    var detailList : NSArray?
+    var detailList: [KnowledgeModel] = []
     var id : String?
     var order : NSNumber?
-    
-    override static func mj_objectClassInArray() -> [AnyHashable : Any]! {
-        return ["detailList" : KnowledgeModel.classForCoder()]
-    }
-
     
 }
