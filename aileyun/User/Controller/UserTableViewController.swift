@@ -176,7 +176,7 @@ extension UserTableViewController : UITableViewDataSource, UITableViewDelegate {
                         bindedVC.bindedM = model
                         self?.navigationController?.pushViewController(bindedVC, animated: true)
                     }else{
-                        HCShowInfo(info: "还未绑定生殖中心r'")
+                        SVProgressHUD.dismiss()
                         self?.navigationController?.pushViewController(BindHospitalViewController(), animated: true)
                     }
                 }

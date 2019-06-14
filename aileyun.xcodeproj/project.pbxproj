@@ -2223,7 +2223,7 @@
 					"-all_load",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jclick.gulou;
+				PRODUCT_BUNDLE_IDENTIFIER = potatochat.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = potatochat_beta_dev;
 				SWIFT_OBJC_BRIDGING_HEADER = aileyun/Bridge.h;
@@ -2294,7 +2294,7 @@
 					"-all_load",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jclick.gulou;
+				PRODUCT_BUNDLE_IDENTIFIER = potatochat.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = aileyun/Bridge.h;

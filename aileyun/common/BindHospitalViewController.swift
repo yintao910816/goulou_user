@@ -78,11 +78,7 @@ class BindHospitalViewController: UIViewController {
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        setData()
-    }
-    
+        
     //固定中一
     func setModel(){
 //        let dic = NSDictionary.init(dictionary: ["id" : "17", "name" : "中山一院生殖中心"])
