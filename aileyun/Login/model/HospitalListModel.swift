@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HospitalListModel: NSObject {
+class HospitalListModel: HJModel {
 
     var id : String?
     var name : String?
@@ -19,12 +19,11 @@ class HospitalListModel: NSObject {
     var abbreviation : String?
     var address : String?
     
-    // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+//    init(_ dict : [String : Any]) {
+//        super.init()
+//        
+//        setValuesForKeys(dict)
+//    }
+//    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 
 }

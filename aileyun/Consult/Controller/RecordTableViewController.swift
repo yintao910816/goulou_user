@@ -9,6 +9,7 @@
 import UIKit
 import MJRefresh
 import SVProgressHUD
+import HandyJSON
 
 @objc protocol GetPhotoCenterDelegate : NSObjectProtocol {
     //设置协议方法
@@ -201,12 +202,10 @@ extension RecordTableViewController {
             if success == true{
                 self?.hasNext = hasNext
                 self?.pageNo += 1
-                if let dicArr = dicArr {
-                    var dataArr = [HC_consultArrModel]()
-                    for i in dicArr{
-                        let model = HC_consultArrModel.mj_object(withKeyValues: i)
-                        dataArr.append(model!)
-                    }
+                if let dicArr = dicArr,
+                    let tempData = JSONDeserializer<HC_consultArrModel>.deserializeModelArrayFrom(array: dicArr),
+                    let dataArr = tempData as? [HC_consultArrModel]
+                    {
                     //保存模型
                     if self?.dataArr != nil {
                         var tempArr = (self?.dataArr)!
@@ -277,12 +276,12 @@ extension RecordTableViewController {
                 }
             }
             
-            guard (secModel.replyList?.count)! > 0 else{
+            guard secModel.replyList.count > 0 else{
                 viewmodelArr.append(secVMArr)
                 continue
             }
             
-            let replyArr = secModel.replyList as! [HC_consultListModel]
+            let replyArr = secModel.replyList
             for replyModel in replyArr {
                 
                 if replyModel.content != nil && replyModel.content != ""{

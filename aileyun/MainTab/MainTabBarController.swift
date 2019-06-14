@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import HandyJSON
 
 class MainTabBarController: UITabBarController {
     
@@ -35,9 +36,10 @@ class MainTabBarController: UITabBarController {
     
     func globelSetting(){
         let tempData = UserDefaults.standard.value(forKey: kBindDic)
-        if tempData != nil {
-            let dic = tempData as! [String : Any]
-            UserManager.shareIntance.BindedModel = BindedModel.init(dic)
+        if tempData != nil,
+            let dic = tempData as? [String : Any]
+        {
+            UserManager.shareIntance.BindedModel = JSONDeserializer<BindedModel>.deserializeFrom(dict: dic)
         }
         
         let tempData2 = UserDefaults.standard.value(forKey: kUserInfoDic)

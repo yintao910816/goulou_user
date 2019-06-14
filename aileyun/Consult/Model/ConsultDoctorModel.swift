@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConsultDoctorModel: NSObject {
+class ConsultDoctorModel: HJModel {
 
 
     var doctorId : String?
@@ -30,12 +30,11 @@ class ConsultDoctorModel: NSObject {
     //咨询过吗
     var isConsulted : Bool = false
     
-    // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+//    init(_ dict : [String : Any]) {
+//        super.init()
+//        
+//        setValuesForKeys(dict)
+//    }
+//    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
     
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HC_consultAddModel: NSObject {
+class HC_consultAddModel: HJModel {
     
     var content : String?
     var patientName : String?
@@ -25,12 +25,4 @@ class HC_consultAddModel: NSObject {
     var fee : NSNumber?
 
     
-    // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
-
 }

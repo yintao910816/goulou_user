@@ -8,18 +8,17 @@
 
 import UIKit
 
-class DoctorCommentModel: NSObject {
+class DoctorCommentModel: HJModel {
     
     var discribe : String?
     var name : String?
     var other : String?
     
-    // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+//    init(_ dict : [String : Any]) {
+//        super.init()
+//
+//        setValuesForKeys(dict)
+//    }
+//    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 
 }

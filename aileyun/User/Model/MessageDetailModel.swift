@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessageDetailModel: NSObject {
+class MessageDetailModel: HJModel {
     
     var readStatus : NSNumber?
     var content : String?
@@ -27,13 +27,12 @@ class MessageDetailModel: NSObject {
     var pushTime : NSNumber?
 
     
-    // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+//    init(_ dict : [String : Any]) {
+//        super.init()
+//
+//        setValuesForKeys(dict)
+//    }
+//    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 
 
 }

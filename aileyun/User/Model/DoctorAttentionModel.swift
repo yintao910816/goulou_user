@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DoctorAttentionModel: NSObject {
+class DoctorAttentionModel: HJModel {
     
 //    doctorId = 14;
 //    doctorName = "\U66f2\U5e86\U5170";
@@ -22,13 +22,12 @@ class DoctorAttentionModel: NSObject {
     var imgUrl : String?
     
     
-    // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+//    init(_ dict : [String : Any]) {
+//        super.init()
+//        
+//        setValuesForKeys(dict)
+//    }
+//    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 
 
 }

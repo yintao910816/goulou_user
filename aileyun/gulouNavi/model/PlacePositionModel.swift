@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlacePositionModel: NSObject {
+class PlacePositionModel: HJModel {
     var name : String?
     var id : NSNumber?
     var code : String?
@@ -21,12 +21,11 @@ class PlacePositionModel: NSObject {
     var isTop : NSNumber?
     var pinyin : String?
     
-    // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+//    init(_ dict : [String : Any]) {
+//        super.init()
+//
+//        setValuesForKeys(dict)
+//    }
+//    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 
 }

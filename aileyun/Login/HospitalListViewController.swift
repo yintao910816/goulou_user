@@ -176,7 +176,7 @@ extension HospitalListViewController : UISearchBarDelegate {
     func searchTheName(){
         let searchPredicate = NSPredicate.init(format: "self.name contains[cd] %@", searchB.text!)
         if hospitalArr != nil {
-            let tempArray = hospitalArr as! NSArray
+            let tempArray = hospitalArr! as NSArray
             searchResultArr = tempArray.filtered(using: searchPredicate) as! [HospitalListModel]
             //刷新表格
             isSearch = true

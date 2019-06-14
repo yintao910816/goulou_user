@@ -8,7 +8,7 @@
 
 import UIKit
 
-class messageGroupModel: NSObject {
+class messageGroupModel: HJModel {
     
     var content : String?
     
@@ -20,13 +20,12 @@ class messageGroupModel: NSObject {
     var notifyGroupCount : NSNumber?
     var pushTime : NSNumber?
     
-    // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+//    init(_ dict : [String : Any]) {
+//        super.init()
+//
+//        setValuesForKeys(dict)
+//    }
+//    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 
 
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommentDocModel: NSObject {
+class CommentDocModel: HJModel {
     
     
     var reviewCount : NSNumber?
@@ -20,13 +20,4 @@ class CommentDocModel: NSObject {
     var reviewContent : String?
     var reviewStatus : NSNumber?
     
-    
-    // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
-
 }

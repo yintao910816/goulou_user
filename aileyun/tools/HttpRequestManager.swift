@@ -58,16 +58,24 @@ class HttpRequestManager {
                     return
                 }
                 var arr = [DoctorCommentModel]()
-                for dic in tempArr! {
-                    FindRealClassForDicValue(dic: dic)
-                    let model = DoctorCommentModel.init(dic)
-                    arr.append(model)
+                
+                if let dataModel = JSONDeserializer<DoctorCommentModel>.deserializeModelArrayFrom(array: tempArr),
+                    let retModel = dataModel as? [DoctorCommentModel]
+                {
+                       arr.append(contentsOf: retModel)
                 }
+//                for dic in tempArr! {
+//                    FindRealClassForDicValue(dic: dic)
+//                    let model = DoctorCommentModel.init(dic)
+//                    arr.append(model)
+//                }
                 
                 var docModel : ConsultDoctorModel?
-                if pageNo == "1" {
+                if pageNo == "1",
                     let tempDic = dic["doctorDeatil"] as? [String : Any]
-                    docModel = ConsultDoctorModel.init(tempDic!)
+                {
+                    
+                    docModel = JSONDeserializer<ConsultDoctorModel>.deserializeFrom(dict: tempDic)
                 }
                 
                 callback(true, docModel, arr)
@@ -86,19 +94,18 @@ class HttpRequestManager {
                 var doctorArr = [ConsultDoctorModel]()
                 let dic = ccb.data as? [String : Any]
                 if let dic = dic {
-                    let didArr = dic["consulted"] as? [[String : Any]]
-                    if let arr = didArr {
-                        for i in arr{
-                            let model = ConsultedModel.init(i)
-                            consultedArr.append(model)
-                        }
+                    if let didArr = dic["consulted"] as? [[String : Any]],
+                        let dataModel = JSONDeserializer<ConsultedModel>.deserializeModelArrayFrom(array: didArr),
+                        let retData = dataModel as? [ConsultedModel]
+                    {
+                        consultedArr.append(contentsOf: retData)
                     }
-                    let arr = dic["all"] as? [[String : Any]]
-                    if let arr = arr {
-                        for i in arr{
-                            let model = ConsultDoctorModel.init(i)
-                            doctorArr.append(model)
-                        }
+                    
+                    if let arr = dic["all"] as? [[String : Any]],
+                        let dataModel = JSONDeserializer<ConsultDoctorModel>.deserializeModelArrayFrom(array: arr),
+                        let retData = dataModel as? [ConsultDoctorModel]
+                    {
+                        doctorArr.append(contentsOf: retData)
                     }
                 }
                 callback(true, consultedArr, doctorArr)
@@ -125,9 +132,10 @@ class HttpRequestManager {
     func getCommentFor(consultId : String, callback : @escaping (Bool, DoctorCommentModel?)->()){
         let dic = NSDictionary.init(dictionary: ["consultId" : consultId])
         HttpClient.shareIntance.POST(PATIENT_CONSULT_GETEVALUATION, parameters: dic) { (result, ccb) in
-            if ccb.success(){
-                let dic = ccb.data as? [String : Any]
-                let model = DoctorCommentModel.init(dic!)
+            if ccb.success(),
+                let dic = ccb.data as? [String : Any],
+                let model = JSONDeserializer<DoctorCommentModel>.deserializeFrom(dict: dic)
+            {
                 callback(true, model)
             }else{
                 callback(false, nil)
@@ -465,15 +473,13 @@ class HttpRequestManager {
         HCPrint(message: "hospitalList")
         HttpClient.shareIntance.GET(HC_SORT_HOSPITAL, parameters: dic) { (result, ccb) in
             HCPrint(message: ccb.data)
-            if ccb.success() {
-                let dataDic = ccb.data as! [String : Any]
-                let arr = dataDic["hospitalList"] as! [[String : Any]]
-                var resultArr = [HospitalListModel]()
-                for dic in arr {
-//                    FindRealClassForDicValue(dic: dic)
-                    resultArr.append(HospitalListModel.init(dic))
-                }
-                callback(true, resultArr)
+            if ccb.success(),
+                let dataDic = ccb.data as? [String : Any],
+                let arr = dataDic["hospitalList"] as? [[String : Any]],
+                let dataModel = JSONDeserializer<HospitalListModel>.deserializeModelArrayFrom(array: arr),
+                let retData = dataModel as? [HospitalListModel]
+            {
+                callback(true, retData)
             }else{
                 callback(false, nil)
             }
@@ -534,18 +540,16 @@ class HttpRequestManager {
     func HC_attentionDocList(patientId : NSInteger, pageNum : String, callback : @escaping (Bool, _ hasNext : Bool, [DoctorAttentionModel]?, String)->()){
         let dic = NSDictionary.init(dictionary: ["patientId" : patientId, "pageNum" : pageNum, "pageSize" : 10])
         HttpClient.shareIntance.GET(HC_ATTENTION_DOCTOR_LIST, parameters: dic) { (result, ccb) in
-            if ccb.success() {
-                let dic = ccb.data as! [String : Any]
-                let arr = dic["list"] as! NSArray
-                var tempArr = [DoctorAttentionModel]()
-                for i in arr {
-                    let tempDic = i as! [String : Any]
-                    tempArr.append(DoctorAttentionModel.init(tempDic))
-                }
+            if ccb.success(),
+                let dic = ccb.data as? [String : Any],
+                let arr = dic["list"] as? [[String : Any]],
+                let data = JSONDeserializer<DoctorAttentionModel>.deserializeModelArrayFrom(array: arr),
+                let retData = data as? [DoctorAttentionModel]
+            {
                 //是否有下一页
                 let hasNextS = dic["hasNextPage"] as! NSNumber
                 let hasNext = hasNextS.intValue == 1 ? true : false
-                callback(true, hasNext, tempArr, ccb.msg)
+                callback(true, hasNext, retData, ccb.msg)
             }else{
                 callback(false, false, nil, ccb.msg)
             }
@@ -557,18 +561,16 @@ class HttpRequestManager {
     func HC_doctorList(hospitalId : NSInteger?, pageNum : String, callback : @escaping (Bool, _ hasNext : Bool, [DoctorModel]?, String)->()){
         let dic = NSDictionary.init(dictionary: ["hospitalId" : hospitalId, "pageNum" : pageNum, "pageSize" : 10])
         HttpClient.shareIntance.GET(HC_DOCTOR_LIST, parameters: dic) { (result, ccb) in
-            if ccb.success(){
-                let dic = ccb.data as! [String : Any]
-                let arr = dic["list"] as! NSArray
-                var tempArr = [DoctorModel]()
-                for i in arr {
-                    let tempDic = i as! [String : Any]
-                    tempArr.append(DoctorModel.init(tempDic))
-                }
+            if ccb.success(),
+                let dic = ccb.data as? [String : Any],
+                let arr = dic["list"] as? [[String: Any]],
+                let dataModel = JSONDeserializer<DoctorModel>.deserializeModelArrayFrom(array: arr),
+                let retModel = dataModel as? [DoctorModel]
+            {
                 //是否有下一页
                 let hasNextS = dic["hasNextPage"] as! NSNumber
                 let hasNext = hasNextS.intValue == 1 ? true : false
-                callback(true, hasNext, tempArr, ccb.msg)
+                callback(true, hasNext, retModel, ccb.msg)
             }else{
                 callback(false, false, nil, ccb.msg)
             }
@@ -580,18 +582,16 @@ class HttpRequestManager {
     func HC_doctorReview(doctorId : NSInteger, pageNum : String, callback : @escaping (Bool, _ hasNext : Bool, [CommentDocModel]?, String)->()){
         let dic = NSDictionary.init(dictionary: ["doctorId" : doctorId, "pageNum" : pageNum, "pageSize" : 10])
         HttpClient.shareIntance.GET(HC_DOCTOR_REVIEW, parameters: dic) { (result, ccb) in
-            if ccb.success(){
-                let dic = ccb.data as! [String : Any]
-                let arr = dic["list"] as! NSArray
-                var tempArr = [CommentDocModel]()
-                for i in arr {
-                    let tempDic = i as! [String : Any]
-                    tempArr.append(CommentDocModel.init(tempDic))
-                }
+            if ccb.success(),
+                let dic = ccb.data as? [String : Any],
+                let arr = dic["list"] as? [[String: Any]],
+                let dataModel = JSONDeserializer<CommentDocModel>.deserializeModelArrayFrom(array: arr),
+                let retModel = dataModel as? [CommentDocModel]
+            {
                 //是否有下一页
                 let hasNextS = dic["hasNextPage"] as! NSNumber
                 let hasNext = hasNextS.intValue == 1 ? true : false
-                callback(true, hasNext, tempArr, ccb.msg)
+                callback(true, hasNext, retModel, ccb.msg)
             }else{
                 callback(false, false, nil, ccb.msg)
             }
@@ -620,11 +620,12 @@ class HttpRequestManager {
         let dic = NSDictionary.init(dictionary: ["patientId" : patientId])
         HttpClient.shareIntance.GET(HC_CHECK_HOSPITAL_BIND, parameters: dic) { (result, ccb) in
         
-            if ccb.success() {
-                let dic = ccb.data as! [String : Any]
+            if ccb.success(),
+                let dic = ccb.data as? [String : Any],
+                let model = JSONDeserializer<BindedModel>.deserializeFrom(dict: dic)
+                {
                 HCPrint(message: dic)
                 UserDefaults.standard.setValue(dic, forKey: kBindDic)
-                let model = BindedModel.init(dic)
                 UserManager.shareIntance.BindedModel = model
                 callback(true, model)
             }else{
@@ -733,16 +734,20 @@ class HttpRequestManager {
     func HC_naviList(callback : @escaping (Bool, [PlacePositionModel]?)->()){
         let fullurlS = HC_NAVI_LIST + String.init(format: "%d", 19)
         HttpClient.shareIntance.GET(fullurlS, parameters: nil) { (result, ccb) in
-            if ccb.success() {
-                let arr = ccb.data as! [[String : Any]]
-                var tempArr = [PlacePositionModel]()
-                for i in arr {
-                    let m = PlacePositionModel.init(i)
-                    if m.isTop?.intValue == 1 {
-                        tempArr.append(m)
-                    }
-                }
-                callback(true, tempArr)
+            if ccb.success(),
+                let arr = ccb.data as? [[String : Any]],
+                let dataModel = JSONDeserializer<PlacePositionModel>.deserializeModelArrayFrom(array: arr),
+                var retData = dataModel as? [PlacePositionModel]
+            {
+//                var tempArr = [PlacePositionModel]()
+//                for i in arr {
+//                    let m = PlacePositionModel.init(i)
+//                    if m.isTop?.intValue == 1 {
+//                        tempArr.append(m)
+//                    }
+//                }
+                retData = retData.filter{ $0.isTop?.intValue == 1 }
+                callback(true, retData)
             }else{
                 callback(false, nil)
             }
@@ -754,14 +759,12 @@ class HttpRequestManager {
     func HC_messageGroup(To : String, callback : @escaping (Bool, [messageGroupModel]?)->()){
         let dic = NSDictionary.init(dictionary: ["to" : To])
         HttpClient.shareIntance.GET(HC_MESSAGE_GROUP, parameters: dic) { (result, ccb) in
-            if ccb.success() {
-                let arr = ccb.data as! [[String : Any]]
-                var tempArr = [messageGroupModel]()
-                for i in arr {
-                    let m = messageGroupModel.init(i)
-                    tempArr.append(m)
-                }
-                callback(true, tempArr)
+            if ccb.success(),
+                let arr = ccb.data as? [[String : Any]],
+                let dataModel = JSONDeserializer<messageGroupModel>.deserializeModelArrayFrom(array: arr),
+                let retData = dataModel as? [messageGroupModel]
+            {
+                callback(true, retData)
             }else{
                 callback(false, nil)
             }
@@ -774,16 +777,15 @@ class HttpRequestManager {
     func HC_messageList(To : String, Type : NSInteger, pageNum : NSInteger, callback : @escaping (Bool, _ hasNext : Bool, [MessageDetailModel]?)->()){
         let dic = NSDictionary.init(dictionary: ["to" : To, "type" : Type, "pageNum" : pageNum, "pageSize" : 10])
         HttpClient.shareIntance.GET(HC_MESSAGE_LIST, parameters: dic) { (result, ccb) in
-            if ccb.success() {
-                let dic = ccb.data as! [String : Any]
-                let arr = dic["list"] as! [[String : Any]]
+            if ccb.success(),
+                let dic = ccb.data as? [String : Any],
+                let arr = dic["list"] as? [[String : Any]],
+                let dataModel = JSONDeserializer<MessageDetailModel>.deserializeModelArrayFrom(array: arr),
+                let retData = dataModel as? [MessageDetailModel]
+            {
+                
                 let hasNext = (dic["hasNextPage"] as! NSNumber).intValue == 0 ? false : true
-                var tempArr = [MessageDetailModel]()
-                for i in arr {
-                    let m = MessageDetailModel.init(i)
-                    tempArr.append(m)
-                }
-                callback(true, hasNext, tempArr)
+                callback(true, hasNext, retData)
             }else{
                 callback(false, false, nil)
             }
@@ -860,19 +862,16 @@ class HttpRequestManager {
     func HC_findDoctorFromName(docName : String, pageNum : String, callback : @escaping (Bool, _ hasNext : Bool, [DoctorModel]?, String)->()){
         let dic = NSDictionary.init(dictionary: ["docName" : docName, "pageNum" : pageNum, "pageSize" : 10])
         HttpClient.shareIntance.GET(HC_DOCTOR_LIST, parameters: dic) { (result, ccb) in
-            if ccb.success(){
-                let dic = ccb.data as! [String : Any]
-                let arr = dic["list"] as! NSArray
-                var tempArr = [DoctorModel]()
-                for i in arr {
-                    let tempDic = i as! [String : Any]
-                    
-                    tempArr.append(DoctorModel.init(tempDic))
-                }
+            if ccb.success(),
+                let dic = ccb.data as? [String : Any],
+                let arr = dic["list"] as? [[String: Any]],
+                let dataModel = JSONDeserializer<DoctorModel>.deserializeModelArrayFrom(array: arr),
+                let retModel = dataModel as? [DoctorModel]
+            {
                 //是否有下一页
                 let hasNextS = dic["hasNextPage"] as! NSNumber
                 let hasNext = hasNextS.intValue == 1 ? true : false
-                callback(true, hasNext, tempArr, ccb.msg)
+                callback(true, hasNext, retModel, ccb.msg)
             }else{
                 callback(false, false, nil, ccb.msg)
             }
@@ -884,15 +883,13 @@ class HttpRequestManager {
     func HC_findDoctorFromId(doctorId : NSInteger, callback : @escaping (Bool, [DoctorModel]?, String)->()){
         let dic = NSDictionary.init(dictionary: ["doctorId" : doctorId, "pageNum" : "1", "pageSize" : 10])
         HttpClient.shareIntance.GET(HC_DOCTOR_LIST, parameters: dic) { (result, ccb) in
-            if ccb.success(){
-                let dic = ccb.data as! [String : Any]
-                let arr = dic["list"] as! NSArray
-                var tempArr = [DoctorModel]()
-                for i in arr {
-                    let tempDic = i as! [String : Any]
-                    tempArr.append(DoctorModel.init(tempDic))
-                }
-                callback(true, tempArr, ccb.msg)
+            if ccb.success(),
+                let dic = ccb.data as? [String : Any],
+                let arr = dic["list"] as? [[String: Any]],
+                let dataModel = JSONDeserializer<DoctorModel>.deserializeModelArrayFrom(array: arr),
+                let retModel = dataModel as? [DoctorModel]
+            {
+                callback(true, retModel, ccb.msg)
             }else{
                 callback(false, nil, ccb.msg)
             }
@@ -903,10 +900,11 @@ class HttpRequestManager {
     func HC_addConsult(content : String, doctorId : NSInteger, realName : String, age : NSInteger, imageList : String, callback : @escaping (Bool, HC_consultAddModel?, String)->()){
         let dic = NSDictionary.init(dictionary: ["content" : content, "doctorId" : doctorId, "realName" : realName, "age" : age, "imageList" : imageList])
         HttpClient.shareIntance.GET(HC_ADD_CONSULT, parameters: dic) { (result, ccb) in
-            if ccb.success() {
-                let dic = ccb.data as! [String : Any]
-                let model = HC_consultAddModel.init(dic)
-                callback(true, model, ccb.msg)
+            if ccb.success(),
+                let dic = ccb.data as? [String : Any]
+                {
+                    let dataModel = JSONDeserializer<HC_consultAddModel>.deserializeFrom(dict: dic)
+                    callback(true, dataModel, ccb.msg)
             }else{
                 callback(false, nil, ccb.msg)
             }

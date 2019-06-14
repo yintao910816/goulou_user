@@ -8,14 +8,14 @@
 
 import UIKit
 
-class ConsultArrModel: NSObject {
+class ConsultArrModel: HJModel {
     var dataState : [HC_consultArrModel]?
     var dataSource : [[HC_consultViewmodel]]?
     var status : String?
     var pageNo : NSInteger = 1
 
-    init(stateArr : [HC_consultArrModel], sourceArr : [[HC_consultViewmodel]], status : String, pageNo : NSInteger) {
-        super.init()
+    convenience init(stateArr : [HC_consultArrModel], sourceArr : [[HC_consultViewmodel]], status : String, pageNo : NSInteger) {
+        self.init()
         
         dataState = stateArr
         dataSource = sourceArr

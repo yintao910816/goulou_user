@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BindedModel: NSObject {
+class BindedModel: HJModel {
     
     //    hospitalId = 15;
     //    hospitalName = "\U70df\U53f0\U6bd3\U749c\U9876\U533b\U9662\U751f\U6b96\U4e2d\U5fc3";
@@ -25,13 +25,12 @@ class BindedModel: NSObject {
     var realName : String?
     var visitCard : String?
     
-    // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+//    init(_ dict : [String : Any]) {
+//        super.init()
+//        
+//        setValuesForKeys(dict)
+//    }
+//    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
 
 
 }
