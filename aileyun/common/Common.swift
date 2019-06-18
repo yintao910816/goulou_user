@@ -285,9 +285,10 @@ func showMessage(s : String){
 }
 
 func checkIsPhone(_ number : String)->(Bool){
-    let regex = "^((13[0-9])|(15[^4,\\D])|(18[0-9])|(14[57])|(17[013678]))\\d{8}$"
-    let predicate = NSPredicate.init(format: "SELF MATCHES %@", regex)
-    return predicate.evaluate(with:number)
+//    let regex = "^((13[0-9])|(15[^4,\\D])|(18[0-9])|(14[57])|(17[013678]))\\d{8}$"
+//    let predicate = NSPredicate.init(format: "SELF MATCHES %@", regex)
+//    return predicate.evaluate(with:number)
+    return number.trimmingCharacters(in: .whitespaces).count > 0
 }
 
 
