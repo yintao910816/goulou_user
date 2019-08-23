@@ -261,7 +261,7 @@ class HttpRequestManager {
                 if let dic = dic,
                     let model = JSONDeserializer<HCUserModel>.deserializeFrom(dict: dic)
                 {
-                    UserDefaults.standard.set(dic, forKey: kUserDic)
+                    UserDefaults.standard.set(noNullDic(dic), forKey: kUserDic)
                     UserManager.shareIntance.HCUser = model
                 }
                 callback(true, ccb.msg)
@@ -1168,6 +1168,9 @@ extension HttpRequestManager {
     }
 
     func getPayPreOrder(model: AppointInfoModel, callBack: @escaping (((PreOrderInfoModel?, String?)) ->())) {
+//        var hos_no: String = ""
+//        var rg_HIS_PatientID: String = ""
+
         let dic = NSDictionary.init(dictionary: ["departmentName": model.depart_name,
                                                  "verifyCode": model.his_order_id,
                                                  "expertId":"",
@@ -1183,7 +1186,10 @@ extension HttpRequestManager {
                                                  "seeTime": model.wb,
                                                  "flow": model.register_sn,
                                                  "tradeType":"",
-                                                 "diagnoseFee": model.diagnoseFee])
+                                                 "diagnoseFee": model.diagnoseFee,
+                                                 
+                                                 "hos_no": model.hos_no,
+                                                 "rg_HIS_PatientID": model.rg_HIS_PatientID])
         HttpClient.shareIntance.POST(HC_preOrder, parameters: dic) { (result, ccb) in
             print(result)
             if ccb.success() {
@@ -1196,7 +1202,7 @@ extension HttpRequestManager {
                     callBack((nil, "json解析失败"))
                     return
                 }
-                retModel.price = model.totalFee
+                retModel.totalFee = model.totalFee
                 retModel.info  = "支付挂号费"
                 callBack((retModel, nil))
             }else{
@@ -1241,5 +1247,38 @@ extension HttpRequestManager {
             }
         }
     }
+}
+
+func noNullDic(_ obj: Any) -> Any {
+    if obj is [String: Any] {
+        var dic = obj as! [String: Any]
+        for sss in dic {
+            print(sss)
+            if sss.value is NSNull {
+                dic[sss.key] = ""
+            }
+            if sss.value is [String: Any] {
+                dic[sss.key] = noNullDic(sss.value)
+            }
+            if sss.value is [Any] {
+                var arr = [Any]()
+                for adic in (sss.value as! [Any]) {
+                    arr += [noNullDic(adic)]
+                }
+                dic[sss.key] = arr
+            }
+        }
+        return dic
+    }
+    
+    if obj is [Any] {
+        var arr = [Any]()
+        for adic in (obj as! [Any]) {
+            arr += [noNullDic(adic)]
+        }
+        return arr
+    }
+    
+    return ""
 }
 

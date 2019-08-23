@@ -56,7 +56,8 @@ extension HttpClient {
         HCmanager.get(URLString, parameters: parameters, progress: { (progress) in
             //
         }, success: { ( task : URLSessionDataTask, responseObject : Any?) in
-                        
+            HCPrint(message: responseObject)
+
             let ccb = CommonCallBack.init()
             let resDic = responseObject as! NSDictionary
             

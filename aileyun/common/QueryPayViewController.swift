@@ -33,7 +33,7 @@ class QueryPayViewController: BaseViewController {
         super.viewDidLoad()
 
         navigationItem.title = "支付状态"
-        priceOutlet.text = "\(payModelInfo.price)元"
+        priceOutlet.text = "\(payModelInfo.totalFee)元"
         
         timer = CountdownTimer.init(totleCount: 3)
         
@@ -43,7 +43,7 @@ class QueryPayViewController: BaseViewController {
             if value == 0 {
                 strongSelf.timeCutDownOutlet.text = "请您耐心等待..."
                 SVProgressHUD.show()
-                HttpRequestManager.shareIntance.queryPay(orderId: strongSelf.payModelInfo.orderId, appointId: strongSelf.payModelInfo.appointId, callBack: { [weak self] data in
+                HttpRequestManager.shareIntance.queryPay(orderId: strongSelf.payModelInfo.rcptStreamNo, appointId: strongSelf.payModelInfo.appointId, callBack: { [weak self] data in
                     SVProgressHUD.dismiss()
                     if data.0 == true {
                         self?.payCallBack?(true)

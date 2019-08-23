@@ -39,16 +39,21 @@ class AppointInfoModel: HJModel {
     var visit_flag: String = ""
     var wb: String = ""
     
+    var hos_no: String = ""
+    var rg_HIS_PatientID: String = ""
 }
 
 import HandyJSON
 class PreOrderInfoModel: HandyJSON {
-    var orderId: String = ""
-    var orderPayconfigs: [OrderPayconfigsModel] = []
+//    var orderId: String = ""
+//    var orderPayconfigs: [OrderPayconfigsModel] = []
+//    var price: String = "0"
+
+    var rcptStreamNo: String = ""
+    var payMethodList: [OrderPayconfigsModel] = []
+    var totalFee: String = "0"
     
-    var price: String = "0"
     var info: String  = ""
-    
     // 点h5上支付按钮，h5传过来的orderId
     var appointId: String = ""
 
