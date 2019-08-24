@@ -239,7 +239,8 @@ let HC_CLEAR_STATUS = HC_HOST_URL + "api/patient/me/readMessageByType"
 //MARK:
 //NARK: 支付相关
 let HC_getHisAppointInfo = "https://wx.ivfcn.com/getHisAppointInfo"
-let HC_preOrder = "http://app.ivfcn.com/patient-api/api/pay/preOrder"
+//let HC_preOrder = "http://app.ivfcn.com/patient-api/api/pay/preOrder"
+let HC_preOrder = "http://app.ivfcn.com/patient-api/api/pay/preOrderV2"
 let HC_prePay = "http://app.ivfcn.com/patient-api/api/pay/prePay"
 let HC_queryPay = "http://app.ivfcn.com/patient-api/api/pay/queryPay"
 

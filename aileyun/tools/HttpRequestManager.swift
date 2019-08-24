@@ -1171,25 +1171,25 @@ extension HttpRequestManager {
 //        var hos_no: String = ""
 //        var rg_HIS_PatientID: String = ""
 
-        let dic = NSDictionary.init(dictionary: ["departmentName": model.depart_name,
+        let dic = NSDictionary.init(dictionary: ["flow": model.register_sn,
+                                                 "clinicDate": model.request_date,
                                                  "verifyCode": model.his_order_id,
+                                                 "openId":"",
+                                                 "tradeType":"",
+                                                 "tpltId": "01",
+                                                 "seeTime": model.wb,
+                                                 "departmentId": model.depart_code,
+                                                 "departmentName": model.depart_name,
                                                  "expertId":"",
                                                  "expertName":"",
-                                                 "openId":"",
-                                                 "tpltId": "01",
-                                                 "departmentId": model.depart_code,
-                                                 "medicalCard": model.patient_id,
-                                                 "additionalFee": model.additionalFee,
-                                                 "totalFee": model.totalFee,
-                                                 "clinicDate": model.request_date,
+                                                 "totalFee": model.charge_price,
                                                  "registerFee": model.charge_price,
-                                                 "seeTime": model.wb,
-                                                 "flow": model.register_sn,
-                                                 "tradeType":"",
-                                                 "diagnoseFee": model.diagnoseFee,
-                                                 
+                                                 "diagnoseFee": model.charge_price,
+                                                 "additionalFee": model.charge_price,
+                                                 "medicalCard": model.patient_id,
+                                                 "rg_HIS_PatientID": model.rg_HIS_PatientID,
                                                  "hos_no": model.hos_no,
-                                                 "rg_HIS_PatientID": model.rg_HIS_PatientID])
+                                                 "timeName": model.time_name])
         HttpClient.shareIntance.POST(HC_preOrder, parameters: dic) { (result, ccb) in
             print(result)
             if ccb.success() {
