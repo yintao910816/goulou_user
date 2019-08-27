@@ -249,10 +249,16 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func startCount(){
-        guard checkIsPhone(cellphoneTF.text!) else{
-            HCShowError(info: "请输入正确的手机号码！")
+//        guard checkIsPhone(cellphoneTF.text!) else{
+//            HCShowError(info: "请输入正确的手机号码！")
+//            return
+//        }
+        
+        guard cellphoneTF.text != "" && cellphoneTF.text != nil else{
+            HCShowError(info: "请输入手机号码！")
             return
         }
+        
         verifyBtn.isEnabled = false
         
         SVProgressHUD.show(withStatus: "获取中...")

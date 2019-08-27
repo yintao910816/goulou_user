@@ -38,6 +38,7 @@ class AppointInfoModel: HJModel {
     var unit_type: String = ""
     var visit_flag: String = ""
     var wb: String = ""
+    var registerFee: String = ""
     
     var hos_no: String = ""
     var rg_HIS_PatientID: String = ""
@@ -51,19 +52,21 @@ class PreOrderInfoModel: HandyJSON {
 
     var rcptStreamNo: String = ""
     var payMethodList: [OrderPayconfigsModel] = []
-    var totalFee: String = "0"
+    var totalFee: NSNumber = NSNumber.init(value: 0)
     
     var info: String  = ""
     // 点h5上支付按钮，h5传过来的orderId
     var appointId: String = ""
+    // 显示在界面上的价格
+    var showTotleFee: String = ""
 
     required init() { }
 }
 
 class OrderPayconfigsModel: HandyJSON {
-    var payCode: String = ""
-    var payDesc: String = ""
-    var payName: String = ""
-
+    
+    // 02-支付宝
+    var itemMethod: String = "02";
+    
     required init() { }
 }

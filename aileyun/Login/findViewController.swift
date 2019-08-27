@@ -209,10 +209,17 @@ class findViewController: UIViewController {
     }
     
     @objc func startCount(){
-        guard checkIsPhone(cellphoneTF.text!) else{
-            HCShowError(info: "请输入正确的手机号码！")
+        
+//        guard checkIsPhone(cellphoneTF.text!) else{
+//            HCShowError(info: "请输入正确的手机号码！")
+//            return
+//        }
+        
+        guard cellphoneTF.text != "" && cellphoneTF.text != nil else{
+            HCShowError(info: "请输入手机号码！")
             return
         }
+        
         SVProgressHUD.show(withStatus: "获取中...")
         HttpRequestManager.shareIntance.HC_validateCode(phone: cellphoneTF.text!, callback: { [weak self](success, message) in
             SVProgressHUD.dismiss()

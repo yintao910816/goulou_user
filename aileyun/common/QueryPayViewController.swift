@@ -33,7 +33,7 @@ class QueryPayViewController: BaseViewController {
         super.viewDidLoad()
 
         navigationItem.title = "支付状态"
-        priceOutlet.text = "\(payModelInfo.totalFee)元"
+        priceOutlet.text = "\(payModelInfo.showTotleFee)元"
         
         timer = CountdownTimer.init(totleCount: 3)
         

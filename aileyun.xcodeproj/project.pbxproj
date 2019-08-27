@@ -340,6 +340,7 @@
 		B827A36122683F100088A2B8 /* UINavigationCtroller+Pop.swift in Sources */ = {isa = PBXBuildFile; fileRef = B827A36022683F100088A2B8 /* UINavigationCtroller+Pop.swift */; };
 		B831ADE9226440F6008347A5 /* Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831ADE8226440F6008347A5 /* Frame.swift */; };
 		B831ADEB2264413F008347A5 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B831ADEA2264413F008347A5 /* UIDevice+Extension.swift */; };
+		B8493B842314D441001B01A7 /* TYHCLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8493B832314D441001B01A7 /* TYHCLocationManager.swift */; };
 		B8BE84A5225D1AE3004D2CAE /* GulouNaviViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE84A0225D1AE3004D2CAE /* GulouNaviViewController.swift */; };
 		B8BE84A6225D1AE3004D2CAE /* PlacePositionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE84A2225D1AE3004D2CAE /* PlacePositionModel.swift */; };
 		B8BE84A7225D1AE3004D2CAE /* GroupManagerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BE84A4225D1AE3004D2CAE /* GroupManagerViewCell.swift */; };
@@ -714,6 +715,7 @@
 		B827A36022683F100088A2B8 /* UINavigationCtroller+Pop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationCtroller+Pop.swift"; sourceTree = "<group>"; };
 		B831ADE8226440F6008347A5 /* Frame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Frame.swift; sourceTree = "<group>"; };
 		B831ADEA2264413F008347A5 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
+		B8493B832314D441001B01A7 /* TYHCLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TYHCLocationManager.swift; sourceTree = "<group>"; };
 		B8BE84A0225D1AE3004D2CAE /* GulouNaviViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GulouNaviViewController.swift; sourceTree = "<group>"; };
 		B8BE84A2225D1AE3004D2CAE /* PlacePositionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacePositionModel.swift; sourceTree = "<group>"; };
 		B8BE84A4225D1AE3004D2CAE /* GroupManagerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupManagerViewCell.swift; sourceTree = "<group>"; };
@@ -1142,6 +1144,7 @@
 				C448416222602BB200F2DF0A /* PayOrderViewController.xib */,
 				C4094E73226423D300992B08 /* QueryPayViewController.swift */,
 				C4094E74226423D300992B08 /* QueryPayViewController.xib */,
+				B8493B832314D441001B01A7 /* TYHCLocationManager.swift */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -1617,7 +1620,7 @@
 					3C3D782F1EF3C07600DE6F46 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = ECNTW6TQFM;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1949,6 +1952,7 @@
 				3C64D45F1F1CC3230068255C /* LocalUserModel.swift in Sources */,
 				3C47DAD31F42D0A400996FA2 /* TreasuryTypeModel.swift in Sources */,
 				3C8B0BBD1F3C342400611AF2 /* WebMenuViewController.swift in Sources */,
+				B8493B842314D441001B01A7 /* TYHCLocationManager.swift in Sources */,
 				3CD7D8F11F4C29DE00420F4B /* MessageGroupViewCell.swift in Sources */,
 				3C64D4591F1C91170068255C /* ConsultHeadView.swift in Sources */,
 				3C309BBE1F96F27F00A00D0B /* QRCodeScanViewController.swift in Sources */,
@@ -2169,8 +2173,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = aileyun/aileyun.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = ECNTW6TQFM;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2225,7 +2229,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jclick.gulou;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = yt_gulou_user_dev_pro;
 				SWIFT_OBJC_BRIDGING_HEADER = aileyun/Bridge.h;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2239,9 +2243,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = aileyun/aileyun.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = ECNTW6TQFM;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2296,7 +2300,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jclick.gulou;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = yt_gulou_user_hoc_pro;
 				SWIFT_OBJC_BRIDGING_HEADER = aileyun/Bridge.h;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;

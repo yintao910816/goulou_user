@@ -14,6 +14,8 @@ class WebViewController: BaseViewController {
     var isPopRoot: Bool = false
     var isIgoreWebBack: Bool = false
 
+    private var locationManager: TYHCLocationManager!
+
     var url : String?{
         didSet{
             HCPrint(message: url)
@@ -81,6 +83,10 @@ class WebViewController: BaseViewController {
     
     lazy var animator = PopoverAnimator()
     
+    deinit {
+        HCPrint(message: "释放了：\(self)")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -105,8 +111,37 @@ class WebViewController: BaseViewController {
     
     func requestData(){
         SVProgressHUD.show()
-        let request = URLRequest.init(url: URL.init(string: url!)!)
-        webView.loadRequest(request)
+        if url?.contains("SelfReportList") == true
+        {
+            locationManager = TYHCLocationManager()
+
+            var tempUrl = url ?? ""
+
+            locationManager.locationCallBack = { [weak self] loc in
+                var lng = 114.268465
+                var lat = 30.588937
+                if loc != nil
+                {
+                    lng = loc!.coordinate.longitude
+                    lat = loc!.coordinate.latitude
+                }
+
+                if tempUrl.contains("?") == true
+                {
+                    tempUrl = tempUrl + "&lat=\(lat)&lng=\(lng)"
+                }else
+                {
+                    tempUrl = tempUrl + "?lat=\(lat)&lng=\(lng)"
+                }
+
+                let request = URLRequest.init(url: URL.init(string: tempUrl)!)
+                self?.webView.loadRequest(request)
+            }
+        }else
+        {
+            let request = URLRequest.init(url: URL.init(string: url!)!)
+            webView.loadRequest(request)
+        }
     }
 
     @objc func popViewController(){
@@ -265,16 +300,16 @@ extension WebViewController : UIWebViewDelegate{
         context?.setObject(unsafeBitCast(backtohis, to: AnyObject.self), forKeyedSubscript: "backtohis" as NSCopying & NSObjectProtocol)
         
         // JS调用打开网页
-        let nativeOpenURL: @convention(block) () ->() = {
+        let nativeOpenURL: @convention(block) () ->() = { [weak self] in
             let array = JSContext.currentArguments() // 这里接到的array中的内容是JSValue类型
-            self.openURL(url: (array?[0] as AnyObject).toString(), title: (array?[1] as AnyObject).toString())
+            self?.openURL(url: (array?[0] as AnyObject).toString(), title: (array?[1] as AnyObject).toString())
         }
         context?.setObject(unsafeBitCast(nativeOpenURL, to: AnyObject.self), forKeyedSubscript: "nativeOpenURL" as NSCopying & NSObjectProtocol)
         
         // JS调用改变收藏状态
-        let postCollectStatus: @convention(block) () ->() = {
+        let postCollectStatus: @convention(block) () ->() = { [weak self] in
             let array = JSContext.currentArguments() // 这里接到的array中的内容是JSValue类型
-            self.changeRightBarButton(status: (array?[0] as AnyObject).toNumber())
+            self?.changeRightBarButton(status: (array?[0] as AnyObject).toNumber())
         }
         context?.setObject(unsafeBitCast(postCollectStatus, to: AnyObject.self), forKeyedSubscript: "postCollectStatus" as NSCopying & NSObjectProtocol)
         // 掉起支付

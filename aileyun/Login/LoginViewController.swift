@@ -177,8 +177,8 @@ class LoginViewController: UIViewController {
         loginBtn.addTarget(self, action: #selector(LoginViewController.login), for: UIControl.Event.touchUpInside)
 
         #if DEBUG
-//        cellphoneTF.text = "13995631675"
-        cellphoneTF.text = "13871080176"
+//        15717102067,13871080176,13995631675
+        cellphoneTF.text = "15717102067"
         passwordTF.text  = "123456"
         #endif
     }

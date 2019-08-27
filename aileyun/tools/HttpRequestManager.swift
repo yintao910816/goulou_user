@@ -1154,7 +1154,6 @@ extension HttpRequestManager {
     func getHisAppointInfo(orderID: String, callBack: @escaping (((PreOrderInfoModel?, String?)) ->())) {
         let dic = NSDictionary.init(dictionary: ["orderId" : orderID])
         HttpClient.shareIntance.GET(HC_getHisAppointInfo, parameters: dic) { (result, ccb) in
-            print(result)
             if ccb.success(),
                 let dic = result as? [String : Any],
                 let data = dic["data"] as? [String: Any],
@@ -1184,8 +1183,8 @@ extension HttpRequestManager {
                                                  "expertName":"",
                                                  "totalFee": model.charge_price,
                                                  "registerFee": model.charge_price,
-                                                 "diagnoseFee": model.charge_price,
-                                                 "additionalFee": model.charge_price,
+                                                 "diagnoseFee": model.diagnoseFee,
+                                                 "additionalFee": model.additionalFee,
                                                  "medicalCard": model.patient_id,
                                                  "rg_HIS_PatientID": model.rg_HIS_PatientID,
                                                  "hos_no": model.hos_no,
@@ -1202,7 +1201,9 @@ extension HttpRequestManager {
                     callBack((nil, "json解析失败"))
                     return
                 }
-                retModel.totalFee = model.totalFee
+                
+                let fee = retModel.totalFee.floatValue / 100.0;
+                retModel.showTotleFee = String.init(format: "%.2f", fee);
                 retModel.info  = "支付挂号费"
                 callBack((retModel, nil))
             }else{

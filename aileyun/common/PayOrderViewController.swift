@@ -27,7 +27,7 @@ class PayOrderViewController: BaseViewController {
         super.viewDidLoad()
 
         navigationItem.title = "支付状态"
-        priceOutlet.text = "\(payModelInfo.totalFee)元"
+        priceOutlet.text = "\(payModelInfo.showTotleFee)元"
         detailOutlet.text = payModelInfo.info
         
         failurePriceOutlet.text = priceOutlet.text
@@ -67,8 +67,8 @@ class PayOrderViewController: BaseViewController {
     private func preparePay() {
         SVProgressHUD.show()
         
-        let model = payModelInfo.payMethodList.first(where: { $0.payName == "支付宝" })
-        HttpRequestManager.shareIntance.prePay(orderId: payModelInfo.rcptStreamNo, payCode: model?.payCode ?? "") { [weak self] data in
+        let model = payModelInfo.payMethodList.first(where: { $0.itemMethod == "02" })
+        HttpRequestManager.shareIntance.prePay(orderId: payModelInfo.rcptStreamNo, payCode:  model?.itemMethod ?? "02") { [weak self] data in
             if let preOrderString = data.0 {
                 AlipaySDK.defaultService()?.payOrder(preOrderString, fromScheme: kScheme, callback: { [weak self] resultDic in
                     SVProgressHUD.dismiss()
