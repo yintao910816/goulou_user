@@ -45,7 +45,7 @@ class MainTabBarController: UITabBarController {
         let tempData2 = UserDefaults.standard.value(forKey: kUserInfoDic)
         if tempData2 != nil {
             let dic = tempData2 as! [String : Any]
-            UserManager.shareIntance.HCUserInfo = HCUserInfoModel.init(dic)
+            UserManager.shareIntance.HCUserInfo = JSONDeserializer<HCUserInfoModel>.deserializeFrom(dict: dic)
         }
     }
     

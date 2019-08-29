@@ -38,12 +38,6 @@ class UserInfoViewController: BaseViewController {
         userInfoM = UserManager.shareIntance.HCUserInfo
         
         tableV.register(UserInfoTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(UserInfoViewController.setUserInfo), name: NSNotification.Name.init(UPDATE_USER_INFO), object: nil)
-    }
-    
-    @objc func setUserInfo(){
-        userInfoM = UserManager.shareIntance.HCUserInfo
     }
     
     deinit {
@@ -101,6 +95,18 @@ extension UserInfoViewController : UITableViewDataSource, UITableViewDelegate{
         
         let row = indexPath.row
         let editVC = EditTextViewController()
+        editVC.editCallBack = { [weak self] (content, type) in
+            self?.userInfoM = UserManager.shareIntance.HCUserInfo
+
+            let cell = (tableView.cellForRow(at: indexPath) as? UserInfoTableViewCell)
+            switch type {
+            case .HeadImg:
+                cell?.headImgV.image = (content as? UIImage)
+            case .Nickname, .Sex, .Birthday, .Sign:
+                cell?.contentL.text = (content as? String)
+            }
+        }
+        
         if row == 0 {
             editVC.modifyType = ModifyItemName.HeadImg
         }else if row == 1{

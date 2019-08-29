@@ -19,6 +19,9 @@ enum ModifyItemName
 }
 
 class EditTextViewController: BaseViewController {
+    // 信息修改完成回调
+    var editCallBack: ((Any?, ModifyItemName)->())?
+    
     var modifyType : ModifyItemName = .Nickname{
         didSet{
             HCPrint(message: modifyType)
@@ -46,8 +49,6 @@ class EditTextViewController: BaseViewController {
             case .Sign:
                 headImgV.isHidden = true
                 inputF.becomeFirstResponder()
-            default:
-                inputF.inputView = nil
             }
         }
     }
@@ -220,6 +221,7 @@ class EditTextViewController: BaseViewController {
         HttpRequestManager.shareIntance.HC_updateUserInfo(dic: dic) { [weak self](success, message) in
             if success == true{
                 HCShowInfo(info: "修改成功")
+                self?.configUpdateCallBack(params: dic)
                 UserManager.shareIntance.updateUserInfo(callback: { (success) in
                     if success == true {
                         let not = Notification.init(name: NSNotification.Name.init(UPDATE_USER_INFO), object: nil, userInfo: nil)
@@ -257,6 +259,20 @@ class EditTextViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    private func configUpdateCallBack(params: NSDictionary) {
+        switch modifyType {
+        case .HeadImg:
+            editCallBack?(selectedImg, modifyType)
+        case .Nickname:
+            editCallBack?(params["nickName"], modifyType)
+        case .Sex:
+            editCallBack?(inputF.text, modifyType)
+        case .Sign:
+            editCallBack?(params["userSign"], modifyType)
+        case .Birthday:
+            editCallBack?(params["birthDay"], modifyType)
+        }
+    }
 }
 
 extension EditTextViewController : UIPickerViewDelegate, UIPickerViewDataSource {
@@ -315,12 +331,14 @@ extension EditTextViewController {
 }
 
 extension EditTextViewController : UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         
-//        UIImagePickerControllerOriginalImage   UIImagePickerControllerEditedImage
-        let img = info["UIImagePickerControllerEditedImage"] as! UIImage
-        selectedImg = img
+        if let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            selectedImg = img
+        }else if let img = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            selectedImg = img
+        }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

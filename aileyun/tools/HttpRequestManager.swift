@@ -354,9 +354,9 @@ class HttpRequestManager {
                 if let dic = dic {
                     UserDefaults.standard.set(dic, forKey: kUserInfoDic)
                 
-                    FindRealClassForDicValue(dic: dic)
-                    let infoModel = HCUserInfoModel.init(dic)
-                    UserManager.shareIntance.HCUserInfo = infoModel
+                    if let infoModel = JSONDeserializer<HCUserInfoModel>.deserializeFrom(dict: dic) {
+                        UserManager.shareIntance.HCUserInfo = infoModel
+                    }
                 }
                 
                 //获取BBSToken
@@ -1186,8 +1186,8 @@ extension HttpRequestManager {
                                                  "diagnoseFee": model.diagnoseFee,
                                                  "additionalFee": model.additionalFee,
                                                  "medicalCard": model.patient_id,
-                                                 "rg_HIS_PatientID": model.rg_HIS_PatientID,
-                                                 "hos_no": model.hos_no,
+                                                 "hisPatientId": model.rg_HIS_PatientID,
+                                                 "hosNo": model.hos_no,
                                                  "timeName": model.time_name])
         HttpClient.shareIntance.POST(HC_preOrder, parameters: dic) { (result, ccb) in
             print(result)
