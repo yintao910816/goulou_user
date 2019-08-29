@@ -219,7 +219,7 @@ class BindHospitalViewController: UIViewController {
         }
         medCardL.font = UIFont.init(name: kReguleFont, size: kTextSize)
         medCardL.textColor = kTextColor
-        medCardL.text = "就诊卡"
+        medCardL.text = "P_ID"
         
         containV.addSubview(medCardTextF)
         medCardTextF.snp.updateConstraints { (make) in
