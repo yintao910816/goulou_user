@@ -488,7 +488,7 @@ class HttpRequestManager {
     
     //绑定生殖中心
     func HC_bindCard(hospitalId : NSInteger, medCard : String, idNo : String, userName : String, callback : @escaping (Bool, String)->()){
-        let dic = NSDictionary.init(dictionary: ["hospitalId" : hospitalId, "medCard" : medCard, "idNo" : idNo, "userName" : userName])
+        let dic = NSDictionary.init(dictionary: ["hospitalId" : hospitalId, "medCard" : medCard, "P_ID" : idNo, "userName" : userName])
         HttpClient.shareIntance.GET(HC_BIND_CARD, parameters: dic) { (result, ccb) in
             HCPrint(message: result)
             if ccb.success(){
