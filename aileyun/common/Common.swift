@@ -391,9 +391,9 @@ extension UIImageView {
     
     func HC_setImageFromURL(urlS : String, placeHolder : String){
         if urlS.contains("http"){
-            self.sd_setImage(with: URL.init(string: urlS), placeholderImage: UIImage.init(named: placeHolder), options: .cacheMemoryOnly, completed: nil)
+            self.sd_setImage(with: URL.init(string: urlS), placeholderImage: UIImage.init(named: placeHolder), options: .queryMemoryData, completed: nil)
         }else{
-            self.sd_setImage(with: URL.init(string: IMAGE_URL + urlS), placeholderImage: UIImage.init(named: placeHolder), options: .cacheMemoryOnly, completed: nil)
+            self.sd_setImage(with: URL.init(string: IMAGE_URL + urlS), placeholderImage: UIImage.init(named: placeHolder), options: .queryMemoryData, completed: nil)
         }
     }
     

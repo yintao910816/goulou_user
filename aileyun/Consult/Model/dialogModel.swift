@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import HandyJSON
 
-class dialogModel: NSObject {
+class dialogModel: NSObject, HandyJSON {
     var type : String?
     
     var headImg : String?
@@ -24,13 +25,17 @@ class dialogModel: NSObject {
     
     
     // MARK:- 构造函数
-    init(_ dict : [String : Any]) {
-        super.init()
-        
-        setValuesForKeys(dict)
-    }
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
+//    init(_ dict : [String : Any]) {
+//        super.init()
+//
+//        setValuesForKeys(dict)
+//    }
+//    override func setValue(_ value: Any?, forUndefinedKey key: String) {}
     
+    required override init() {
+        
+    }
+
     override var description: String {
         get{
             return "type\(type)" + "content\(content)" + "consultTime\(consultTime)" + "status\(status)" + "headImg\(headImg)" + "picList\(picList)"

@@ -127,7 +127,7 @@ class ShowShareViewController: BaseViewController, QQApiInterfaceDelegate{
         let message = WXMediaMessage.init()
         message.title = appName
         message.description = slogan
-        message.setThumbImage(UIImage.init(named: logoName))
+        message.setThumbImage(UIImage.init(named: logoName) ?? UIImage())
         
         let webpageObj = WXWebpageObject.init()
         webpageObj.webpageUrl = shareURL

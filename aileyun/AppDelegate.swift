@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate{
 
         IpsmapServices.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        WXApi.registerApp(weixinAppid)
+        WXApi.registerApp(weixinAppid, universalLink: "")
         
         UMeng(launchOptions: launchOptions)
         

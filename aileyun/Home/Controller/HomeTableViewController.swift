@@ -111,7 +111,7 @@ class HomeTableViewController: BaseViewController {
         initUI()
         
         //设置数据
-        SVProgressHUD.show()
+//        SVProgressHUD.show()
         HttpRequestManager.shareIntance.HC_getHrefH5URL(){[weak self](success, msg) in
             if success == false{
                 HCPrint(message: "获取配置失败，从本地加载中")

@@ -16,15 +16,15 @@ PODS:
     - AFNetworking/NSURLSession
   - AlipaySDK-iOS (15.5.9)
   - HandyJSON (5.0.0)
-  - MJExtension (3.0.15.1)
-  - MJRefresh (3.1.15.7)
-  - SDWebImage (4.4.4):
-    - SDWebImage/Core (= 4.4.4)
-  - SDWebImage/Core (4.4.4)
+  - MJExtension (3.2.1)
+  - MJRefresh (3.2.0)
+  - SDWebImage (5.2.3):
+    - SDWebImage/Core (= 5.2.3)
+  - SDWebImage/Core (5.2.3)
   - SnapKit (4.2.0)
   - SVProgressHUD (2.2.5)
   - UMengAnalytics-NO-IDFA (4.2.5)
-  - WechatOpenSDK (1.8.3)
+  - WechatOpenSDK (1.8.6)
 
 DEPENDENCIES:
   - AFNetworking
@@ -39,7 +39,7 @@ DEPENDENCIES:
   - WechatOpenSDK
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - AFNetworking
     - AlipaySDK-iOS
     - HandyJSON
@@ -55,14 +55,14 @@ SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   AlipaySDK-iOS: 1c5283b30977a24acecc0114662697f7dc78f618
   HandyJSON: 992f2d661716d6a91de82d0056927bc7813b5770
-  MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
-  MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
-  SDWebImage: c00ec18ab25d10e5ffac109b0f78d1b4341c9691
+  MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
+  MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
+  SDWebImage: 46a7f73228f84ce80990c786e4372cf4db5875ce
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
-  WechatOpenSDK: 3117412f8aafde4758cac1e8d20b93c67cafcfef
+  WechatOpenSDK: 368ae03b72ee3ea1328c4f11326fbb5d2721d118
 
 PODFILE CHECKSUM: 1620694aea62b31c5c66efd0e5858eed3676f51e
 
-COCOAPODS: 1.7.1
+COCOAPODS: 1.8.3
