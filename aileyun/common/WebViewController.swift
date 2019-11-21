@@ -115,11 +115,13 @@ class WebViewController: BaseViewController {
         {
             locationManager = TYHCLocationManager()
 
-            var tempUrl = url ?? ""
+            let tempUrl = url ?? ""
 
             locationManager.locationCallBack = { [weak self] loc in
                 var lng = 114.268465
                 var lat = 30.588937
+                var requestURL = tempUrl
+                
                 if loc != nil
                 {
                     lng = loc!.coordinate.longitude
@@ -128,13 +130,13 @@ class WebViewController: BaseViewController {
 
                 if tempUrl.contains("?") == true
                 {
-                    tempUrl = tempUrl + "&lat=\(lat)&lng=\(lng)"
+                    requestURL = tempUrl + "&lat=\(lat)&lng=\(lng)"
                 }else
                 {
-                    tempUrl = tempUrl + "?lat=\(lat)&lng=\(lng)"
+                    requestURL = tempUrl + "?lat=\(lat)&lng=\(lng)"
                 }
 
-                let request = URLRequest.init(url: URL.init(string: tempUrl)!)
+                let request = URLRequest.init(url: URL.init(string: requestURL)!)
                 self?.webView.loadRequest(request)
             }
         }else
