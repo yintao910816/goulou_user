@@ -223,18 +223,19 @@ class findViewController: UIViewController {
         SVProgressHUD.show(withStatus: "获取中...")
         HttpRequestManager.shareIntance.HC_validateCode(phone: cellphoneTF.text!, callback: { [weak self](success, message) in
             SVProgressHUD.dismiss()
+            guard let strongSelf = self else { return }
             if success {
                 HCShowInfo(info: "获取验证码成功！")
-                self?.count = 0
+                strongSelf.count = 0
                 
-                self?.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(RegisterViewController.showSecond), userInfo: nil, repeats: true)
+                strongSelf.timer = Timer.scheduledTimer(timeInterval: 1, target: strongSelf, selector: #selector(findViewController.showSecond), userInfo: nil, repeats: true)
             }else{
                 SVProgressHUD.showError(withStatus: message)
             }
         })
     }
     
-    func showSecond(){
+    @objc func showSecond(){
         count = count + 1
         if count == KMaxSeconds {
             resetCodeBtn()
