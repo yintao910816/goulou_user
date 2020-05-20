@@ -24,6 +24,7 @@ class BindedModel: HJModel {
     var patientId : NSNumber?
     var realName : String?
     var visitCard : String?
+    var clinicType: String = ""
     
 //    init(_ dict : [String : Any]) {
 //        super.init()

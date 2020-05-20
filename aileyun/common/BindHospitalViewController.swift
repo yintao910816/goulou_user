@@ -40,7 +40,7 @@ class BindHospitalViewController: UIViewController {
     
     let hosNameL = UILabel()
     let idNoTextF = UITextField()
-    let medCardTextF = UITextField()
+    let groupTextF = UITextField()
     
     let realnameTextF = UITextField()
     
@@ -89,7 +89,7 @@ class BindHospitalViewController: UIViewController {
     
     func setData(){
         idNoTextF.text = UserManager.shareIntance.HCUserInfo?.idNo
-        medCardTextF.text = UserManager.shareIntance.HCUserInfo?.visitCard
+//        medCardTextF.text = UserManager.shareIntance.HCUserInfo?.visitCard
         realnameTextF.text = UserManager.shareIntance.HCUserInfo?.realname
     }
     
@@ -105,7 +105,7 @@ class BindHospitalViewController: UIViewController {
     
         self.view.addSubview(scrollV)
         
-        let containV = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 180))
+        let containV = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 135))
         containV.backgroundColor = UIColor.white
         scrollV.addSubview(containV)
         
@@ -200,40 +200,40 @@ class BindHospitalViewController: UIViewController {
         idNoTextF.textAlignment = NSTextAlignment.right
         idNoTextF.placeholder = "请输入身份证号码"
         
-        let divisionV3 = UIView()
-        containV.addSubview(divisionV3)
-        divisionV3.snp.updateConstraints { (make) in
-            make.left.equalTo(hosL)
-            make.top.equalTo(idNoL.snp.bottom).offset(10)
-            make.width.equalTo(SCREEN_WIDTH - 40)
-            make.height.equalTo(1)
-        }
-        divisionV3.backgroundColor = kdivisionColor
-        
-        let medCardL = UILabel()
-        containV.addSubview(medCardL)
-        medCardL.snp.updateConstraints { (make) in
-            make.left.equalTo(hosL)
-            make.top.equalTo(divisionV3.snp.bottom).offset(10)
-            make.height.equalTo(20)
-        }
-        medCardL.font = UIFont.init(name: kReguleFont, size: kTextSize)
-        medCardL.textColor = kTextColor
-        medCardL.text = "P_ID"
-        
-        containV.addSubview(medCardTextF)
-        medCardTextF.snp.updateConstraints { (make) in
-            make.right.equalTo(hosNameL)
-            make.top.equalTo(medCardL)
-            make.height.equalTo(20)
-            make.left.equalTo(hosL.snp.right)
-        }
-        medCardTextF.font = UIFont.init(name: kReguleFont, size: kTextSize)
-        medCardTextF.textColor = kTextColor
-        medCardTextF.keyboardType = .numberPad
-        medCardTextF.textAlignment = NSTextAlignment.right
-        medCardTextF.placeholder = "请输入就诊卡号"
-        
+//        let divisionV3 = UIView()
+//        containV.addSubview(divisionV3)
+//        divisionV3.snp.updateConstraints { (make) in
+//            make.left.equalTo(hosL)
+//            make.top.equalTo(idNoL.snp.bottom).offset(10)
+//            make.width.equalTo(SCREEN_WIDTH - 40)
+//            make.height.equalTo(1)
+//        }
+//        divisionV3.backgroundColor = kdivisionColor
+//        
+//        let medCardL = UILabel()
+//        containV.addSubview(medCardL)
+//        medCardL.snp.updateConstraints { (make) in
+//            make.left.equalTo(hosL)
+//            make.top.equalTo(divisionV3.snp.bottom).offset(10)
+//            make.height.equalTo(20)
+//        }
+//        medCardL.font = UIFont.init(name: kReguleFont, size: kTextSize)
+//        medCardL.textColor = kTextColor
+//        medCardL.text = "分组"
+//
+//        containV.addSubview(groupTextF)
+//        groupTextF.snp.updateConstraints { (make) in
+//            make.right.equalTo(hosNameL)
+//            make.top.equalTo(medCardL)
+//            make.height.equalTo(20)
+//            make.left.equalTo(hosL.snp.right)
+//        }
+//        groupTextF.isUserInteractionEnabled = false
+//        groupTextF.font = UIFont.init(name: kReguleFont, size: kTextSize)
+//        groupTextF.textColor = kTextColor
+//        groupTextF.keyboardType = .numberPad
+//        groupTextF.textAlignment = NSTextAlignment.right
+//        groupTextF.text = UserManager.shareIntance.HCUserInfo?.clincType
         
         let imgV = UIImageView.init(image: UIImage.init(named: "medicalRecord.jpg"))
         scrollV.addSubview(imgV)
@@ -379,10 +379,10 @@ class BindHospitalViewController: UIViewController {
             return
         }
         
-        guard medCardTextF.text != "" && medCardTextF.text != nil else {
-            HCShowError(info: "请输入就诊卡号！")
-            return
-        }
+//        guard medCardTextF.text != "" && medCardTextF.text != nil else {
+//            HCShowError(info: "请输入就诊卡号！")
+//            return
+//        }
         
         guard realnameTextF.text != "" && realnameTextF.text != nil else {
             HCShowError(info: "请输入真实姓名！")
@@ -394,15 +394,23 @@ class BindHospitalViewController: UIViewController {
             return
         }
         
-        let hosId = (hospitalModel?.id)!
-        let medS = medCardTextF.text!
+        let hosId = hospitalModel?.id ?? ""
+//        let medS = medCardTextF.text!
         let idS = idNoTextF.text!
-        let userS = realnameTextF.text!
+        let userS = realnameTextF.text ?? ""
         
         SVProgressHUD.show()
-        HttpRequestManager.shareIntance.HC_bindCard(hospitalId: Int(hosId)!, medCard: medS, idNo: idS, userName: userS) {(success, message) in
+        HttpRequestManager.shareIntance.HC_bindCard(hospitalId: Int(hosId) ?? 0, idNo: idS, userName: userS) { [weak self] (success, message) in
             if success == true {
-                self.navigationController?.popViewController(animated: true)
+                self?.navigationController?.viewControllers.first?.tabBarController?.selectedIndex = 0
+                self?.navigationController?.popViewController(animated: true)
+                
+                if message.count > 0 {
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                        let not = Notification.init(name: NSNotification.Name.init(bindSuccessToPush), object: message, userInfo: nil)
+                        NotificationCenter.default.post(not)
+                    }
+                }
                 HCShowInfo(info: "绑定成功！")
             }else{
                 HCShowError(info: message)

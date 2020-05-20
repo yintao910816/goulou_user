@@ -140,6 +140,17 @@ class HomeTableViewController: BaseViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(HomeTableViewController.markUnreadNum), name: NSNotification.Name.init(CLEAR_MSG_STATUS), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(HomeTableViewController.bindSuccessPushWeb(no:)), name: NSNotification.Name.init(bindSuccessToPush), object: nil)
+    }
+    
+    @objc private func bindSuccessPushWeb(no: Notification) {
+        if let webURL = no.object as? String {
+            let webVC = WebViewController()
+            webVC.isPopRoot = true
+            webVC.url = webURL
+            navigationController?.pushViewController(webVC, animated: true)
+        }
     }
     
     deinit {

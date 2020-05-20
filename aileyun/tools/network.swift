@@ -155,7 +155,7 @@ let HC_THIRD_BIND = HC_HOST_URL + "api/patient/oauthBind"
 let HC_SORT_HOSPITAL = HC_HOST_URL + "api/patient/hospital/sortList"
 
 //绑定生殖中心
-let HC_BIND_CARD = HC_HOST_URL + "api/patient/hospital/bindCard"
+let HC_BIND_CARD = HC_HOST_URL + "api/patient/hospital/bindCardNew"
 
 //解绑生殖中心
 let HC_UNBIND = HC_HOST_URL + "api/patient/hospital/unBindCard"

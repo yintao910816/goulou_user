@@ -131,6 +131,8 @@ let GO_TO_GROUP = "goToGroup"
 let DELETE_ARTICLE = "deleteArticle"
 let LOCATION_AUTH = "locationAuth"
 
+// 绑定成功，如返回url则跳转url
+let bindSuccessToPush = "bindSuccessToPush"
 
 //首页滚动图片高度
 let ScrollImageVHeight : CGFloat = 200

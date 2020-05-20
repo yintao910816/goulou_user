@@ -41,6 +41,8 @@ class HCUserInfoModel: NSObject, HandyJSON {
     
     var BBSToken : String?
     
+    var clincType: String = ""
+    
     required override init() { }
 //    convenience init(_ dic : [String : Any]) {
 //        self.init()

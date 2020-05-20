@@ -487,12 +487,16 @@ class HttpRequestManager {
     }
     
     //绑定生殖中心
-    func HC_bindCard(hospitalId : NSInteger, medCard : String, idNo : String, userName : String, callback : @escaping (Bool, String)->()){
-        let dic = NSDictionary.init(dictionary: ["hospitalId" : hospitalId, "medCard" : medCard, "idNo" : idNo, "userName" : userName])
+    func HC_bindCard(hospitalId : NSInteger, idNo : String, userName : String, callback : @escaping (Bool, String)->()){
+        let dic = NSDictionary.init(dictionary: ["hospitalId" : hospitalId, "idNo" : idNo, "userName" : userName])
         HttpClient.shareIntance.GET(HC_BIND_CARD, parameters: dic) { (result, ccb) in
             HCPrint(message: result)
             if ccb.success(){
-                callback(true, "")
+                if let dic = ccb.data as? [String : String], let webURL = dic["weburl"], webURL.contains("http") {
+                    callback(true, webURL)
+                }else {
+                    callback(true, "")
+                }
                 
                 //重新获取个人信息
                 self.HC_userInfo(callback: { (success, info) in
@@ -506,6 +510,25 @@ class HttpRequestManager {
             }
         }
     }
+//    func HC_bindCard(hospitalId : NSInteger, medCard : String, idNo : String, userName : String, callback : @escaping (Bool, String)->()){
+//        let dic = NSDictionary.init(dictionary: ["hospitalId" : hospitalId, "medCard" : medCard, "idNo" : idNo, "userName" : userName])
+//        HttpClient.shareIntance.GET(HC_BIND_CARD, parameters: dic) { (result, ccb) in
+//            HCPrint(message: result)
+//            if ccb.success(){
+//                callback(true, "")
+//
+//                //重新获取个人信息
+//                self.HC_userInfo(callback: { (success, info) in
+//                    //
+//                })
+//            }else{
+//                let dic = result as! [String : Any]
+//                let s = dic["message"] as! String
+//                HCPrint(message: s)
+//                callback(false, s)
+//            }
+//        }
+//    }
     
     //解绑生殖中心
     func HC_unbind(hospitalId : NSInteger, medCard : String, idNo : String, callback : @escaping (Bool, String)->()){

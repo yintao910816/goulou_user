@@ -661,7 +661,6 @@
 		3C8B0BC11F3C52F800611AF2 /* libUMessage_Sdk_1.5.0a.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.5.0a.a; sourceTree = "<group>"; };
 		3C8B0BC21F3C52F800611AF2 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		3C8B0BC41F3C5D8E00611AF2 /* aileyun.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = aileyun.entitlements; sourceTree = "<group>"; };
-		3C8F44711FEA04C700EF85A6 /* BindHospitalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindHospitalViewController.swift; sourceTree = "<group>"; };
 		3C8F44741FEA4EE000EF85A6 /* guanggao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guanggao.png; sourceTree = "<group>"; };
 		3C9008D51EFBADB100CED474 /* UserQQModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserQQModel.swift; sourceTree = "<group>"; };
 		3C9008D71EFBC06A00CED474 /* treasuryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = treasuryTableViewCell.swift; sourceTree = "<group>"; };
@@ -1329,7 +1328,6 @@
 				3C71E11A1F0A1EBF009C2714 /* RegisterViewController.swift */,
 				3C51A9A51F0B9220004ED84B /* findViewController.swift */,
 				3C0085431F31AFE1009BCCC6 /* BindHospitalViewController.swift */,
-				3C8F44711FEA04C700EF85A6 /* BindHospitalViewController.swift */,
 				3C0085451F31B9C1009BCCC6 /* HospitalListViewController.swift */,
 				3C30E8A71F3470F000E35AC9 /* BindedViewController.swift */,
 			);
@@ -2212,7 +2210,7 @@
 					"$(PROJECT_DIR)/aileyun/tools/VoiceConvert/lib",
 					"$(PROJECT_DIR)/aileyun/tools/UMessage_Sdk_1.5.0a",
 				);
-				MARKETING_VERSION = 2.02.001;
+				MARKETING_VERSION = 2.02.003;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -2284,7 +2282,7 @@
 					"$(PROJECT_DIR)/aileyun/tools/VoiceConvert/lib",
 					"$(PROJECT_DIR)/aileyun/tools/UMessage_Sdk_1.5.0a",
 				);
-				MARKETING_VERSION = 2.02.001;
+				MARKETING_VERSION = 2.02.003;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

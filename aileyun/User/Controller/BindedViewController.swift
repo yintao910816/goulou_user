@@ -32,6 +32,7 @@ class BindedViewController: UIViewController {
         n.font = UIFont.init(name: kReguleFont, size: kTextSize)
         n.textColor = kLightTextColor
         n.textAlignment = NSTextAlignment.right
+        n.text = UserManager.shareIntance.HCUserInfo?.idNo
         return n
     }()
     
@@ -41,6 +42,15 @@ class BindedViewController: UIViewController {
         m.textColor = kLightTextColor
         m.textAlignment = NSTextAlignment.right
         return m
+    }()
+    
+    lazy var groupDetailL : UILabel = {
+        let n = UILabel()
+        n.font = UIFont.init(name: kReguleFont, size: kTextSize)
+        n.textColor = kLightTextColor
+        n.textAlignment = NSTextAlignment.right
+        n.text = UserManager.shareIntance.HCUserInfo?.clincType
+        return n
     }()
     
     lazy var unbindBtn : UIButton = {
@@ -95,7 +105,7 @@ class BindedViewController: UIViewController {
         
         self.view.addSubview(scrollV)
         
-        let containV = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 180))
+        let containV = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 225))
         containV.backgroundColor = UIColor.white
         scrollV.addSubview(containV)
         
@@ -205,6 +215,36 @@ class BindedViewController: UIViewController {
             make.height.equalTo(20)
             make.left.equalTo(hosL.snp.right)
         }
+        
+        let divisionV4 = UIView()
+        containV.addSubview(divisionV4)
+        divisionV4.snp.updateConstraints { (make) in
+            make.left.equalTo(hosL)
+            make.top.equalTo(medCardL.snp.bottom).offset(10)
+            make.width.equalTo(SCREEN_WIDTH - 40)
+            make.height.equalTo(1)
+        }
+        divisionV4.backgroundColor = kdivisionColor
+
+        let groupTitleNoL = UILabel()
+        containV.addSubview(groupTitleNoL)
+        groupTitleNoL.snp.updateConstraints { (make) in
+            make.left.equalTo(hosL)
+            make.top.equalTo(divisionV4.snp.bottom).offset(10)
+            make.height.equalTo(20)
+        }
+        groupTitleNoL.font = UIFont.init(name: kReguleFont, size: kTextSize)
+        groupTitleNoL.textColor = kTextColor
+        groupTitleNoL.text = "分组"
+        
+        containV.addSubview(groupDetailL)
+        groupDetailL.snp.updateConstraints { (make) in
+            make.right.equalTo(hospitalL)
+            make.top.equalTo(groupTitleNoL)
+            make.height.equalTo(20)
+            make.left.equalTo(hosL.snp.right)
+        }
+
        
         scrollV.addSubview(unbindBtn)
         unbindBtn.snp.updateConstraints { (make) in
@@ -236,7 +276,7 @@ class BindedViewController: UIViewController {
     
     func unbindAction(){
         SVProgressHUD.show()
-        HttpRequestManager.shareIntance.HC_unbind(hospitalId: (bindedM?.hospitalId?.intValue)!, medCard: (bindedM?.visitCard)!, idNo: (bindedM?.idNo)!) {( success, message) in
+        HttpRequestManager.shareIntance.HC_unbind(hospitalId: (bindedM?.hospitalId?.intValue)!, medCard: bindedM?.visitCard ?? "", idNo: bindedM?.idNo ?? "") {( success, message) in
             if success == true {
                 HCShowInfo(info: message)
                 self.navigationController?.popViewController(animated: true)
