@@ -23,7 +23,7 @@ class MainTabBarController: UITabBarController {
         addChildViewController(childControllerName: "HomeTableViewController", title: "首页", normalImage: "Home")
         addChildViewController(childControllerName: "ConsultViewController", title: "问医生", normalImage: "Consult")
         addChildViewController(childControllerName: "GulouNaviViewController", title: "导航", normalImage: "navi")
-        addChildViewController(childControllerName: "GroupViewController", title: "圈子", normalImage: "Group")
+//        addChildViewController(childControllerName: "GroupViewController", title: "圈子", normalImage: "Group")
         addChildViewController(childControllerName: "UserTableViewController", title: "我", normalImage: "User")
 
         self.tabBar.tintColor = kDefaultThemeColor

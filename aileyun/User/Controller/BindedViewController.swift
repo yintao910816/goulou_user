@@ -67,9 +67,10 @@ class BindedViewController: UIViewController {
     var bindedM : BindedModel? {
         didSet{
             hospitalL.text = bindedM?.hospitalName
-            medNumL.text = bindedM?.visitCard
             nameL.text = bindedM?.realName
             idNumL.text = bindedM?.idNo
+            medNumL.text = bindedM?.visitCard
+            groupDetailL.text = bindedM?.clinicType
         }
     }
     
