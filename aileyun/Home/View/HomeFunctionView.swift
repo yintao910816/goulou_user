@@ -89,7 +89,7 @@ class HomeFunctionView: UIView {
                                     self?.naviVC?.pushViewController(webVC, animated: true)
                                 }else{
                                     self?.naviVC?.pushViewController(BindHospitalViewController(), animated: true)
-                                    showAlert(title: "提醒", message: "此功能需要绑定就诊卡")
+//                                    showAlert(title: "提醒", message: "此功能需要绑定就诊卡")
                                 }
                             }
                             return

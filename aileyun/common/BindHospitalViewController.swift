@@ -209,7 +209,7 @@ class BindHospitalViewController: UIViewController {
 //            make.height.equalTo(1)
 //        }
 //        divisionV3.backgroundColor = kdivisionColor
-//        
+//
 //        let medCardL = UILabel()
 //        containV.addSubview(medCardL)
 //        medCardL.snp.updateConstraints { (make) in
@@ -291,6 +291,11 @@ class BindHospitalViewController: UIViewController {
         
         let tapGes = UITapGestureRecognizer.init(target: self, action: #selector(dismissKeyBoard))
         scrollV.addGestureRecognizer(tapGes)
+        
+        #if DEBUG
+        idNoTextF.text = "141024891014001"
+        realnameTextF.text = "测试"
+        #endif
     }
     
     @objc private func dismissKeyBoard() {
