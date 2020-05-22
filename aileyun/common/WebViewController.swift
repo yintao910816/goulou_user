@@ -301,6 +301,14 @@ extension WebViewController : UIWebViewDelegate{
         }
         context?.setObject(unsafeBitCast(backtohis, to: AnyObject.self), forKeyedSubscript: "backtohis" as NSCopying & NSObjectProtocol)
         
+        let backHomeFnApi: @convention(block) () ->() = {[weak self]in
+            DispatchQueue.main.async {
+                print("h5 调用 - backHomeFnApi")
+                self?.navigationController?.popToRootViewController(animated: true)
+            }
+        }
+        context?.setObject(unsafeBitCast(backHomeFnApi, to: AnyObject.self), forKeyedSubscript: "backHomeFnApi" as NSCopying & NSObjectProtocol)
+        
         // JS调用打开网页
         let nativeOpenURL: @convention(block) () ->() = { [weak self] in
             let array = JSContext.currentArguments() // 这里接到的array中的内容是JSValue类型
