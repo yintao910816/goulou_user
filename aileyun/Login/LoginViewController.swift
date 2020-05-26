@@ -187,6 +187,7 @@ class LoginViewController: UIViewController {
         let space = AppDelegate.shareIntance.space
         
         let containerV = UIView()
+        containerV.isHidden = true
         self.view.addSubview(containerV)
         containerV.snp.updateConstraints { (make) in
             make.bottom.equalTo(self.view).offset(-space.bottomSpace)

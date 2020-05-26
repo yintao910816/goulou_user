@@ -85,17 +85,17 @@ class HomeTableViewController: BaseViewController {
         let t = UITableView.init(frame: CGRect.init(x: 0, y: space.topSpace, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - space.topSpace - space.bottomSpace - 48))
         t.rowHeight = UITableView.automaticDimension
         t.estimatedRowHeight = 300
-        t.dataSource = self
-        t.delegate = self
+//        t.dataSource = self
+//        t.delegate = self
         return t
     }()
     
     
-    var circleArr : [HCCircleModel]?{
-        didSet{
-            tableV.reloadData()
-        }
-    }
+//    var circleArr : [HCCircleModel]?{
+//        didSet{
+//            tableV.reloadData()
+//        }
+//    }
 
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
@@ -162,7 +162,7 @@ class HomeTableViewController: BaseViewController {
         setupNavibar()
         
         self.view.addSubview(tableV)
-        tableV.register(treasuryTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+//        tableV.register(treasuryTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         
         tableV.contentInset = UIEdgeInsets.init(top: -44, left: 0, bottom: 0, right: 0)
     
@@ -364,15 +364,15 @@ class HomeTableViewController: BaseViewController {
             group.leave()
         }
         
-        group.enter()
-        HttpRequestManager.shareIntance.HC_findLastestTopics(callback: { [weak self](success, arr, msg) in
-            if success == true {
-                self?.circleArr = arr
-            }else{
-                HCPrint(message: msg)
-            }
-            group.leave()
-        })
+//        group.enter()
+//        HttpRequestManager.shareIntance.HC_findLastestTopics(callback: { [weak self](success, arr, msg) in
+//            if success == true {
+//                self?.circleArr = arr
+//            }else{
+//                HCPrint(message: msg)
+//            }
+//            group.leave()
+//        })
         
         group.notify(queue: DispatchQueue.main) {
             SVProgressHUD.dismiss()
@@ -435,90 +435,90 @@ extension HomeTableViewController {
     }
 }
 
-extension HomeTableViewController : UITableViewDataSource, UITableViewDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return circleArr?.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! treasuryTableViewCell
-        cell.model = circleArr?[indexPath.row]
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let contV = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 50))
-        contV.backgroundColor = UIColor.white
-        
-        let diviV = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 3))
-        diviV.backgroundColor = kdivisionColor
-        contV.addSubview(diviV)
-        
-        let knowledgeIV = UIImageView()
-        knowledgeIV.image = UIImage.init(named: "标题")
-        knowledgeIV.contentMode = .scaleAspectFit
-        contV.addSubview(knowledgeIV)
-        knowledgeIV.snp.updateConstraints { (make) in
-            make.left.equalTo(contV).offset(20)
-            make.top.equalTo(contV).offset(20)
-            make.width.height.equalTo(20)
-        }
-        
-        let knowledgeL = UILabel()
-        knowledgeL.text = "好孕圈子"
-        knowledgeL.font = UIFont.init(name: kReguleFont, size: 16)
-        knowledgeL.textColor = kTextColor
-        contV.addSubview(knowledgeL)
-        knowledgeL.snp.updateConstraints { (make) in
-            make.left.equalTo(knowledgeIV.snp.right).offset(4)
-            make.centerY.equalTo(knowledgeIV)
-        }
-        
-        let imgV = UIImageView()
-        imgV.image = UIImage.init(named: "箭头")
-        imgV.contentMode = .right
-        contV.addSubview(imgV)
-        imgV.snp.updateConstraints { (make) in
-            make.right.equalTo(contV).offset(-20)
-            make.centerY.equalTo(knowledgeIV)
-            make.width.height.equalTo(20)
-        }
-        
-        let divisionV = UIView()
-        divisionV.backgroundColor = kdivisionColor
-        contV.addSubview(divisionV)
-        divisionV.snp.updateConstraints { (make) in
-            make.left.right.bottom.equalTo(contV)
-            make.height.equalTo(1)
-        }
-        
-        let tapG = UITapGestureRecognizer.init(target: self, action: #selector(HomeTableViewController.gotoGroup))
-        contV.addGestureRecognizer(tapG)
-        
-        return contV
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let id = circleArr?[indexPath.row].id {
-            guard let bbsToken = UserManager.shareIntance.HCUserInfo?.BBSToken else{
-                HCShowError(info: "没有bbsToken")
-                return
-            }
-            guard let bbsRootUrl = UserManager.shareIntance.HCUserInfo?.bbsFgiUrl else{
-                HCShowError(info: "没有bbsRootUrl")
-                return
-            }
-            let webVC = WebViewController()
-            webVC.url = bbsRootUrl + GROUP_DETAIL_URL + "?bbsToken=" + bbsToken + "&id=" + id
-            self.navigationController?.pushViewController(webVC, animated: true)
-        }
-    }
-}
+//extension HomeTableViewController : UITableViewDataSource, UITableViewDelegate {
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
+//    }
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return circleArr?.count ?? 0
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! treasuryTableViewCell
+//        cell.model = circleArr?[indexPath.row]
+//        return cell
+//    }
+//
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let contV = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 50))
+//        contV.backgroundColor = UIColor.white
+//
+//        let diviV = UIView.init(frame: CGRect.init(x: 0, y: 0, width: SCREEN_WIDTH, height: 3))
+//        diviV.backgroundColor = kdivisionColor
+//        contV.addSubview(diviV)
+//
+//        let knowledgeIV = UIImageView()
+//        knowledgeIV.image = UIImage.init(named: "标题")
+//        knowledgeIV.contentMode = .scaleAspectFit
+//        contV.addSubview(knowledgeIV)
+//        knowledgeIV.snp.updateConstraints { (make) in
+//            make.left.equalTo(contV).offset(20)
+//            make.top.equalTo(contV).offset(20)
+//            make.width.height.equalTo(20)
+//        }
+//
+//        let knowledgeL = UILabel()
+//        knowledgeL.text = "好孕圈子"
+//        knowledgeL.font = UIFont.init(name: kReguleFont, size: 16)
+//        knowledgeL.textColor = kTextColor
+//        contV.addSubview(knowledgeL)
+//        knowledgeL.snp.updateConstraints { (make) in
+//            make.left.equalTo(knowledgeIV.snp.right).offset(4)
+//            make.centerY.equalTo(knowledgeIV)
+//        }
+//
+//        let imgV = UIImageView()
+//        imgV.image = UIImage.init(named: "箭头")
+//        imgV.contentMode = .right
+//        contV.addSubview(imgV)
+//        imgV.snp.updateConstraints { (make) in
+//            make.right.equalTo(contV).offset(-20)
+//            make.centerY.equalTo(knowledgeIV)
+//            make.width.height.equalTo(20)
+//        }
+//
+//        let divisionV = UIView()
+//        divisionV.backgroundColor = kdivisionColor
+//        contV.addSubview(divisionV)
+//        divisionV.snp.updateConstraints { (make) in
+//            make.left.right.bottom.equalTo(contV)
+//            make.height.equalTo(1)
+//        }
+//
+//        let tapG = UITapGestureRecognizer.init(target: self, action: #selector(HomeTableViewController.gotoGroup))
+//        contV.addGestureRecognizer(tapG)
+//
+//        return contV
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 50
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if let id = circleArr?[indexPath.row].id {
+//            guard let bbsToken = UserManager.shareIntance.HCUserInfo?.BBSToken else{
+//                HCShowError(info: "没有bbsToken")
+//                return
+//            }
+//            guard let bbsRootUrl = UserManager.shareIntance.HCUserInfo?.bbsFgiUrl else{
+//                HCShowError(info: "没有bbsRootUrl")
+//                return
+//            }
+//            let webVC = WebViewController()
+//            webVC.url = bbsRootUrl + GROUP_DETAIL_URL + "?bbsToken=" + bbsToken + "&id=" + id
+//            self.navigationController?.pushViewController(webVC, animated: true)
+//        }
+//    }
+//}
