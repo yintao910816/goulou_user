@@ -1202,8 +1202,6 @@ extension HttpRequestManager {
                                                  "seeTime": model.wb,
                                                  "departmentId": model.depart_code,
                                                  "departmentName": model.depart_name,
-                                                 "expertId":"",
-                                                 "expertName":"",
                                                  "totalFee": model.charge_price,
                                                  "registerFee": model.charge_price,
                                                  "diagnoseFee": model.diagnoseFee,
@@ -1211,7 +1209,9 @@ extension HttpRequestManager {
                                                  "medicalCard": model.patient_id,
                                                  "hisPatientId": model.rg_HIS_PatientID,
                                                  "hosNo": model.hos_no,
-                                                 "timeName": model.time_name])
+                                                 "timeName": model.time_name,
+                                                 "expertId": model.doctor_sn,
+                                                 "expertName": model.doctor_name])
         HttpClient.shareIntance.POST(HC_preOrder, parameters: dic) { (result, ccb) in
             print(result)
             if ccb.success() {
