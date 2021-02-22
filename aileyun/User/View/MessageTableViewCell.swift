@@ -12,7 +12,18 @@ class MessageTableViewCell: UITableViewCell {
     
     var model : MessageDetailModel? {
         didSet{
-            contentL.text = model?.content
+            if let content = model?.content, let data = content.data(using: .unicode) {
+                do {
+                    let attrStr = try NSAttributedString(data: data, options: [.documentType : NSAttributedString.DocumentType.html], documentAttributes: nil)
+                    contentL.attributedText = attrStr
+
+                } catch let error as NSError{
+                    print("error:\(error)")
+                    contentL.text = model?.content
+                }
+            }else {
+                contentL.text = model?.content
+            }
             
             let num = model?.pushTime?.doubleValue
             let date = Date.init(timeIntervalSince1970: num! / 1000)
